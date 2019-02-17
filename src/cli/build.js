@@ -1,5 +1,3 @@
-const path = require('path')
-
 const api = require('../api')
 const errorHandler = require('./utilities/error-handler')
 

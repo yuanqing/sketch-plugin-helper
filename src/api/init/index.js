@@ -33,7 +33,9 @@ async function init ({ outputDirectoryPath, config }) {
     config.githubRepositoryName
   )
   if (await fs.exists(pluginDirectoryPath)) {
-    return Promise.reject(`Directory already exists: ${pluginDirectoryPath}`)
+    return Promise.reject(
+      new Error(`Directory already exists: ${pluginDirectoryPath}`)
+    )
   }
   return outputPluginDirectory({ pluginDirectoryPath, config })
 }
