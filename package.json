@@ -30,8 +30,8 @@
     "fix": "prettier-standard 'src/**/*.js'",
     "lint": "standard 'src/**/*.js'",
     "precommit": "lint-staged",
-    "start": "rm -rf sketch-hello-world && sph init --name='Hello World' --description='A plugin that prints Hello World' --author='Lim Yuan Qing' --username=yuanqing --repository=sketch-hello-world",
-    "build": "cd sketch-hello-world && sph build"
+    "init": "rm -rf sketch-hello-world && ./src/cli/index.js init --name='Hello World' --description='A plugin that prints Hello World' --author='Lim Yuan Qing' --username=yuanqing --repository=sketch-hello-world",
+    "build": "cd sketch-hello-world && ../src/cli/index.js build"
   },
   "lint-staged": {
     "*.js": [
