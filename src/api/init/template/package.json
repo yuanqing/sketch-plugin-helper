@@ -1,0 +1,19 @@
+{
+  "private": true,
+  "devDependencies": {
+    "sketch-plugin-helper": "*"
+  },
+  "scripts": {
+    "build": "sph build",
+    "fix": "sph fix",
+    "lint": "sph lint",
+    "watch": "sph watch"
+  },
+  "sph": {
+    "pluginName": "{{pluginName}}",
+    "pluginDescription": "{{pluginDescription}}",
+    "authorName": "{{authorName}}",
+    "githubUserName": "{{githubUserName}}",
+    "githubRepositoryName": "{{githubRepositoryName}}"
+  }
+}

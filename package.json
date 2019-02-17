@@ -1,0 +1,42 @@
+{
+  "name": "sketch-plugin-helper",
+  "version": "0.0.0",
+  "description": "",
+  "author": "Lim Yuan Qing",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/yuanqing/sketch-plugin-helper.git"
+  },
+  "main": "src/api.js",
+  "bin": {
+    "sph": "src/cli.js"
+  },
+  "dependencies": {
+    "dashify": "^2.0.0",
+    "fs-extra": "^7.0.1",
+    "is-utf8": "^0.2.1",
+    "mustache": "^3.0.1",
+    "prettier-standard": "^9.1.1",
+    "recursive-readdir": "^2.2.2",
+    "standard": "^12.0.1",
+    "webpack": "^4.29.4",
+    "yargs": "^13.2.0"
+  },
+  "devDependencies": {
+    "lint-staged": "^8.1.4"
+  },
+  "scripts": {
+    "fix": "prettier-standard 'src/**/*.js'",
+    "lint": "standard 'src/**/*.js'",
+    "precommit": "lint-staged",
+    "start": "rm -rf sketch-hello-world && sph init --name='Hello World' --description='A plugin that prints Hello World' --author='Lim Yuan Qing' --username=yuanqing --repository=sketch-hello-world",
+    "build": "cd sketch-hello-world && sph build"
+  },
+  "lint-staged": {
+    "*.js": [
+      "standard",
+      "git add"
+    ]
+  }
+}
