@@ -1,6 +1,6 @@
 const path = require('path')
 
-const writeAppcast = require('./write-appcast')
+const writeAppcast = require('./appcast/write-appcast')
 const writeBundle = require('./write-bundle')
 const writeManifest = require('./write-manifest')
 const readConfig = require('./read-config')
