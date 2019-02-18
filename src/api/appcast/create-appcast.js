@@ -42,9 +42,9 @@ function createAppcast ({
 }
 
 function mapVersionsToItems ({
-  versions,
   githubUserName,
-  githubRepositoryName
+  githubRepositoryName,
+  versions
 }) {
   return versions.map(function (version) {
     return {

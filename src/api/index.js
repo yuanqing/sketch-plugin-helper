@@ -1,4 +1,5 @@
 module.exports = {
   build: require('./build'),
-  init: require('./init')
+  init: require('./init'),
+  version: require('./version')
 }

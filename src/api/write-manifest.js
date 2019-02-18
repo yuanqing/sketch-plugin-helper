@@ -2,21 +2,20 @@ const dashify = require('dashify')
 const fs = require('fs-extra')
 const path = require('path')
 
+const { bundleFileName, manifestFileName } = require('./constants')
+
 function writeManifest ({
   methodsFilePath,
   menuConfigFilePath,
   outputDirectoryPath,
-  outputFileName,
-  bundleFileName,
   config
 }) {
   const manifest = createManifest({
     methodsFilePath,
     menuConfigFilePath,
-    bundleFileName,
     config
   })
-  const outputFilePath = path.join(outputDirectoryPath, outputFileName)
+  const outputFilePath = path.join(outputDirectoryPath, manifestFileName)
   const fileContent = JSON.stringify(manifest, null, 2)
   return fs.outputFile(outputFilePath, fileContent)
 }
@@ -24,7 +23,6 @@ function writeManifest ({
 function createManifest ({
   methodsFilePath,
   menuConfigFilePath,
-  bundleFileName,
   config: {
     pluginName,
     pluginDescription,
@@ -46,7 +44,6 @@ function createManifest ({
     methods,
     menuConfig,
     pluginIdentifier,
-    bundleFileName,
     commands,
     menu
   })
@@ -66,14 +63,7 @@ function createManifest ({
   }
 }
 
-function parse ({
-  methods,
-  menuConfig,
-  pluginIdentifier,
-  bundleFileName,
-  commands,
-  menu
-}) {
+function parse ({ methods, menuConfig, pluginIdentifier, commands, menu }) {
   menuConfig.forEach(function (menuItem) {
     // separator
     if (menuItem === '-') {

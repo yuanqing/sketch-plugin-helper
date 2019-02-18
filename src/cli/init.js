@@ -3,7 +3,7 @@ const api = require('../api')
 module.exports = {
   command: 'init',
   alias: ['i'],
-  describe: 'Scaffolds a new Sketch plugin',
+  describe: 'Initialises a new Sketch plugin',
   builder: {
     pluginName: {
       alias: ['n', 'name'],
@@ -26,7 +26,7 @@ module.exports = {
       demandOption: true
     }
   },
-  handler: async function ({
+  handler: function ({
     pluginName,
     pluginDescription,
     authorName,
@@ -36,14 +36,12 @@ module.exports = {
     const outputDirectoryPath = process.cwd()
     return api
       .init({
-        outputDirectoryPath,
-        config: {
-          pluginName,
-          pluginDescription,
-          authorName,
-          githubUserName,
-          githubRepositoryName
-        }
+        pluginName,
+        pluginDescription,
+        authorName,
+        githubUserName,
+        githubRepositoryName,
+        outputDirectoryPath
       })
       .catch(function (error) {
         console.error(error)

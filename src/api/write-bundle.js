@@ -1,13 +1,15 @@
 const webpack = require('webpack')
 
-function writeBundle ({ inputFilePath, outputDirectoryPath, outputFileName }) {
+const { bundleFileName } = require('./constants')
+
+function writeBundle ({ inputFilePath, outputDirectoryPath }) {
   return new Promise(function (resolve, reject) {
     webpack(
       {
         entry: inputFilePath,
         output: {
           path: outputDirectoryPath,
-          filename: outputFileName,
+          filename: bundleFileName,
           libraryTarget: 'this'
         }
       },

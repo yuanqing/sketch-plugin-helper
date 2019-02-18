@@ -1,28 +1,18 @@
-const execa = require('execa')
-const getStream = require('get-stream')
 const path = require('path')
-const semver = require('semver')
-
-function getPackageJsonConfig () {
-  const packageJsonPath = path.join(process.cwd(), 'package.json')
-  return require(packageJsonPath).sph
-}
-
-async function readGitTags () {
-  const tags = await getStream.array(execa('git', ['tag']).stdout, {
-    encoding: 'utf8'
-  })
-  return tags.map(function (tag) {
-    return semver.valid(semver.coerce(tag))
-  })
-}
+const fs = require('fs-extra')
+const readAppcastVersions = require('./appcast/read-appcast-versions')
+const { appcastFileName } = require('./constants')
 
 async function readConfig () {
-  const packageJsonConfig = getPackageJsonConfig()
-  const gitTags = await readGitTags()
+  const packageJsonPath = path.join(process.cwd(), 'package.json')
+  const packageJson = require(packageJsonPath)
+  const appcastPath = path.join(process.cwd(), appcastFileName)
+  const versions = (await fs.exists(appcastPath))
+    ? await readAppcastVersions(appcastPath)
+    : [packageJson.version]
   return {
-    ...packageJsonConfig,
-    versions: gitTags
+    ...packageJson.sph,
+    versions
   }
 }
 

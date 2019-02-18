@@ -4,7 +4,7 @@ module.exports = {
   command: 'build',
   alias: ['b'],
   describe: 'Build the plugin',
-  handler: async function () {
+  handler: function () {
     return api.build().catch(function (error) {
       console.error(error)
     })
