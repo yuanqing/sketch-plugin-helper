@@ -1,6 +1,6 @@
 const webpack = require('webpack')
 
-function outputBundle ({ inputFilePath, outputDirectoryPath, outputFileName }) {
+function writeBundle ({ inputFilePath, outputDirectoryPath, outputFileName }) {
   return new Promise(function (resolve, reject) {
     webpack(
       {
@@ -18,4 +18,4 @@ function outputBundle ({ inputFilePath, outputDirectoryPath, outputFileName }) {
   })
 }
 
-module.exports = outputBundle
+module.exports = writeBundle

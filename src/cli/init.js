@@ -1,5 +1,4 @@
 const api = require('../api')
-const errorHandler = require('./utilities/error-handler')
 
 module.exports = {
   command: 'init',
@@ -46,6 +45,8 @@ module.exports = {
           githubRepositoryName
         }
       })
-      .catch(errorHandler)
+      .catch(function (error) {
+        console.error(error)
+      })
   }
 }

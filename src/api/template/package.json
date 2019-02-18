@@ -1,13 +1,8 @@
 {
   "private": true,
+  "version": "0.0.0",
   "devDependencies": {
     "sketch-plugin-helper": "*"
-  },
-  "scripts": {
-    "build": "sph build",
-    "fix": "sph fix",
-    "lint": "sph lint",
-    "watch": "sph watch"
   },
   "sph": {
     "pluginName": "{{pluginName}}",

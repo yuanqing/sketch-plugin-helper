@@ -1,13 +1,15 @@
 const path = require('path')
 
+const writeAppcast = require('./write-appcast')
 const writeBundle = require('./write-bundle')
 const writeManifest = require('./write-manifest')
-const readConfig = require('../utilities/read-config')
+const readConfig = require('./read-config')
 
 const methodsRelativePath = 'src/index.js'
 const menuConfigRelativePath = 'src/menu.js'
 const bundleFileName = 'bundle.js'
 const manifestFileName = 'manifest.json'
+const appcastFileName = 'appcast.xml'
 
 async function build () {
   const config = await readConfig()
@@ -29,6 +31,11 @@ async function build () {
       outputDirectoryPath,
       outputFileName: manifestFileName,
       bundleFileName,
+      config
+    }),
+    await writeAppcast({
+      outputDirectoryPath: process.cwd(),
+      outputFileName: appcastFileName,
       config
     })
   ])
