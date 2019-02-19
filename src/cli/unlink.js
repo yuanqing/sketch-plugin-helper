@@ -3,9 +3,8 @@ const errorHandler = require('./error-handler')
 
 module.exports = {
   command: 'unlink',
-  alias: ['u'],
-  describe: 'Removes the plugin symbolic link from the Sketch plugin folder',
-  handler: function ({ type }) {
+  describe: 'Deletes the plugin symbolic link from the Sketch plugin folder',
+  handler: function () {
     return unlink().catch(errorHandler)
   }
 }

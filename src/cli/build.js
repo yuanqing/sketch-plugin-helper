@@ -4,17 +4,16 @@ const errorHandler = require('./error-handler')
 
 module.exports = {
   command: 'build',
-  alias: ['b'],
-  describe: 'Build the plugin',
+  describe: 'Builds the plugin',
   builder: {
-    isWatch: {
+    shouldWatch: {
       alias: ['watch', 'w'],
       type: 'boolean'
     }
   },
-  handler: async function ({ isWatch }) {
+  handler: async function ({ shouldWatch }) {
     await build().catch(errorHandler)
-    if (isWatch) {
+    if (shouldWatch) {
       return watch().catch(errorHandler)
     }
     return Promise.resolve()

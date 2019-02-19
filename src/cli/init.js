@@ -3,7 +3,6 @@ const errorHandler = require('./error-handler')
 
 module.exports = {
   command: 'init',
-  alias: ['i'],
   describe: 'Initialises a new Sketch plugin',
   builder: {
     pluginName: {

@@ -3,9 +3,8 @@ const errorHandler = require('./error-handler')
 
 module.exports = {
   command: 'link',
-  alias: ['l'],
-  describe: 'Symlinks your plugin to the Sketch plugin folder',
-  handler: function ({ type }) {
+  describe: 'Symlinks the plugin to the Sketch plugin folder',
+  handler: function () {
     return link().catch(errorHandler)
   }
 }

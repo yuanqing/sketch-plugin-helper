@@ -15,10 +15,12 @@
   "dependencies": {
     "chokidar": "^2.1.1",
     "dashify": "^2.0.0",
+    "execa": "^1.0.0",
     "fs-extra": "^7.0.1",
     "is-utf8": "^0.2.1",
     "mustache": "^3.0.1",
     "mversion": "^1.13.0",
+    "npm-run-path": "^2.0.2",
     "prettier-standard": "^9.1.1",
     "recursive-readdir": "^2.2.2",
     "semver": "^5.6.0",

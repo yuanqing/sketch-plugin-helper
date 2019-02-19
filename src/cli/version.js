@@ -3,8 +3,7 @@ const errorHandler = require('./error-handler')
 
 module.exports = {
   command: 'version <type>',
-  alias: ['v'],
-  describe: 'Update the version of your Sketch plugin',
+  describe: 'Updates the version of the Sketch plugin',
   handler: function ({ type }) {
     return version(type).catch(errorHandler)
   }
