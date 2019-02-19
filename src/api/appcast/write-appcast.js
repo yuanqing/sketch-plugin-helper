@@ -9,7 +9,7 @@ function writeAppcast (config) {
   const appcast = createAppcast(config)
   const xml = xmlJs.json2xml(appcast, { compact: true, spaces: 2 })
   const outputFilePath = path.join(process.cwd(), appcastFileName)
-  return fs.outputFile(outputFilePath, xml + '\n')
+  return fs.outputFile(outputFilePath, xml)
 }
 
 module.exports = writeAppcast
