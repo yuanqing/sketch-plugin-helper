@@ -1,40 +1,40 @@
 const path = require('path')
 
 const writeAppcast = require('./appcast/write-appcast')
+const readConfig = require('./read-config')
 const writeBundle = require('./write-bundle')
 const writeManifest = require('./write-manifest')
-const readConfig = require('./read-config')
 const {
-  methodsRelativePath,
+  actionsConfigRelativePath,
   menuConfigRelativePath,
-  actionsConfigRelativePath
+  methodsRelativePath
 } = require('./constants')
 
 async function build () {
   const config = await readConfig()
-  const methodsFilePath = path.join(process.cwd(), methodsRelativePath)
-  const menuConfigFilePath = path.join(process.cwd(), menuConfigRelativePath)
   const actionsConfigFilePath = path.join(
     process.cwd(),
     actionsConfigRelativePath
   )
-  const outputDirectoryPath = path.join(
+  const methodsFilePath = path.join(process.cwd(), methodsRelativePath)
+  const menuConfigFilePath = path.join(process.cwd(), menuConfigRelativePath)
+  const pluginDirectoryPath = path.join(
     process.cwd(),
     `${config.pluginName}.sketchplugin/Contents/Sketch`
   )
   return Promise.all([
+    await writeAppcast(config),
     await writeBundle({
       inputFilePath: methodsFilePath,
-      outputDirectoryPath
+      outputDirectoryPath: pluginDirectoryPath
     }),
     await writeManifest({
-      methodsFilePath,
-      menuConfigFilePath,
       actionsConfigFilePath,
-      outputDirectoryPath,
+      menuConfigFilePath,
+      methodsFilePath,
+      outputDirectoryPath: pluginDirectoryPath,
       config
-    }),
-    await writeAppcast(config)
+    })
   ])
 }
 

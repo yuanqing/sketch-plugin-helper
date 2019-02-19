@@ -1,12 +1,13 @@
 const fs = require('fs-extra')
 const isUtf8 = require('is-utf8')
-const mustache = require('mustache')
 const path = require('path')
 const recursiveReaddir = require('recursive-readdir')
 
-async function init (config) {
+const interpolate = require('./interpolate')
+
+async function init ({ outputDirectoryPath, config }) {
   const pluginDirectoryPath = path.join(
-    config.outputDirectoryPath,
+    outputDirectoryPath,
     config.githubRepositoryName
   )
   if (await fs.exists(pluginDirectoryPath)) {
@@ -17,13 +18,8 @@ async function init (config) {
   return writePluginDirectory({ pluginDirectoryPath, config })
 }
 
-mustache.escape = function (text) {
-  return text
-}
-
-const templateDirectoryPath = path.resolve(__dirname, 'template')
-
 async function writePluginDirectory ({ pluginDirectoryPath, config }) {
+  const templateDirectoryPath = path.resolve(__dirname, 'template')
   const filePaths = await recursiveReaddir(templateDirectoryPath)
   return Promise.all(
     filePaths.map(async function (filePath) {
@@ -33,7 +29,7 @@ async function writePluginDirectory ({ pluginDirectoryPath, config }) {
         filePath.substring(templateDirectoryPath.length + 1)
       )
       const fileContents = isUtf8(buffer)
-        ? mustache.render(buffer.toString(), config)
+        ? interpolate(buffer.toString(), config)
         : buffer
       return fs.outputFile(outputPath, fileContents)
     })

@@ -1,4 +1,4 @@
-const methods = require('./')
+const methods = require('./methods')
 
 module.exports = [
   {

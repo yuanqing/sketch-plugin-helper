@@ -51,7 +51,7 @@ function createManifest ({
     commands,
     menu
   })
-  const commands = parseActionsConfig({
+  parseActionsConfig({
     methods,
     actionsConfig,
     pluginIdentifier,
@@ -79,7 +79,7 @@ function parseActionsConfig ({
   pluginIdentifier,
   commands
 }) {
-  return actionsConfig.reduce(function (commands, actionConfig) {
+  actionsConfig.forEach(function (actionConfig) {
     const identifier = [
       pluginIdentifier,
       dashify(actionConfig.name),
@@ -97,8 +97,7 @@ function parseActionsConfig ({
       }
     }
     commands.push(command)
-    return commands
-  }, commands)
+  })
 }
 
 function parseMenuConfig ({

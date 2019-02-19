@@ -4,5 +4,6 @@ module.exports = {
   bundleFileName: 'bundle.js',
   manifestFileName: 'manifest.json',
   menuConfigRelativePath: 'src/menu.js',
-  methodsRelativePath: 'src/index.js'
+  methodsRelativePath: 'src/methods.js',
+  sourceDirectory: './src'
 }

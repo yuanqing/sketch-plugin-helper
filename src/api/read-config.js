@@ -1,5 +1,6 @@
 const path = require('path')
 const fs = require('fs-extra')
+
 const readAppcastVersions = require('./appcast/read-appcast-versions')
 const { appcastFileName } = require('./constants')
 

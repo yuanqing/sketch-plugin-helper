@@ -1,4 +1,4 @@
-const api = require('../api')
+const init = require('../api/init')
 
 module.exports = {
   command: 'init',
@@ -26,25 +26,13 @@ module.exports = {
       demandOption: true
     }
   },
-  handler: function ({
-    pluginName,
-    pluginDescription,
-    authorName,
-    githubUserName,
-    githubRepositoryName
-  }) {
+  handler: function (config) {
     const outputDirectoryPath = process.cwd()
-    return api
-      .init({
-        pluginName,
-        pluginDescription,
-        authorName,
-        githubUserName,
-        githubRepositoryName,
-        outputDirectoryPath
-      })
-      .catch(function (error) {
-        console.error(error)
-      })
+    return init({
+      outputDirectoryPath,
+      config
+    }).catch(function (error) {
+      console.error(error)
+    })
   }
 }
