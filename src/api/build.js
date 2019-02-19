@@ -7,15 +7,15 @@ const writeManifest = require('./write-manifest')
 
 async function build () {
   const config = await readConfig()
-  const pluginDirectoryPath = path.join(
+  const pluginInnerDirectoryPath = path.join(
     process.cwd(),
     `${config.pluginName}.sketchplugin/Contents/Sketch`
   )
   return Promise.all([
     await writeAppcast(config),
-    await writeBundle(pluginDirectoryPath),
+    await writeBundle(pluginInnerDirectoryPath),
     await writeManifest({
-      outputDirectoryPath: pluginDirectoryPath,
+      outputDirectoryPath: pluginInnerDirectoryPath,
       config
     })
   ])

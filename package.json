@@ -38,6 +38,8 @@
     "start": "yarn run init && yarn run build && yarn run version",
     "init": "rm -rf sketch-hello-world && ./src/cli/index.js init --name='Hello World' --description='A plugin that prints Hello World' --author='Lim Yuan Qing' --username=yuanqing --repository=sketch-hello-world",
     "build": "cd sketch-hello-world && ../src/cli/index.js build",
+    "link": "cd sketch-hello-world && ../src/cli/index.js link",
+    "unlink": "cd sketch-hello-world && ../src/cli/index.js unlink",
     "watch": "cd sketch-hello-world && ../src/cli/index.js build --watch",
     "version": "cd sketch-hello-world && ../src/cli/index.js version minor"
   },
