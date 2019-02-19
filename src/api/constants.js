@@ -1,4 +1,5 @@
 module.exports = {
+  actionsConfigRelativePath: 'src/actions.js',
   appcastFileName: 'appcast.xml',
   bundleFileName: 'bundle.js',
   manifestFileName: 'manifest.json',

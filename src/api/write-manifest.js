@@ -7,12 +7,14 @@ const { bundleFileName, manifestFileName } = require('./constants')
 function writeManifest ({
   methodsFilePath,
   menuConfigFilePath,
+  actionsConfigFilePath,
   outputDirectoryPath,
   config
 }) {
   const manifest = createManifest({
     methodsFilePath,
     menuConfigFilePath,
+    actionsConfigFilePath,
     config
   })
   const outputFilePath = path.join(outputDirectoryPath, manifestFileName)
@@ -23,6 +25,7 @@ function writeManifest ({
 function createManifest ({
   methodsFilePath,
   menuConfigFilePath,
+  actionsConfigFilePath,
   config: {
     pluginName,
     pluginDescription,
@@ -34,18 +37,25 @@ function createManifest ({
 }) {
   const methods = require(methodsFilePath)
   const menuConfig = require(menuConfigFilePath)
+  const actionsConfig = require(actionsConfigFilePath)
   const pluginIdentifier = [githubUserName, githubRepositoryName].join('.')
   const commands = []
   const menu = {
     title: pluginName,
     items: []
   }
-  parse({
+  parseMenuConfig({
     methods,
     menuConfig,
     pluginIdentifier,
     commands,
     menu
+  })
+  const commands = parseActionsConfig({
+    methods,
+    actionsConfig,
+    pluginIdentifier,
+    commands
   })
   return {
     name: pluginName,
@@ -63,7 +73,41 @@ function createManifest ({
   }
 }
 
-function parse ({ methods, menuConfig, pluginIdentifier, commands, menu }) {
+function parseActionsConfig ({
+  methods,
+  actionsConfig,
+  pluginIdentifier,
+  commands
+}) {
+  return actionsConfig.reduce(function (commands, actionConfig) {
+    const identifier = [
+      pluginIdentifier,
+      dashify(actionConfig.name),
+      dashify(actionConfig.action)
+    ].join('.')
+    const handlerName = findHandlerName(actionConfig.handler, methods)
+    const command = {
+      name: actionConfig.name,
+      identifier,
+      script: bundleFileName,
+      handlers: {
+        actions: {
+          [actionConfig.action]: handlerName
+        }
+      }
+    }
+    commands.push(command)
+    return commands
+  }, commands)
+}
+
+function parseMenuConfig ({
+  methods,
+  menuConfig,
+  pluginIdentifier,
+  commands,
+  menu
+}) {
   menuConfig.forEach(function (menuItem) {
     // separator
     if (menuItem === '-') {
@@ -76,7 +120,8 @@ function parse ({ methods, menuConfig, pluginIdentifier, commands, menu }) {
         pluginIdentifier,
         dashify(menuItem.name)
       ].join('.')
-      const command = createCommand({
+      menu.items.push(menuItemIdentifier)
+      const command = createMenuItemCommand({
         name: menuItem.name,
         identifier: menuItemIdentifier,
         script: bundleFileName,
@@ -85,7 +130,6 @@ function parse ({ methods, menuConfig, pluginIdentifier, commands, menu }) {
         methods
       })
       commands.push(command)
-      menu.items.push(menuItemIdentifier)
       return
     }
     // parent menu item
@@ -105,7 +149,7 @@ function parse ({ methods, menuConfig, pluginIdentifier, commands, menu }) {
   })
 }
 
-function createCommand ({
+function createMenuItemCommand ({
   name,
   identifier,
   script,
