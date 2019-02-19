@@ -1,12 +1,12 @@
 const webpack = require('webpack')
 
-const { bundleFileName } = require('./constants')
+const { bundleFileName, methodsFilePath } = require('./constants')
 
-function writeBundle ({ entryFilePath, outputDirectoryPath }) {
+function writeBundle (outputDirectoryPath) {
   return new Promise(function (resolve, reject) {
     webpack(
       {
-        entry: entryFilePath,
+        entry: methodsFilePath,
         output: {
           path: outputDirectoryPath,
           filename: bundleFileName,

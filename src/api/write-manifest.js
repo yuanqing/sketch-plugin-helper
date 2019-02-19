@@ -2,42 +2,32 @@ const dashify = require('dashify')
 const fs = require('fs-extra')
 const path = require('path')
 
-const { bundleFileName, manifestFileName } = require('./constants')
-
-function writeManifest ({
-  methodsFilePath,
-  menuConfigFilePath,
+const {
+  bundleFileName,
   actionsConfigFilePath,
-  outputDirectoryPath,
-  config
-}) {
-  const manifest = createManifest({
-    methodsFilePath,
-    menuConfigFilePath,
-    actionsConfigFilePath,
-    config
-  })
+  menuConfigFilePath,
+  methodsFilePath,
+  manifestFileName
+} = require('./constants')
+
+async function writeManifest ({ outputDirectoryPath, config }) {
+  const manifest = await createManifest(config)
   const outputFilePath = path.join(outputDirectoryPath, manifestFileName)
   const fileContent = JSON.stringify(manifest, null, 2)
   return fs.outputFile(outputFilePath, fileContent)
 }
 
-function createManifest ({
-  methodsFilePath,
-  menuConfigFilePath,
-  actionsConfigFilePath,
-  config: {
-    pluginName,
-    pluginDescription,
-    authorName,
-    githubUserName,
-    githubRepositoryName,
-    versions
-  }
+async function createManifest ({
+  pluginName,
+  pluginDescription,
+  authorName,
+  githubUserName,
+  githubRepositoryName,
+  versions
 }) {
-  const methods = require(methodsFilePath)
-  const menuConfig = require(menuConfigFilePath)
-  const actionsConfig = require(actionsConfigFilePath)
+  const actionsConfig = (await requireIfExists(actionsConfigFilePath)) || []
+  const menuConfig = (await requireIfExists(menuConfigFilePath)) || []
+  const methods = require(path.join(process.cwd(), methodsFilePath))
   const pluginIdentifier = [githubUserName, githubRepositoryName].join('.')
   const commands = []
   const menu = {
@@ -45,15 +35,15 @@ function createManifest ({
     items: []
   }
   parseMenuConfig({
-    methods,
     menuConfig,
+    methods,
     pluginIdentifier,
     commands,
     menu
   })
   parseActionsConfig({
-    methods,
     actionsConfig,
+    methods,
     pluginIdentifier,
     commands
   })
@@ -71,6 +61,14 @@ function createManifest ({
     commands,
     menu
   }
+}
+
+async function requireIfExists (filePath) {
+  const absolutePath = path.join(process.cwd(), filePath)
+  if (await fs.exists(absolutePath)) {
+    return require(absolutePath)
+  }
+  return null
 }
 
 function parseActionsConfig ({
@@ -138,10 +136,10 @@ function parseMenuConfig ({
       items: []
     }
     menu.items.push(parentMenuItem)
-    parse({
+    parseMenuConfig({
+      methods,
       menuConfig: menuItem[parentMenuItemName],
       pluginIdentifier,
-      bundleFileName,
       commands,
       menu: parentMenuItem
     })
