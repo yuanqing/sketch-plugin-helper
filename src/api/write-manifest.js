@@ -55,7 +55,6 @@ async function createManifest ({
     version: versions[0],
     identifier: pluginIdentifier,
     appcast: `https://raw.githubusercontent.com/${githubUserName}/${githubRepositoryName}/master/appcast.xml`,
-    compatibleVersion: '52.3',
     bundleVersion: 1,
     disableCocoaScriptPreprocessor: true,
     commands,
