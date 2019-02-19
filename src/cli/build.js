@@ -1,9 +1,6 @@
 const build = require('../api/build')
 const watch = require('../api/watch')
-
-function errorHandler (error) {
-  console.error(error)
-}
+const errorHandler = require('./error-handler')
 
 module.exports = {
   command: 'build',

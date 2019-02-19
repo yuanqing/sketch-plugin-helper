@@ -1,4 +1,5 @@
 const init = require('../api/init')
+const errorHandler = require('./error-handler')
 
 module.exports = {
   command: 'init',
@@ -31,8 +32,6 @@ module.exports = {
     return init({
       outputDirectoryPath,
       config
-    }).catch(function (error) {
-      console.error(error)
-    })
+    }).catch(errorHandler)
   }
 }
