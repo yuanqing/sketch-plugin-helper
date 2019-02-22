@@ -8,9 +8,8 @@
     "type": "git",
     "url": "git://github.com/yuanqing/sketch-plugin-helper.git"
   },
-  "main": "src",
   "bin": {
-    "sph": "src/cli/index.js"
+    "sph": "src/sph/index.js"
   },
   "dependencies": {
     "chokidar": "^2.1.1",

@@ -1,5 +1,5 @@
-const version = require('../api/version')
-const errorHandler = require('./error-handler')
+const version = require('../common/version')
+const errorHandler = require('../common/error-handler')
 
 module.exports = {
   command: 'version <type>',

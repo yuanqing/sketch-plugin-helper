@@ -1,5 +1,5 @@
-const link = require('../api/link')
-const errorHandler = require('./error-handler')
+const link = require('../common/link')
+const errorHandler = require('../common/error-handler')
 
 module.exports = {
   command: 'link',

@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
 require('yargs')
-  .command(require('./cli/build'))
-  .command(require('./cli/init'))
-  .command(require('./cli/link'))
-  .command(require('./cli/lint'))
-  .command(require('./cli/unlink'))
-  .command(require('./cli/version'))
+  .command(require('./build'))
+  .command(require('./init'))
+  .command(require('./link'))
+  .command(require('./lint'))
+  .command(require('./unlink'))
+  .command(require('./version'))
   .help()
   .parse()

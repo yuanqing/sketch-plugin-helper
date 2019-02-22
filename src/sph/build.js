@@ -1,6 +1,6 @@
-const build = require('../api/build')
-const watch = require('../api/watch')
-const errorHandler = require('./error-handler')
+const build = require('../common/build')
+const watch = require('../common/watch')
+const errorHandler = require('../common/error-handler')
 
 module.exports = {
   command: 'build',

@@ -1,5 +1,5 @@
-const lint = require('../api/lint')
-const errorHandler = require('./error-handler')
+const lint = require('../common/lint')
+const errorHandler = require('../common/error-handler')
 
 module.exports = {
   command: 'lint',

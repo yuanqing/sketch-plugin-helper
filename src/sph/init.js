@@ -1,5 +1,5 @@
-const init = require('../api/init')
-const errorHandler = require('./error-handler')
+const init = require('../common/init')
+const errorHandler = require('../common/error-handler')
 
 module.exports = {
   command: 'init',

@@ -1,5 +1,5 @@
-const unlink = require('../api/unlink')
-const errorHandler = require('./error-handler')
+const unlink = require('../common/unlink')
+const errorHandler = require('../common/error-handler')
 
 module.exports = {
   command: 'unlink',

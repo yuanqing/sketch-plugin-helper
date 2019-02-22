@@ -14,6 +14,7 @@ function writeBundle (outputDirectoryPath) {
         }
       },
       function (error) {
+        console.log(error)
         error ? reject(error) : resolve()
       }
     )
