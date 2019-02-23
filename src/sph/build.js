@@ -6,13 +6,20 @@ module.exports = {
   command: 'build',
   describe: 'Builds the plugin',
   builder: {
+    isDevelopment: {
+      alias: ['development', 'develop', 'dev', 'd'],
+      type: 'boolean',
+      default: false
+    },
     shouldWatch: {
       alias: ['watch', 'w'],
-      type: 'boolean'
+      type: 'boolean',
+      default: false
     }
   },
-  handler: async function ({ shouldWatch }) {
-    await build().catch(errorHandler)
+  handler: async function ({ isDevelopment, shouldWatch }) {
+    process.NODE_ENV = isDevelopment ? 'development' : 'production'
+    await build(isDevelopment).catch(errorHandler)
     if (shouldWatch) {
       return watch().catch(errorHandler)
     }

@@ -1,5 +1,8 @@
+const {readSettings} = require('sketch-plugin-helper')
+
 function helloWorld (context) {
-  context.document.showMessage('Hello World')
+  const {name} = readSettings()
+  context.document.showMessage(`Hello, ${name}`)
 }
 
 module.exports = helloWorld

@@ -1,23 +1,20 @@
 const webpack = require('webpack')
 
-const { bundleFileName, methodsFilePath } = require('./constants')
+const createWebpackConfig = require('./create-webpack-config')
 
-function writeBundle (outputDirectoryPath) {
+function writeBundle ({isDevelopment, outputPath}) {
+  const webpackConfig = createWebpackConfig({isDevelopment, outputPath})
   return new Promise(function (resolve, reject) {
-    webpack(
-      {
-        entry: methodsFilePath,
-        output: {
-          path: outputDirectoryPath,
-          filename: bundleFileName,
-          libraryTarget: 'this'
-        }
-      },
-      function (error) {
-        console.log(error)
-        error ? reject(error) : resolve()
+    webpack(webpackConfig, function (error, stats) {
+      console.log(stats.toString({ colors: true }))
+      if (error) {
+        console.error(error.details)
       }
-    )
+      if (stats.hasErrors()) {
+        console.error(stats.toJson())
+      }
+      stats.hasErrors() ? reject(stats.toString()) : resolve()
+    })
   })
 }
 

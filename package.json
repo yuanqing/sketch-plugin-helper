@@ -9,9 +9,10 @@
     "url": "git://github.com/yuanqing/sketch-plugin-helper.git"
   },
   "bin": {
-    "sph": "src/sph/index.js"
+    "sph": "src/sph/sph.js"
   },
   "dependencies": {
+    "brfs": "^2.0.2",
     "chokidar": "^2.1.1",
     "dashify": "^2.0.0",
     "execa": "^1.0.0",
@@ -24,6 +25,7 @@
     "recursive-readdir": "^2.2.2",
     "semver": "^5.6.0",
     "standard": "^12.0.1",
+    "transform-loader": "^0.2.4",
     "webpack": "^4.29.4",
     "xml-js": "^1.6.11",
     "yargs": "^13.2.0"
@@ -36,12 +38,9 @@
     "lint": "standard 'src/**/*.js'",
     "precommit": "lint-staged",
     "start": "yarn run init && yarn run build && yarn run version",
-    "init": "rm -rf sketch-hello-world && ./src/sph/index.js init --name='Hello World' --description='A plugin that prints Hello World' --author='Lim Yuan Qing' --username=yuanqing --repository=sketch-hello-world",
-    "build": "cd sketch-hello-world && ../src/sph/index.js build",
-    "link": "cd sketch-hello-world && ../src/sph/index.js link",
-    "unlink": "cd sketch-hello-world && ../src/sph/index.js unlink",
-    "watch": "cd sketch-hello-world && ../src/sph/index.js build --watch",
-    "version": "cd sketch-hello-world && ../src/sph/index.js version minor"
+    "init": "rm -rf sketch-hello-world && ./src/sph/sph.js init --name='Hello World' --description='A plugin that prints Hello World' --author='Lim Yuan Qing' --username=yuanqing --repository=sketch-hello-world && yarn link && cd sketch-hello-world && yarn link sketch-plugin-helper",
+    "build": "cd sketch-hello-world && ../src/sph/sph.js build",
+    "version": "cd sketch-hello-world && ../src/sph/sph.js version minor"
   },
   "lint-staged": {
     "*.js": [
