@@ -19,7 +19,7 @@ async function init ({ outputDirectoryPath, config }) {
 }
 
 async function writePluginDirectory ({ pluginDirectoryPath, config }) {
-  const templateDirectoryPath = path.resolve(__dirname, 'template')
+  const templateDirectoryPath = path.resolve(__dirname, '..', 'template')
   const filePaths = await recursiveReaddir(templateDirectoryPath)
   return Promise.all(
     filePaths.map(async function (filePath) {
