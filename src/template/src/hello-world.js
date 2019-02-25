@@ -1,7 +1,7 @@
-const {readSettings} = require('sketch-plugin-helper')
+const { readSettings } = require('sketch-plugin-helper')
 
 function helloWorld (context) {
-  const {name} = readSettings()
+  const { name } = readSettings()
   context.document.showMessage(`Hello, ${name}`)
 }
 

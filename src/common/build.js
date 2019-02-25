@@ -1,7 +1,7 @@
 const path = require('path')
 
-const writeAppcast = require('./appcast/write-appcast')
 const readConfig = require('./read-config')
+const writeAppcast = require('./appcast/write-appcast')
 const writeBundle = require('./write-bundle')
 const writeManifest = require('./write-manifest')
 
@@ -15,10 +15,14 @@ async function build (isDevelopment) {
   )
   return Promise.all([
     await writeAppcast(config),
-    await writeBundle({isDevelopment, outputPath: pluginInnerDirectoryPath}),
+    await writeBundle({
+      config,
+      isDevelopment,
+      outputDirectoryPath: pluginInnerDirectoryPath
+    }),
     await writeManifest({
-      outputDirectoryPath: pluginInnerDirectoryPath,
-      config
+      config,
+      outputDirectoryPath: pluginInnerDirectoryPath
     })
   ])
 }

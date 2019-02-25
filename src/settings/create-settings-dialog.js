@@ -10,14 +10,10 @@ function createSettingsDialog () {
   alert.setMessageText('Extract Text')
   alert.addButtonWithTitle('OK')
   alert.addButtonWithTitle('Cancel')
-  const view = NSView.alloc().initWithFrame(
-    NSMakeRect(0, 0, 200, 200)
-  )
+  const view = NSView.alloc().initWithFrame(NSMakeRect(0, 0, 200, 200))
   alert.addAccessoryView(view)
 
-  const textInput = NSTextField.alloc().initWithFrame(
-    NSMakeRect(0, 0, 100, 20)
-  )
+  const textInput = NSTextField.alloc().initWithFrame(NSMakeRect(0, 0, 100, 20))
   textInput.setStringValue('foo')
   view.addSubview(textInput)
 

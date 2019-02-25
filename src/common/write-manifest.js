@@ -2,15 +2,9 @@ const dashify = require('dashify')
 const fs = require('fs-extra')
 const path = require('path')
 
-const {
-  bundleFileName,
-  actionsConfigFilePath,
-  menuConfigFilePath,
-  methodsFilePath,
-  manifestFileName
-} = require('./constants')
+const { bundleFileName, manifestFileName } = require('./constants')
 
-async function writeManifest ({ outputDirectoryPath, config }) {
+async function writeManifest ({ config, outputDirectoryPath }) {
   const manifest = await createManifest(config)
   const outputFilePath = path.join(outputDirectoryPath, manifestFileName)
   const fileContent = JSON.stringify(manifest, null, 2)
@@ -23,11 +17,10 @@ async function createManifest ({
   authorName,
   githubUserName,
   githubRepositoryName,
-  versions
+  versions,
+  menu: menuConfig,
+  actions: actionsConfig
 }) {
-  const actionsConfig = (await requireIfExists(actionsConfigFilePath)) || []
-  const menuConfig = (await requireIfExists(menuConfigFilePath)) || []
-  const methods = require(path.join(process.cwd(), methodsFilePath))
   const pluginIdentifier = [githubUserName, githubRepositoryName].join('.')
   const commands = []
   const menu = {
@@ -36,14 +29,12 @@ async function createManifest ({
   }
   parseMenuConfig({
     menuConfig,
-    methods,
     pluginIdentifier,
     commands,
     menu
   })
   parseActionsConfig({
     actionsConfig,
-    methods,
     pluginIdentifier,
     commands
   })
@@ -62,48 +53,7 @@ async function createManifest ({
   }
 }
 
-async function requireIfExists (filePath) {
-  const absolutePath = path.join(process.cwd(), filePath)
-  if (await fs.exists(absolutePath)) {
-    return require(absolutePath)
-  }
-  return null
-}
-
-function parseActionsConfig ({
-  methods,
-  actionsConfig,
-  pluginIdentifier,
-  commands
-}) {
-  actionsConfig.forEach(function (actionConfig) {
-    const identifier = [
-      pluginIdentifier,
-      dashify(actionConfig.name),
-      dashify(actionConfig.action)
-    ].join('.')
-    const handlerName = findHandlerName(actionConfig.handler, methods)
-    const command = {
-      name: actionConfig.name,
-      identifier,
-      script: bundleFileName,
-      handlers: {
-        actions: {
-          [actionConfig.action]: handlerName
-        }
-      }
-    }
-    commands.push(command)
-  })
-}
-
-function parseMenuConfig ({
-  methods,
-  menuConfig,
-  pluginIdentifier,
-  commands,
-  menu
-}) {
+function parseMenuConfig ({ menuConfig, pluginIdentifier, commands, menu }) {
   menuConfig.forEach(function (menuItem) {
     // separator
     if (menuItem === '-') {
@@ -117,14 +67,13 @@ function parseMenuConfig ({
         dashify(menuItem.name)
       ].join('.')
       menu.items.push(menuItemIdentifier)
-      const command = createMenuItemCommand({
+      const command = {
         name: menuItem.name,
         identifier: menuItemIdentifier,
         script: bundleFileName,
         shortcut: menuItem.shortcut,
-        handler: menuItem.handler,
-        methods
-      })
+        handler: menuItem.handler
+      }
       commands.push(command)
       return
     }
@@ -136,7 +85,6 @@ function parseMenuConfig ({
     }
     menu.items.push(parentMenuItem)
     parseMenuConfig({
-      methods,
       menuConfig: menuItem[parentMenuItemName],
       pluginIdentifier,
       commands,
@@ -145,30 +93,25 @@ function parseMenuConfig ({
   })
 }
 
-function createMenuItemCommand ({
-  name,
-  identifier,
-  script,
-  shortcut,
-  handler,
-  methods
-}) {
-  const result = {}
-  result.name = name
-  result.identifier = identifier
-  if (shortcut) {
-    result.shortcut = shortcut
-  }
-  result.script = script
-  result.handler = findHandlerName(handler, methods)
-  return result
-}
-
-function findHandlerName (handler, methods) {
-  return Object.keys(methods).reduce(function (result, handlerName) {
-    const method = methods[handlerName]
-    return method === handler ? handlerName : result
-  }, null)
+function parseActionsConfig ({ actionsConfig, pluginIdentifier, commands }) {
+  actionsConfig.forEach(function (actionConfig) {
+    const identifier = [
+      pluginIdentifier,
+      dashify(actionConfig.name),
+      dashify(actionConfig.action)
+    ].join('.')
+    const command = {
+      name: actionConfig.name,
+      identifier,
+      script: bundleFileName,
+      handlers: {
+        actions: {
+          [actionConfig.action]: actionConfig.handler
+        }
+      }
+    }
+    commands.push(command)
+  })
 }
 
 module.exports = writeManifest

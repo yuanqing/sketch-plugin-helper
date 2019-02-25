@@ -1,6 +1,6 @@
 {
   "private": true,
-  "version": "0.1.0",
+  "version": "0.0.0",
   "devDependencies": {
     "sketch-plugin-helper": "*"
   },
@@ -9,6 +9,26 @@
     "pluginDescription": "{{pluginDescription}}",
     "authorName": "{{authorName}}",
     "githubUserName": "{{githubUserName}}",
-    "githubRepositoryName": "{{githubRepositoryName}}"
+    "githubRepositoryName": "{{githubRepositoryName}}",
+    "menu": [
+      {
+        "name": "Hello World",
+        "handler": "hello-world"
+      },
+      {
+        "name": "Settings",
+        "handler": "settings"
+      }
+    ],
+    "actions": [
+      {
+        "name": "Hello World on Document Open",
+        "handler": "hello-world",
+        "action": "OpenDocument"
+      }
+    ],
+    "defaultSettings": {
+      "name": "Yuan Qing"
+    }
   }
 }
