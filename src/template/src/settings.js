@@ -1,6 +1,6 @@
 const { openSettingsDialog, saveSettings } = require('sketch-plugin-helper')
 
-function settings (context) {
+export default function (context) {
   const settings = openSettingsDialog([
     {
       key: 'name',
@@ -12,5 +12,3 @@ function settings (context) {
     context.document.showMessage('Settings saved')
   }
 }
-
-module.exports = settings
