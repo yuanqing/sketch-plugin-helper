@@ -44,6 +44,14 @@
     "build": "cd sketch-hello-world && ../src/sph/sph.js build",
     "version": "cd sketch-hello-world && ../src/sph/sph.js version minor"
   },
+  "standard": {
+    "globals": [
+      "COSAlertWindow",
+      "NSMakeRect",
+      "NSTextField",
+      "NSView"
+    ]
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
