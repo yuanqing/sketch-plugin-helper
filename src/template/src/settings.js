@@ -1,7 +1,7 @@
 const { openSettingsDialog, saveSettings } = require('sketch-plugin-helper')
 
 export default function (context) {
-  const settings = openSettingsDialog([
+  const settings = openSettingsDialog('Settings', [
     {
       key: 'name',
       type: 'textBox'
