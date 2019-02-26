@@ -32,6 +32,7 @@
     "yargs": "^13.2.0"
   },
   "devDependencies": {
+    "husky": "^1.3.1",
     "lint-staged": "^8.1.4"
   },
   "scripts": {
@@ -42,6 +43,11 @@
     "init": "rm -rf sketch-hello-world && ./src/sph/sph.js init --name='Hello World' --description='A plugin that prints Hello World' --author='Lim Yuan Qing' --username=yuanqing --repository=sketch-hello-world && yarn link && cd sketch-hello-world && yarn link sketch-plugin-helper",
     "build": "cd sketch-hello-world && ../src/sph/sph.js build",
     "version": "cd sketch-hello-world && ../src/sph/sph.js version minor"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
     "*.js": [
