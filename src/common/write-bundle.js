@@ -40,17 +40,18 @@ function collectUniqueHandlers (array) {
 function generateEntryFileContent (handlers) {
   const code = []
   handlers.forEach(function (handler) {
-    const basename = path.basename(handler, '.js')
     code.push(
-      `'${basename}':require('${path.join(
+      `'${handler}':require('${path.join(
         process.cwd(),
         sourceDirectory,
-        basename
+        handler
       )}').default`
     )
   })
   return `module.exports={${code.join(',')}}`
 }
+
+const sketchModuleRegex = /^sketch(\/\w+)?/
 
 function createWebpackConfig ({
   entryFilePath,
@@ -78,7 +79,7 @@ function createWebpackConfig ({
     target: 'node',
     externals: [
       function (context, request, callback) {
-        if (/^sketch\//.test(request) || request === 'sketch') {
+        if (sketchModuleRegex.test(request)) {
           return callback(null, `commonjs ${request}`)
         }
         return callback()
