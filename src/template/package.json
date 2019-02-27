@@ -28,6 +28,7 @@
       }
     ],
     "defaultSettings": {
+      "greeting": "Hello",
       "name": "Yuan Qing"
     }
   }
