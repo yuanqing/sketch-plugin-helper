@@ -51,7 +51,7 @@ function generateEntryFileContent (handlers) {
   return `module.exports={${code.join(',')}}`
 }
 
-const sketchModuleRegex = /^sketch(\/\w+)?/
+const sketchModuleRegex = /^sketch(\/\w+)?$/
 
 function createWebpackConfig ({
   entryFilePath,
