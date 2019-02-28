@@ -11,6 +11,10 @@
   "bin": {
     "sph": "src/sph/sph.js"
   },
+  "files": [
+    "index.js",
+    "src/**/*.js"
+  ],
   "dependencies": {
     "brfs": "^2.0.2",
     "chokidar": "^2.1.1",
