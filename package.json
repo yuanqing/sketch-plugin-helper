@@ -13,7 +13,8 @@
   },
   "files": [
     "index.js",
-    "src/**/*.js"
+    "src/**/*.js",
+    "src/template/**/*"
   ],
   "dependencies": {
     "brfs": "^2.0.2",
