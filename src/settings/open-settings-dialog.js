@@ -2,10 +2,11 @@ const readSettings = require('./read-settings')
 
 const width = 300
 const rowHeight = 20
+const padding = 10
 
-function createLabel (value, y) {
+function createLabel (value, y, parentHeight) {
   const label = NSTextField.alloc().initWithFrame(
-    NSMakeRect(0, y, width, rowHeight)
+    NSMakeRect(0, parentHeight - y - rowHeight, width, rowHeight)
   )
   label.setStringValue(value)
   label.setSelectable(false)
@@ -16,9 +17,9 @@ function createLabel (value, y) {
 }
 
 const createForm = {
-  textBox: function (value, y) {
+  textBox: function (value, y, parentHeight) {
     const form = NSTextField.alloc().initWithFrame(
-      NSMakeRect(0, y, width, rowHeight)
+      NSMakeRect(0, parentHeight - y - rowHeight, width, rowHeight)
     )
     form.setStringValue(value)
     return form
@@ -30,17 +31,16 @@ function openSettingsDialog (title, fields) {
   alert.setMessageText(title)
   alert.addButtonWithTitle('OK')
   alert.addButtonWithTitle('Cancel')
-  const fieldHeight = rowHeight + rowHeight
-  const view = NSView.alloc().initWithFrame(
-    NSMakeRect(0, 0, width, fields.length * (fieldHeight + rowHeight))
-  )
+  const fieldHeight = (rowHeight * 2) + padding
+  const viewHeight = fields.length * fieldHeight
+  const view = NSView.alloc().initWithFrame(NSMakeRect(0, 0, width, viewHeight))
   alert.addAccessoryView(view)
   const settings = readSettings()
   const forms = fields.map(function ({ key, name, type }, index) {
-    const y = index * (fieldHeight + rowHeight)
-    const formLabel = createLabel(name, y + rowHeight)
+    const y = index * fieldHeight
+    const formLabel = createLabel(name, y, viewHeight)
     view.addSubview(formLabel)
-    const formField = createForm[type](settings[key], y)
+    const formField = createForm[type](settings[key], y + rowHeight, viewHeight)
     view.addSubview(formField)
     return {
       key,
