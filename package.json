@@ -62,10 +62,13 @@
   },
   "standard": {
     "globals": [
-      "COSAlertWindow",
+      "NSAlert",
+      "NSLayoutAttributeLeft",
       "NSMakeRect",
+      "NSStackView",
+      "NSStackViewGravityTop",
       "NSTextField",
-      "NSView"
+      "NSUserInterfaceLayoutOrientationVertical"
     ]
   }
 }

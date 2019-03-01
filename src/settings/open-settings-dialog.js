@@ -1,51 +1,35 @@
+const createStackView = require('./create-stack-view')
+const createAlert = require('./create-alert')
+const createLabel = require('./create-label')
+const formFactory = require('./form-factory')
 const readSettings = require('./read-settings')
 
 const width = 300
-const rowHeight = 20
-const padding = 10
-
-function createLabel (value, y, parentHeight) {
-  const label = NSTextField.alloc().initWithFrame(
-    NSMakeRect(0, parentHeight - y - rowHeight, width, rowHeight)
-  )
-  label.setStringValue(value)
-  label.setSelectable(false)
-  label.setEditable(false)
-  label.setBezeled(false)
-  label.setDrawsBackground(false)
-  return label
-}
-
-const createForm = {
-  textBox: function (value, y, parentHeight) {
-    const form = NSTextField.alloc().initWithFrame(
-      NSMakeRect(0, parentHeight - y - rowHeight, width, rowHeight)
-    )
-    form.setStringValue(value)
-    return form
-  }
-}
+const height = 20
+const paddingSmall = 4
+const paddingLarge = 12
 
 function openSettingsDialog (title, fields) {
-  const alert = COSAlertWindow.new()
-  alert.setMessageText(title)
-  alert.addButtonWithTitle('OK')
-  alert.addButtonWithTitle('Cancel')
-  const fieldHeight = (rowHeight * 2) + padding
-  const viewHeight = fields.length * fieldHeight
-  const view = NSView.alloc().initWithFrame(NSMakeRect(0, 0, width, viewHeight))
-  alert.addAccessoryView(view)
+  const stackView = createStackView({
+    width,
+    height: fields.length * (height + paddingSmall + height + paddingLarge)
+  })
+  const alert = createAlert(title)
+  alert.setAccessoryView(stackView)
   const settings = readSettings()
   const forms = fields.map(function ({ key, name, type }, index) {
-    const y = index * fieldHeight
-    const formLabel = createLabel(name, y, viewHeight)
-    view.addSubview(formLabel)
-    const formField = createForm[type](settings[key], y + rowHeight, viewHeight)
-    view.addSubview(formField)
+    const createFormField = formFactory[type]
     return {
       key,
-      formField
+      formField: createFormField({ value: settings[key], width, height }),
+      formLabel: createLabel({ value: name, width, height })
     }
+  })
+  forms.forEach(function ({ formLabel, formField }) {
+    stackView.addView_inGravity_(formLabel, NSStackViewGravityTop)
+    stackView.setCustomSpacing_afterView_(paddingSmall, formLabel)
+    stackView.addView_inGravity_(formField, NSStackViewGravityTop)
+    stackView.setCustomSpacing_afterView_(paddingLarge, formField)
   })
   if (alert.runModal() === '1000') {
     return forms.reduce(function (result, { key, formField }) {
