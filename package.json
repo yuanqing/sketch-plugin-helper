@@ -47,6 +47,7 @@
     "start": "yarn run init && yarn run build && yarn run version",
     "init": "rm -rf sketch-hello-world && ./src/sph/sph.js init --name='Hello World' --description='A plugin that prints Hello World' --author='Lim Yuan Qing' --username=yuanqing --repository=sketch-hello-world && yarn link && cd sketch-hello-world && yarn link sketch-plugin-helper",
     "build": "cd sketch-hello-world && ../src/sph/sph.js build",
+    "watch": "cd sketch-hello-world && ../src/sph/sph.js build --watch",
     "version": "cd sketch-hello-world && ../src/sph/sph.js version minor"
   },
   "husky": {
@@ -64,6 +65,7 @@
     "globals": [
       "NSAlert",
       "NSLayoutAttributeLeft",
+      "NSLineBreakByTruncatingTail",
       "NSMakeRect",
       "NSStackView",
       "NSStackViewGravityTop",

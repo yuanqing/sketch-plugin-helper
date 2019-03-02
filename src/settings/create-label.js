@@ -1,13 +1,14 @@
 function createLabel ({ width, height, value }) {
-  const label = NSTextField.alloc().initWithFrame(
+  const textField = NSTextField.alloc().initWithFrame(
     NSMakeRect(0, 0, width, height)
   )
-  label.setStringValue(value)
-  label.setSelectable(false)
-  label.setEditable(false)
-  label.setBezeled(false)
-  label.setDrawsBackground(false)
-  return label
+  textField.setBezeled(false)
+  textField.setDrawsBackground(false)
+  textField.setEditable(false)
+  textField.setLineBreakMode(NSLineBreakByTruncatingTail)
+  textField.setSelectable(false)
+  textField.setStringValue(value)
+  return textField
 }
 
 module.exports = createLabel
