@@ -3,19 +3,19 @@
 const createAlert = require('./create-alert')
 const createLabel = require('./create-label')
 const createStackView = require('./create-stack-view')
-const fieldFactory = require('./field-factory')
+const createInput = require('./create-input')
 const readSettings = require('./read-settings')
 const {
+  inputHeight,
+  inputPaddingBottom,
   labelHeight,
   labelPaddingBottom,
-  fieldHeight,
-  fieldPaddingBottom,
   width
 } = require('./dimensions')
 
-function openSettingsDialog ({ title, fields: fieldsConfig }) {
+function openSettingsDialog ({ title, inputs: inputsConfig }) {
   const settings = readSettings()
-  const { fields, views, stackViewHeight } = parse(fieldsConfig, settings)
+  const { inputs, views, stackViewHeight } = parse({ inputsConfig, settings })
   const stackView = createStackView({
     width,
     height: stackViewHeight,
@@ -24,8 +24,8 @@ function openSettingsDialog ({ title, fields: fieldsConfig }) {
   const alert = createAlert(title)
   alert.setAccessoryView(stackView)
   if (alert.runModal() == '1000') {
-    return Object.keys(fields).reduce(function (result, key) {
-      const retrieveValue = fields[key]
+    return Object.keys(inputs).reduce(function (result, key) {
+      const retrieveValue = inputs[key]
       result[key] = retrieveValue()
       return result
     }, {})
@@ -33,11 +33,11 @@ function openSettingsDialog ({ title, fields: fieldsConfig }) {
   return null
 }
 
-function parse (fieldsConfig, settings) {
-  const fields = {}
+function parse ({ inputsConfig, settings }) {
+  const inputs = {}
   const views = []
   let stackViewHeight = 0
-  fieldsConfig.forEach(function ({ type, key, label, ...rest }) {
+  inputsConfig.forEach(function ({ type, key, label, ...rest }) {
     const labelView = createLabel({ label, width, height: labelHeight })
     if (labelView) {
       views.push({
@@ -47,23 +47,22 @@ function parse (fieldsConfig, settings) {
       stackViewHeight += labelHeight + labelPaddingBottom
     }
     const value = settings[key]
-    const createField = fieldFactory[type]
-    const { view, retrieveValue } = createField({
+    const { view, retrieveValue } = createInput[type]({
       value,
       width,
-      height: fieldHeight,
+      height: inputHeight,
       ...rest
     })
     views.push({
       view,
-      paddingBottom: fieldPaddingBottom
+      paddingBottom: inputPaddingBottom
     })
-    stackViewHeight += fieldHeight + fieldPaddingBottom
-    fields[key] = retrieveValue
+    stackViewHeight += inputHeight + inputPaddingBottom
+    inputs[key] = retrieveValue
   })
-  stackViewHeight -= fieldPaddingBottom
+  stackViewHeight -= inputPaddingBottom
   return {
-    fields,
+    inputs,
     views,
     stackViewHeight
   }

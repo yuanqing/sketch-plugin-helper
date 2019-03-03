@@ -3,7 +3,7 @@ const { openSettingsDialog, saveSettings } = require('sketch-plugin-helper')
 export default function () {
   const settings = openSettingsDialog({
     title: 'Settings',
-    fields: [
+    inputs: [
       {
         key: 'greeting',
         label: 'Greeting',

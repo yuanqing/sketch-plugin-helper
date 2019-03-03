@@ -1,6 +1,7 @@
 const { readSettings } = require('sketch-plugin-helper')
+const UI = require('sketch/ui')
 
-export default function (context) {
+export default function () {
   const { greeting, name } = readSettings()
-  context.document.showMessage(`${greeting}, ${name}`)
+  UI.message(`${greeting}, ${name}`)
 }

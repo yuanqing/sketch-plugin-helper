@@ -12,17 +12,16 @@
     "githubRepositoryName": "{{githubRepositoryName}}",
     "menu": [
       {
-        "name": "Hello World",
-        "handler": "hello-world"
+        "handler": "hello-world",
+        "label": "Hello World"
       },
       {
-        "name": "Settings",
-        "handler": "settings"
+        "handler": "settings",
+        "label": "Settings"
       }
     ],
     "actions": [
       {
-        "name": "Hello World on Document Open",
         "handler": "hello-world",
         "action": "OpenDocument"
       }

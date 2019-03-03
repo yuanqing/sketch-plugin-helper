@@ -1,3 +1,5 @@
+/* eslint-disable eqeqeq */
+
 const dashify = require('dashify')
 const fs = require('fs-extra')
 const path = require('path')
@@ -56,19 +58,17 @@ async function createManifest ({
 function parseMenuConfig ({ menuConfig, pluginIdentifier, commands, menu }) {
   menuConfig.forEach(function (menuItem) {
     // separator
-    if (menuItem === '-') {
+    if (menuItem == '-') {
       menu.items.push('-')
       return
     }
     // menu item
     if (menuItem.handler) {
-      const menuItemIdentifier = [
-        pluginIdentifier,
-        dashify(menuItem.name)
-      ].join('.')
+      const name = menuItem.label
+      const menuItemIdentifier = [pluginIdentifier, dashify(name)].join('.')
       menu.items.push(menuItemIdentifier)
       const command = {
-        name: menuItem.name,
+        name,
         identifier: menuItemIdentifier,
         script: bundleFileName,
         shortcut: menuItem.shortcut,
@@ -95,13 +95,14 @@ function parseMenuConfig ({ menuConfig, pluginIdentifier, commands, menu }) {
 
 function parseActionsConfig ({ actionsConfig, pluginIdentifier, commands }) {
   actionsConfig.forEach(function (actionConfig) {
+    const name = actionConfig.name || actionConfig.handler
     const identifier = [
       pluginIdentifier,
-      dashify(actionConfig.name),
+      dashify(name),
       dashify(actionConfig.action)
     ].join('.')
     const command = {
-      name: actionConfig.name,
+      name,
       identifier,
       script: bundleFileName,
       handlers: {
