@@ -3,7 +3,7 @@
 const createAlert = require('./create-alert')
 const createLabel = require('./create-label')
 const createStackView = require('./create-stack-view')
-const createInput = require('./create-input')
+const createInput = require('./input/create-input')
 const readSettings = require('./read-settings')
 const {
   inputHeight,

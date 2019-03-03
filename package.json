@@ -63,10 +63,15 @@
   },
   "standard": {
     "globals": [
+      "CGSizeMake",
       "NSAlert",
+      "NSButtonCell",
       "NSLayoutAttributeLeft",
       "NSLineBreakByTruncatingTail",
       "NSMakeRect",
+      "NSMatrix",
+      "NSRadioButton",
+      "NSRadioModeMatrix",
       "NSStackView",
       "NSStackViewGravityTop",
       "NSTextField",

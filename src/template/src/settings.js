@@ -1,4 +1,8 @@
-const { openSettingsDialog, saveSettings } = require('sketch-plugin-helper')
+const {
+  openSettingsDialog,
+  saveSettings,
+  TEXT_BOX
+} = require('sketch-plugin-helper')
 
 export default function () {
   const settings = openSettingsDialog({
@@ -7,12 +11,12 @@ export default function () {
       {
         key: 'greeting',
         label: 'Greeting',
-        type: 'textBox'
+        type: TEXT_BOX
       },
       {
         key: 'name',
         label: 'Name',
-        type: 'textBox'
+        type: TEXT_BOX
       }
     ]
   })

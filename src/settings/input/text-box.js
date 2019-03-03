@@ -14,6 +14,4 @@ function textBox ({ width, height, value, placeholder }) {
   }
 }
 
-module.exports = {
-  textBox
-}
+module.exports = textBox
