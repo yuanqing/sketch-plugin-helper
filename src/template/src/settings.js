@@ -4,12 +4,12 @@ export default function (context) {
   const settings = openSettingsDialog('Settings', [
     {
       key: 'greeting',
-      name: 'Greeting',
+      label: 'Greeting',
       type: 'textBox'
     },
     {
       key: 'name',
-      name: 'Name',
+      label: 'Name',
       type: 'textBox'
     }
   ])
