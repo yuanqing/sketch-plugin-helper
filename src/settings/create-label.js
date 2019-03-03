@@ -1,4 +1,4 @@
-function createLabel ({ width, height, value }) {
+function createLabel ({ label, width, height }) {
   const textField = NSTextField.alloc().initWithFrame(
     NSMakeRect(0, 0, width, height)
   )
@@ -7,7 +7,7 @@ function createLabel ({ width, height, value }) {
   textField.setEditable(false)
   textField.setLineBreakMode(NSLineBreakByTruncatingTail)
   textField.setSelectable(false)
-  textField.setStringValue(value)
+  textField.setStringValue(label)
   return textField
 }
 
