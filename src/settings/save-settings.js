@@ -1,16 +1,20 @@
 const Settings = require('sketch/settings')
+const UI = require('sketch/ui')
 
-function saveSettings (newSettings) {
-  if (typeof newSettings === 'undefined') {
+function saveSettings ({ settings, successMessage }) {
+  if (typeof settings === 'undefined') {
     return
   }
-  Object.keys(newSettings).forEach(function (key) {
-    const newSetting = newSettings[key]
-    if (typeof newSetting === 'undefined') {
+  Object.keys(settings).forEach(function (key) {
+    const value = settings[key]
+    if (typeof value === 'undefined') {
       return
     }
-    Settings.setSettingForKey(key, newSetting)
+    Settings.setSettingForKey(key, value)
   })
+  if (successMessage) {
+    UI.message(successMessage)
+  }
 }
 
 module.exports = saveSettings

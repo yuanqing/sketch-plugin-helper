@@ -6,14 +6,14 @@ const createStackView = require('./create-stack-view')
 const fieldFactory = require('./field-factory')
 const readSettings = require('./read-settings')
 const {
-  width,
   labelHeight,
   labelPaddingBottom,
   fieldHeight,
-  fieldPaddingBottom
+  fieldPaddingBottom,
+  width
 } = require('./dimensions')
 
-function openSettingsDialog (title, fieldsConfig) {
+function openSettingsDialog ({ title, fields: fieldsConfig }) {
   const settings = readSettings()
   const { fields, views, stackViewHeight } = parse(fieldsConfig, settings)
   const stackView = createStackView({
