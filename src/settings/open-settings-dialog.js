@@ -1,21 +1,21 @@
-const createStackView = require('./create-stack-view')
+/* eslint-disable eqeqeq */
+
 const createAlert = require('./create-alert')
 const createLabel = require('./create-label')
+const createStackView = require('./create-stack-view')
 const fieldFactory = require('./field-factory')
 const readSettings = require('./read-settings')
-
-const width = 300
-const labelHeight = 20
-const labelPaddingBottom = 6
-const fieldHeight = 20
-const fieldPaddingBottom = 12
+const {
+  width,
+  labelHeight,
+  labelPaddingBottom,
+  fieldHeight,
+  fieldPaddingBottom
+} = require('./dimensions')
 
 function openSettingsDialog (title, fieldsConfig) {
   const settings = readSettings()
-  const { fields, views, stackViewHeight } = parseFieldsConfig(
-    fieldsConfig,
-    settings
-  )
+  const { fields, views, stackViewHeight } = parse(fieldsConfig, settings)
   const stackView = createStackView({
     width,
     height: stackViewHeight,
@@ -23,7 +23,7 @@ function openSettingsDialog (title, fieldsConfig) {
   })
   const alert = createAlert(title)
   alert.setAccessoryView(stackView)
-  if (alert.runModal() === '1000') {
+  if (alert.runModal() == '1000') {
     return Object.keys(fields).reduce(function (result, key) {
       const retrieveValue = fields[key]
       result[key] = retrieveValue()
@@ -33,7 +33,7 @@ function openSettingsDialog (title, fieldsConfig) {
   return null
 }
 
-function parseFieldsConfig (fieldsConfig, settings) {
+function parse (fieldsConfig, settings) {
   const fields = {}
   const views = []
   let stackViewHeight = 0

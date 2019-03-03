@@ -5,11 +5,11 @@ function saveSettings (newSettings) {
     return
   }
   Object.keys(newSettings).forEach(function (key) {
-    const newSetting = newSettings[newSettings]
+    const newSetting = newSettings[key]
     if (typeof newSetting === 'undefined') {
       return
     }
-    Settings.setSettingForKey(newSetting)
+    Settings.setSettingForKey(key, newSetting)
   })
 }
 
