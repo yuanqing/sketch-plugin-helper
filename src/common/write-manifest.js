@@ -29,17 +29,21 @@ async function createManifest ({
     title: pluginName,
     items: []
   }
-  parseMenuConfig({
-    menuConfig,
-    pluginIdentifier,
-    commands,
-    menu
-  })
-  parseActionsConfig({
-    actionsConfig,
-    pluginIdentifier,
-    commands
-  })
+  if (menuConfig) {
+    parseMenuConfig({
+      menuConfig,
+      pluginIdentifier,
+      commands,
+      menu
+    })
+  }
+  if (actionsConfig) {
+    parseActionsConfig({
+      actionsConfig,
+      pluginIdentifier,
+      commands
+    })
+  }
   return {
     name: pluginName,
     description: pluginDescription,

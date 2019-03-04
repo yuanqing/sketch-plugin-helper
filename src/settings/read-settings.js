@@ -1,9 +1,10 @@
 const Settings = require('sketch/settings')
 
+const { packageJsonConfigKey } = require('../common/constants')
 const getPackageJson = require('../common/get-package-json')
 
 function readSettings () {
-  const { defaultSettings } = getPackageJson().sph
+  const { defaultSettings } = getPackageJson()[packageJsonConfigKey]
   return Object.keys(defaultSettings).reduce(function (results, key) {
     const savedSetting = Settings.settingForKey(key)
     const defaultSetting = defaultSettings[key]

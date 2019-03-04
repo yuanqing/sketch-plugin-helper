@@ -1,5 +1,4 @@
 function radioButtons ({ width, height, value, possibleValues }) {
-  console.log(value)
   const buttonFormat = NSButtonCell.alloc().init()
   buttonFormat.setButtonType(NSRadioButton)
   const length = possibleValues.length

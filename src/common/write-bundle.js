@@ -32,7 +32,7 @@ async function writeBundle ({ config, isDevelopment, outputDirectoryPath }) {
 function collectUniqueHandlers (array) {
   const handlers = {}
   array.forEach(function (item) {
-    if (item.handler) {
+    if (item && item.handler) {
       handlers[item.handler] = true
     }
   })

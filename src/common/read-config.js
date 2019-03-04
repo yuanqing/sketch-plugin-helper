@@ -3,7 +3,7 @@ const fs = require('fs-extra')
 
 const readAppcastVersions = require('./appcast/read-appcast-versions')
 const getPackageJson = require('./get-package-json')
-const { appcastFileName } = require('./constants')
+const { appcastFileName, packageJsonConfigKey } = require('./constants')
 
 async function readConfig () {
   const packageJson = getPackageJson()
@@ -12,7 +12,7 @@ async function readConfig () {
     ? await readAppcastVersions(appcastPath)
     : [packageJson.version]
   return {
-    ...packageJson.sph,
+    ...packageJson[packageJsonConfigKey],
     versions
   }
 }

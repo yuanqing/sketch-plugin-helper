@@ -38,8 +38,8 @@ function parse ({ inputsConfig, settings }) {
   const views = []
   let stackViewHeight = 0
   inputsConfig.forEach(function ({ type, key, label, ...rest }) {
-    const labelView = createLabel({ label, width, height: labelHeight })
-    if (labelView) {
+    if (label) {
+      const labelView = createLabel({ label, width, height: labelHeight })
       views.push({
         view: labelView,
         paddingBottom: labelPaddingBottom
