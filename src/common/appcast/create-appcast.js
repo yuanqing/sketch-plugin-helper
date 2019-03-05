@@ -49,26 +49,19 @@ function mapVersionsToItems ({
   return versions.map(function (version) {
     return {
       title: {
-        _text: version
+        _text: `v${version}`
       },
       description: {
-        _text: dropVersionPrefix(version)
+        _text: version
       },
       enclosure: {
         _attributes: {
-          url: `https://github.com/${githubUserName}/${githubRepositoryName}/archive/${version}.zip`,
-          'sparkle:version': dropVersionPrefix(version)
+          url: `https://github.com/${githubUserName}/${githubRepositoryName}/archive/v${version}.zip`,
+          'sparkle:version': version
         }
       }
     }
   })
-}
-
-function dropVersionPrefix (version) {
-  if (version[0] === 'v') {
-    return version.substring(1)
-  }
-  return version
 }
 
 module.exports = createAppcast
