@@ -1,6 +1,6 @@
 module.exports = {
-  openSettingsDialog: require('./src/settings/open-settings-dialog'),
-  readSettings: require('./src/settings/read-settings'),
-  saveSettings: require('./src/settings/save-settings'),
-  ...require('./src/settings/input/input-types')
+  openSettingsDialog: require('./settings/open-settings-dialog'),
+  readSettings: require('./settings/read-settings'),
+  saveSettings: require('./settings/save-settings'),
+  ...require('./settings/input/input-types')
 }
