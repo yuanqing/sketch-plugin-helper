@@ -4,7 +4,7 @@
   "devDependencies": {
     "sketch-plugin-helper": "*"
   },
-  "sph": {
+  "sketch-plugin-helper": {
     "pluginName": "{{pluginName}}",
     "pluginDescription": "{{pluginDescription}}",
     "authorName": "{{authorName}}",
