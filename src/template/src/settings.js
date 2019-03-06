@@ -1,7 +1,8 @@
 const {
   openSettingsDialog,
   saveSettings,
-  TEXT_BOX
+  TEXT_BOX,
+  DROP_DOWN
 } = require('sketch-plugin-helper')
 
 export default function () {
@@ -11,7 +12,11 @@ export default function () {
       {
         key: 'greeting',
         label: 'Greeting',
-        type: TEXT_BOX
+        type: DROP_DOWN,
+        possibleValues: [
+          'Hello',
+          'Goodbye'
+        ]
       },
       {
         key: 'name',
