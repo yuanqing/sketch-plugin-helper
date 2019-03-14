@@ -15,6 +15,11 @@ function getAllLayers () {
   return page.layers
 }
 
+function getPage () {
+  const document = dom.getSelectedDocument()
+  return document.selectedPage
+}
+
 function getSelectedLayers () {
   const document = dom.getSelectedDocument()
   return document.selectedLayers
@@ -27,6 +32,7 @@ function showMessage (message) {
 module.exports = {
   getAllArtboards,
   getAllLayers,
+  getPage,
   getSelectedLayers,
   showMessage
 }
