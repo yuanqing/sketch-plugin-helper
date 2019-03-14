@@ -13,10 +13,7 @@ export default function () {
         key: 'greeting',
         label: 'Greeting',
         type: DROP_DOWN,
-        possibleValues: [
-          'Hello',
-          'Goodbye'
-        ]
+        possibleValues: ['Hello', 'Goodbye']
       },
       {
         key: 'name',
