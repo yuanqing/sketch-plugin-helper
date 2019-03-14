@@ -9,7 +9,7 @@ const { bundleFileName, manifestFileName } = require('./constants')
 async function writeManifest ({ config, outputDirectoryPath }) {
   const manifest = await createManifest(config)
   const outputFilePath = path.join(outputDirectoryPath, manifestFileName)
-  const fileContent = JSON.stringify(manifest, null, 2)
+  const fileContent = JSON.stringify(manifest, null, 2) + '\n'
   return fs.outputFile(outputFilePath, fileContent)
 }
 
