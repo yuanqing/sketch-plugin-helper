@@ -3,7 +3,7 @@ const errorHandler = require('../common/error-handler')
 
 module.exports = {
   command: 'init',
-  describe: 'Initialises a new Sketch plugin',
+  describe: 'Scaffolds a new Sketch plugin',
   builder: {
     pluginName: {
       alias: ['n', 'name'],
@@ -26,7 +26,7 @@ module.exports = {
       demandOption: true
     }
   },
-  handler: function (config) {
+  handler: async function (config) {
     const outputDirectoryPath = process.cwd()
     return init({
       outputDirectoryPath,

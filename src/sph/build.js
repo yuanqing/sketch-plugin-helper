@@ -18,10 +18,9 @@ module.exports = {
     }
   },
   handler: async function ({ isDevelopment, shouldWatch }) {
-    process.NODE_ENV = isDevelopment ? 'development' : 'production'
     await build(isDevelopment).catch(errorHandler)
     if (shouldWatch) {
-      return watch().catch(errorHandler)
+      return watch(isDevelopment).catch(errorHandler)
     }
     return Promise.resolve()
   }
