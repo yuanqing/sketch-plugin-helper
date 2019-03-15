@@ -4,6 +4,15 @@
   "devDependencies": {
     "sketch-plugin-helper": "*"
   },
+  "scripts": {
+    "build": "sph build",
+    "fix": "sph lint --fix",
+    "link": "sph link",
+    "lint": "sph lint",
+    "unlink": "sph unlink",
+    "version": "sph version",
+    "watch": "sph watch"
+  },
   "sketch-plugin-helper": {
     "pluginName": "{{pluginName}}",
     "pluginDescription": "{{pluginDescription}}",
