@@ -71,16 +71,20 @@
     "globals": [
       "CGSizeMake",
       "NSAlert",
+      "NSButton",
       "NSButtonCell",
       "NSLayoutAttributeLeft",
       "NSLineBreakByTruncatingTail",
       "NSMakeRect",
       "NSMatrix",
+      "NSOffState",
+      "NSOnState",
       "NSPopUpButton",
       "NSRadioButton",
       "NSRadioModeMatrix",
       "NSStackView",
       "NSStackViewGravityTop",
+      "NSSwitchButton",
       "NSTextField",
       "NSUserInterfaceLayoutOrientationVertical"
     ]

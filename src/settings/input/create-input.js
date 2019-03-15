@@ -1,5 +1,6 @@
 module.exports = {
-  TEXT_BOX: require('./text-box'),
+  CHECK_BOX: require('./check-box'),
+  DROP_DOWN: require('./drop-down'),
   RADIO_BUTTONS: require('./radio-buttons'),
-  DROP_DOWN: require('./drop-down')
+  TEXT_BOX: require('./text-box')
 }

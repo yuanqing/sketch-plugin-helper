@@ -38,7 +38,7 @@ function parse ({ inputsConfig, settings }) {
   const views = []
   let stackViewHeight = 0
   inputsConfig.forEach(function ({ type, key, label, ...rest }) {
-    if (label) {
+    if (label && type != 'CHECK_BOX') {
       const labelView = createLabel({ label, width, height: labelHeight })
       views.push({
         view: labelView,
@@ -48,6 +48,7 @@ function parse ({ inputsConfig, settings }) {
     }
     const value = settings[key]
     const { view, retrieveValue } = createInput[type]({
+      label,
       value,
       width,
       height: inputHeight,
