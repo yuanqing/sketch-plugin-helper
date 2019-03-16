@@ -11,7 +11,7 @@
     "lint": "sph lint",
     "unlink": "sph unlink",
     "version": "sph version",
-    "watch": "sph watch"
+    "watch": "sph build --watch"
   },
   "sketch-plugin-helper": {
     "pluginName": "{{pluginName}}",
