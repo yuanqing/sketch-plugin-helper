@@ -1,12 +1,12 @@
 const {
-  openSettingsDialog,
-  saveSettings,
+  openUserInputDialog,
+  saveUserInput,
   TEXT_BOX,
   DROP_DOWN
 } = require('sketch-plugin-helper')
 
 export default function () {
-  const settings = openSettingsDialog({
+  const userInput = openUserInputDialog({
     title: 'Settings',
     inputs: [
       {
@@ -22,7 +22,7 @@ export default function () {
       }
     ]
   })
-  if (settings) {
-    saveSettings({ settings, successMessage: 'Settings saved' })
+  if (userInput) {
+    saveUserInput(userInput, { successMessage: 'Settings saved' })
   }
 }

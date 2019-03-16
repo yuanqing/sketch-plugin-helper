@@ -25,6 +25,20 @@ function getSelectedLayers () {
   return document.selectedLayers
 }
 
+function getSelectedOrAllLayers () {
+  const selectedLayers = getSelectedLayers()
+  return selectedLayers.length != 0 ? selectedLayers : getAllLayers()
+}
+
+function iterateNestedLayers (layers, callback) {
+  layers.forEach(function (layer) {
+    callback(layer)
+    if (layer.type == 'Artboard' || layer.type == 'Group') {
+      iterateNestedLayers(layer.layers, callback)
+    }
+  })
+}
+
 function showMessage (message) {
   UI.message(message)
 }
@@ -34,5 +48,7 @@ module.exports = {
   getAllLayers,
   getPage,
   getSelectedLayers,
+  getSelectedOrAllLayers,
+  iterateNestedLayers,
   showMessage
 }

@@ -3,19 +3,22 @@
 const createAlert = require('./create-alert')
 const createLabel = require('./create-label')
 const createStackView = require('./create-stack-view')
-const createInput = require('./input/create-input')
-const readSettings = require('./read-settings')
+const createForm = require('./form/create-form')
+const getSavedUserInput = require('./get-saved-user-input')
 const {
-  inputHeight,
-  inputPaddingBottom,
+  formHeight,
+  formPaddingBottom,
   labelHeight,
   labelPaddingBottom,
   width
 } = require('./dimensions')
 
-function openSettingsDialog ({ title, inputs: inputsConfig }) {
-  const settings = readSettings()
-  const { inputs, views, stackViewHeight } = parse({ inputsConfig, settings })
+function openUserInputDialog ({ title, inputs: inputsConfig }) {
+  const savedUserInput = getSavedUserInput()
+  const { inputs, views, stackViewHeight } = parse({
+    inputsConfig,
+    savedUserInput
+  })
   const stackView = createStackView({
     width,
     height: stackViewHeight,
@@ -33,7 +36,7 @@ function openSettingsDialog ({ title, inputs: inputsConfig }) {
   return null
 }
 
-function parse ({ inputsConfig, settings }) {
+function parse ({ inputsConfig, savedUserInput }) {
   const inputs = {}
   const views = []
   let stackViewHeight = 0
@@ -46,22 +49,22 @@ function parse ({ inputsConfig, settings }) {
       })
       stackViewHeight += labelHeight + labelPaddingBottom
     }
-    const value = settings[key]
-    const { view, retrieveValue } = createInput[type]({
+    const value = savedUserInput[key]
+    const { view, retrieveValue } = createForm[type]({
       label,
       value,
       width,
-      height: inputHeight,
+      height: formHeight,
       ...rest
     })
     views.push({
       view,
-      paddingBottom: inputPaddingBottom
+      paddingBottom: formPaddingBottom
     })
-    stackViewHeight += inputHeight + inputPaddingBottom
+    stackViewHeight += formHeight + formPaddingBottom
     inputs[key] = retrieveValue
   })
-  stackViewHeight -= inputPaddingBottom
+  stackViewHeight -= formPaddingBottom
   return {
     inputs,
     views,
@@ -69,4 +72,4 @@ function parse ({ inputsConfig, settings }) {
   }
 }
 
-module.exports = openSettingsDialog
+module.exports = openUserInputDialog
