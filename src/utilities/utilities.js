@@ -40,19 +40,21 @@ function iterateNestedLayers (layers, callback) {
 }
 
 function showErrorMessage (message) {
-  showMessage(`🔴 ${message}`)
+  showMessage(message, { symbol: '🔴' })
 }
 
 function showSuccessMessage (message) {
-  showMessage(`✅ ${message}`)
+  showMessage(message, { symbol: '✅' })
 }
 
-function showMessage (message) {
-  UI.message(message)
+function showMessage (message, options) {
+  UI.message(
+    options && options.symbol ? `${options.symbol} ${message}` : message
+  )
 }
 
 function showWarningMessage (message) {
-  showMessage(`⚠️ ${message}`)
+  showMessage(message, { symbol: '⚠️' })
 }
 
 module.exports = {
