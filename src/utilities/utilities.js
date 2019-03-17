@@ -15,9 +15,9 @@ function getAllLayers () {
   return page.layers
 }
 
-function getPage () {
+function addLayersToPage (layers) {
   const document = dom.getSelectedDocument()
-  return document.selectedPage
+  return document.selectedPage.sketchObject.addLayers(layers)
 }
 
 function getSelectedLayers () {
@@ -33,7 +33,8 @@ function getSelectedOrAllLayers () {
 function iterateNestedLayers (layers, callback) {
   layers.forEach(function (layer) {
     callback(layer)
-    if (layer.type == 'Artboard' || layer.type == 'Group') {
+    const type = layer.type
+    if (type == 'Artboard' || type == 'Group') {
       iterateNestedLayers(layer.layers, callback)
     }
   })
@@ -58,9 +59,9 @@ function showWarningMessage (message) {
 }
 
 module.exports = {
+  addLayersToPage,
   getAllArtboards,
   getAllLayers,
-  getPage,
   getSelectedLayers,
   getSelectedOrAllLayers,
   iterateNestedLayers,
