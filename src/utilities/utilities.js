@@ -22,7 +22,7 @@ function getPage () {
 
 function getSelectedLayers () {
   const document = dom.getSelectedDocument()
-  return document.selectedLayers
+  return document.selectedLayers.layers
 }
 
 function getSelectedOrAllLayers () {
@@ -39,8 +39,20 @@ function iterateNestedLayers (layers, callback) {
   })
 }
 
+function showErrorMessage (message) {
+  showMessage(`🔴 ${message}`)
+}
+
+function showSuccessMessage (message) {
+  showMessage(`✅ ${message}`)
+}
+
 function showMessage (message) {
   UI.message(message)
+}
+
+function showWarningMessage (message) {
+  showMessage(`⚠️ ${message}`)
 }
 
 module.exports = {
@@ -50,5 +62,8 @@ module.exports = {
   getSelectedLayers,
   getSelectedOrAllLayers,
   iterateNestedLayers,
-  showMessage
+  showErrorMessage,
+  showMessage,
+  showSuccessMessage,
+  showWarningMessage
 }
