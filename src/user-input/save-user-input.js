@@ -1,7 +1,7 @@
 const Settings = require('sketch/settings')
 const { showMessage } = require('../utilities/utilities')
 
-function saveUserInput (userInput, { successMessage }) {
+function saveUserInput (userInput, options) {
   if (typeof userInput === 'undefined') {
     return
   }
@@ -12,8 +12,8 @@ function saveUserInput (userInput, { successMessage }) {
     }
     Settings.setSettingForKey(key, value)
   })
-  if (successMessage) {
-    showMessage(successMessage)
+  if (options && options.successMessage) {
+    showMessage(options.successMessage)
   }
 }
 
