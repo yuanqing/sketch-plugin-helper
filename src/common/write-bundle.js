@@ -59,7 +59,7 @@ function generateEntryFileContent (handlers) {
         process.cwd(),
         sourceDirectory,
         handler
-      )}').default`
+      )}')`
     )
   })
   return `module.exports={${code.join(',')}}`
