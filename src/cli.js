@@ -2,10 +2,9 @@
 
 require('yargs')
   .command(require('./sph/build'))
-  .command(require('./sph/init'))
-  .command(require('./sph/link'))
+  .command(require('./sph/create'))
+  .command(require('./sph/symlink'))
   .command(require('./sph/lint'))
-  .command(require('./sph/unlink'))
   .command(require('./sph/version'))
   .help()
   .version()

@@ -1,10 +1,14 @@
 const version = require('../common/version')
-const errorHandler = require('../common/error-handler')
+const createSpinner = require('./create-spinner')
+const errorHandler = require('./error-handler')
 
 module.exports = {
   command: 'version <type>',
   describe: 'Updates the version of the Sketch plugin',
-  handler: function ({ type }) {
-    return version(type).catch(errorHandler)
+  handler: async function ({ type }) {
+    const spinner = createSpinner('Updating version...')
+    await version(type).catch(errorHandler())
+    spinner.succeed('Updated version')
+    return Promise.resolve()
   }
 }

@@ -17,7 +17,7 @@ async function writeBundle ({ config, isDevelopment, outputDirectoryPath }) {
   return new Promise(function (resolve, reject) {
     webpack(webpackConfig, async function (error, stats) {
       await fs.unlink(entryFilePath)
-      console.log(stats.toString({ colors: true }))
+      // console.log(stats.toString({ colors: true }))
       if (error) {
         console.error(error.details)
       }
@@ -99,7 +99,7 @@ function createWebpackConfig ({
         return callback()
       }
     ],
-    stats: 'minimal',
+    stats: 'errors-only',
     plugins: [
       new webpack.EnvironmentPlugin({
         NODE_ENV: mode

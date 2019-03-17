@@ -1,6 +1,7 @@
-const errorHandler = require('../common/error-handler')
 const fix = require('../common/lint/fix')
 const lint = require('../common/lint/lint')
+const createSpinner = require('./create-spinner')
+const errorHandler = require('./error-handler')
 
 module.exports = {
   command: 'lint',
@@ -11,7 +12,10 @@ module.exports = {
       type: 'boolean'
     }
   },
-  handler: function ({ shouldFix }) {
-    return (shouldFix ? fix : lint)().catch(errorHandler)
+  handler: async function ({ shouldFix }) {
+    const spinner = createSpinner('Linting...')
+    await (shouldFix ? fix : lint)().catch(errorHandler(spinner))
+    spinner.succeed('Linted')
+    return Promise.resolve()
   }
 }

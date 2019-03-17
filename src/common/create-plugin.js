@@ -5,7 +5,7 @@ const recursiveReaddir = require('recursive-readdir')
 
 const interpolate = require('./interpolate')
 
-async function init ({ outputDirectoryPath, config }) {
+async function create ({ outputDirectoryPath, config }) {
   const pluginDirectoryPath = path.join(
     outputDirectoryPath,
     config.githubRepositoryName
@@ -36,4 +36,4 @@ async function writePluginDirectory ({ pluginDirectoryPath, config }) {
   )
 }
 
-module.exports = init
+module.exports = create

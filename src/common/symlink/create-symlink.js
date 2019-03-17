@@ -2,7 +2,7 @@ const fs = require('fs-extra')
 const path = require('path')
 
 const createSymlinkPath = require('./create-symlink-path')
-const readConfig = require('./read-config')
+const readConfig = require('../read-config')
 
 async function link () {
   const { pluginName } = await readConfig()

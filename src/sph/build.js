@@ -1,6 +1,7 @@
 const build = require('../common/build')
 const watch = require('../common/watch')
-const errorHandler = require('../common/error-handler')
+const createSpinner = require('./create-spinner')
+const errorHandler = require('./error-handler')
 
 module.exports = {
   command: 'build',
@@ -18,9 +19,24 @@ module.exports = {
     }
   },
   handler: async function ({ isDevelopment, shouldWatch }) {
-    await build(isDevelopment).catch(errorHandler)
+    const spinner = createSpinner('Building...')
+    await build(isDevelopment).catch(errorHandler(spinner))
+    spinner.succeed('Built')
     if (shouldWatch) {
-      return watch(isDevelopment).catch(errorHandler)
+      return watch({
+        isDevelopment,
+        onReady: function () {
+          spinner('Watching...')
+        },
+        onChange: function () {
+          spinner.info('Change detected')
+          spinner('Building...')
+        },
+        onSuccess: function () {
+          spinner.succeed('Built')
+          spinner('Watching...')
+        }
+      }).catch(errorHandler(spinner))
     }
     return Promise.resolve()
   }
