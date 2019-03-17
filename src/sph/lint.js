@@ -1,5 +1,6 @@
-const lint = require('../common/lint')
 const errorHandler = require('../common/error-handler')
+const fix = require('../common/lint/fix')
+const lint = require('../common/lint/lint')
 
 module.exports = {
   command: 'lint',
@@ -11,6 +12,6 @@ module.exports = {
     }
   },
   handler: function ({ shouldFix }) {
-    return lint(shouldFix).catch(errorHandler)
+    return (shouldFix ? fix : lint)().catch(errorHandler)
   }
 }
