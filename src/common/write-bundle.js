@@ -30,13 +30,25 @@ async function writeBundle ({ config, isDevelopment, outputDirectoryPath }) {
 }
 
 function collectUniqueHandlers (array) {
-  const handlers = {}
+  const result = {}
+  collectUniqueHandlersHelper(array, result)
+  return Object.keys(result)
+}
+
+function collectUniqueHandlersHelper (array, result) {
   array.forEach(function (item) {
-    if (item && item.handler) {
-      handlers[item.handler] = true
+    if (item == null || typeof item === 'string') {
+      return
+    }
+    if (item.handler) {
+      result[item.handler] = true
+      return
+    }
+    const values = Object.values(item)
+    if (values.length === 1 && Array.isArray(values[0])) {
+      collectUniqueHandlers(values[0], result)
     }
   })
-  return Object.keys(handlers)
 }
 
 function generateEntryFileContent (handlers) {
