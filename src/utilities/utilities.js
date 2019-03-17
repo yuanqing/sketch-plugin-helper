@@ -3,6 +3,11 @@
 const dom = require('sketch/dom')
 const UI = require('sketch/ui')
 
+function addLayersToPage (layers) {
+  const document = dom.getSelectedDocument()
+  return document.selectedPage.sketchObject.addLayers(layers)
+}
+
 function getAllArtboards () {
   return getAllLayers().filter(function (layer) {
     return layer.type == 'Artboard'
@@ -13,11 +18,6 @@ function getAllLayers () {
   const document = dom.getSelectedDocument()
   const page = document.selectedPage
   return page.layers
-}
-
-function addLayersToPage (layers) {
-  const document = dom.getSelectedDocument()
-  return document.selectedPage.sketchObject.addLayers(layers)
 }
 
 function getSelectedLayers () {
