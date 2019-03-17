@@ -44,6 +44,10 @@ async function createManifest ({
       commands
     })
   }
+  if (menu.items.length == 1) {
+    menu.isRoot = true
+    delete menu.title
+  }
   return {
     name: pluginName,
     description: pluginDescription,
