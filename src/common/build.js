@@ -1,3 +1,4 @@
+const fs = require('fs-extra')
 const path = require('path')
 
 const readConfig = require('./read-config')
@@ -13,6 +14,9 @@ async function build (isDevelopment) {
     'Contents',
     'Sketch'
   )
+  if (await fs.exists(pluginInnerDirectoryPath)) {
+    await fs.remove(pluginInnerDirectoryPath)
+  }
   return Promise.all([
     await writeAppcast(config),
     await writeBundle({
