@@ -2,31 +2,36 @@ const chalk = require('chalk')
 const ora = require('ora')
 const timestamp = require('time-stamp')
 
-function prependTimestamp (text) {
-  return `${chalk.gray(timestamp('HH:mm:ss'))} ${text}`
+function createSpinner () {
+  return new Spinner()
 }
 
-function createSpinner (text) {
-  const spinner = ora()
-  function wrapper (text) {
-    spinner.start(prependTimestamp(text))
-    return wrapper
+class Spinner {
+  constructor () {
+    this.spinner = ora()
   }
-  wrapper.info = function (text) {
-    spinner.stopAndPersist({
+  loading (text) {
+    this.spinner.start(prependTimestamp(text))
+    return this
+  }
+  info (text) {
+    this.spinner.stopAndPersist({
       text: prependTimestamp(text)
     })
-    return wrapper
+    return this
   }
-  wrapper.succeed = function (text) {
-    spinner.succeed(prependTimestamp(text))
-    return wrapper
+  succeed (text) {
+    this.spinner.succeed(prependTimestamp(text))
+    return this
   }
-  wrapper.fail = function (text) {
-    spinner.fail(prependTimestamp(text))
-    return wrapper
+  fail (text) {
+    this.spinner.fail(prependTimestamp(text))
+    return this
   }
-  return wrapper(text)
+}
+
+function prependTimestamp (text) {
+  return `${chalk.gray(timestamp('HH:mm:ss'))} ${text}`
 }
 
 module.exports = createSpinner

@@ -19,7 +19,8 @@ module.exports = {
     }
   },
   handler: async function ({ isDevelopment, shouldWatch }) {
-    const spinner = createSpinner('Building...')
+    const spinner = createSpinner()
+    spinner.loading('Building...')
     await build(isDevelopment || shouldWatch).catch(errorHandler(spinner))
     spinner.succeed('Built')
     if (shouldWatch) {

@@ -6,7 +6,8 @@ module.exports = {
   command: 'version <type>',
   describe: 'Updates the version of the Sketch plugin',
   handler: async function ({ type }) {
-    const spinner = createSpinner('Updating version...')
+    const spinner = createSpinner()
+    spinner.loading('Updating version...')
     await version(type).catch(errorHandler())
     spinner.succeed('Updated version')
     return Promise.resolve()

@@ -13,12 +13,13 @@ module.exports = {
     }
   },
   handler: async function ({ shouldDelete }) {
+    const spinner = createSpinner()
     if (shouldDelete) {
-      const spinner = createSpinner('Deleting symbolic link...')
+      spinner.loading('Deleting symbolic link...')
       await deleteSymlink().catch(errorHandler(spinner))
       spinner.succeed('Deleted symbolic link')
     } else {
-      const spinner = createSpinner('Creating symbolic link...')
+      spinner.loading('Creating symbolic link...')
       await createSymlink().catch(errorHandler(spinner))
       spinner.succeed('Created symbolic link')
     }

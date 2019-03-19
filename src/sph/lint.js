@@ -13,9 +13,14 @@ module.exports = {
     }
   },
   handler: async function ({ shouldFix }) {
-    const spinner = createSpinner('Linting...')
-    await (shouldFix ? fix : lint)().catch(errorHandler(spinner))
-    spinner.succeed('Linted')
+    const spinner = createSpinner()
+    if (shouldFix) {
+      await fix().catch(errorHandler(spinner))
+      spinner.succeed('Fixed')
+    } else {
+      await lint().catch(errorHandler(spinner))
+      spinner.succeed('Linted')
+    }
     return Promise.resolve()
   }
 }

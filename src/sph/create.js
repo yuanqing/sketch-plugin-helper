@@ -28,7 +28,8 @@ module.exports = {
     }
   },
   handler: async function (config) {
-    const spinner = createSpinner('Creating new plugin...')
+    const spinner = createSpinner()
+    spinner.loading('Creating new plugin...')
     const outputDirectoryPath = process.cwd()
     await createPlugin({
       outputDirectoryPath,
