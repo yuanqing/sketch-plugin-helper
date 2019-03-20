@@ -1,7 +1,7 @@
-const Settings = require('sketch/settings')
-const { showMessage } = require('../utilities/utilities')
+import { setSettingForKey } from 'sketch/settings'
+import { showMessage } from '../utilities/show-message'
 
-function saveUserInput (userInput, options) {
+export function saveUserInput (userInput, options) {
   if (typeof userInput === 'undefined') {
     return
   }
@@ -10,11 +10,9 @@ function saveUserInput (userInput, options) {
     if (typeof value === 'undefined') {
       return
     }
-    Settings.setSettingForKey(key, value)
+    setSettingForKey(key, value)
   })
   if (options && options.successMessage) {
     showMessage(options.successMessage)
   }
 }
-
-module.exports = saveUserInput

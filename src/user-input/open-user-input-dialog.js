@@ -1,10 +1,10 @@
 /* eslint-disable eqeqeq */
 
+import { getSavedUserInput } from './get-saved-user-input'
 const createAlert = require('./create-alert')
 const createLabel = require('./create-label')
 const createStackView = require('./create-stack-view')
 const createForm = require('./form/create-form')
-const getSavedUserInput = require('./get-saved-user-input')
 const {
   formHeight,
   formPaddingBottom,
@@ -13,7 +13,7 @@ const {
   width
 } = require('./dimensions')
 
-function openUserInputDialog ({ title, inputs: inputsConfig }) {
+export function openUserInputDialog ({ title, inputs: inputsConfig }) {
   const savedUserInput = getSavedUserInput()
   const { inputs, views, stackViewHeight } = parse({
     inputsConfig,
@@ -71,5 +71,3 @@ function parse ({ inputsConfig, savedUserInput }) {
     stackViewHeight
   }
 }
-
-module.exports = openUserInputDialog

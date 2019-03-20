@@ -58,13 +58,14 @@ function generateEntryFileContent (handlers) {
         process.cwd(),
         sourceDirectory,
         handler
-      )}')`
+      )}').default`
     )
   })
   return `module.exports={${code.join(',')}}`
 }
 
 const sketchModuleRegex = /^sketch(\/\w+)?$/
+const brfsWrapperPath = path.join(__dirname, 'brfs-wrapper')
 
 function createWebpackConfig ({
   entryFilePath,
@@ -84,7 +85,7 @@ function createWebpackConfig ({
       rules: [
         {
           test: /\.js$/,
-          loader: 'transform-loader?brfs'
+          loader: `transform-loader?${brfsWrapperPath}`
         }
       ]
     },
