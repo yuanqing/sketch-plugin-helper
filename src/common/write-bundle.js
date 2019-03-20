@@ -17,7 +17,6 @@ async function writeBundle ({ config, isDevelopment, outputDirectoryPath }) {
   return new Promise(function (resolve, reject) {
     webpack(webpackConfig, async function (error, stats) {
       await fs.unlink(entryFilePath)
-      // console.log(stats.toString({ colors: true }))
       if (error) {
         console.error(error.details)
       }
@@ -46,7 +45,7 @@ function collectUniqueHandlersHelper (array, result) {
     }
     const values = Object.values(item)
     if (values.length === 1 && Array.isArray(values[0])) {
-      collectUniqueHandlers(values[0], result)
+      collectUniqueHandlersHelper(values[0], result)
     }
   })
 }
