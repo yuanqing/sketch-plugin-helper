@@ -72,15 +72,18 @@ function parseMenuConfig ({ menuConfig, pluginIdentifier, commands, menu }) {
     }
     // menu item
     if (menuItem.handler) {
-      const name = menuItem.label
-      const menuItemIdentifier = [pluginIdentifier, dashify(name)].join('.')
+      const { label, handler, shortcut } = menuItem
+      const menuItemIdentifier = [
+        pluginIdentifier,
+        ...handler.split('/').map(dashify)
+      ].join('.')
       menu.items.push(menuItemIdentifier)
       const command = {
-        name,
+        name: label,
         identifier: menuItemIdentifier,
         script: bundleFileName,
-        shortcut: menuItem.shortcut,
-        handler: menuItem.handler
+        shortcut,
+        handler
       }
       commands.push(command)
       return
