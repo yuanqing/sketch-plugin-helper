@@ -1,6 +1,5 @@
 {
   "name": "sketch-plugin-helper",
-  "sideEffects": false,
   "version": "0.0.4",
   "description": "An opinionated, batteries-included toolkit for making Sketch plugins",
   "keywords": [
