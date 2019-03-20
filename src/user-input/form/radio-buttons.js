@@ -1,4 +1,4 @@
-function radioButtons ({ width, height, value, possibleValues }) {
+export function radioButtons ({ width, height, value, possibleValues }) {
   const buttonFormat = NSButtonCell.alloc().init()
   buttonFormat.setButtonType(NSRadioButton)
   const length = possibleValues.length
@@ -24,5 +24,3 @@ function radioButtons ({ width, height, value, possibleValues }) {
     }
   }
 }
-
-module.exports = radioButtons

@@ -1,4 +1,4 @@
-function textBox ({ width, height, value, placeholder }) {
+export function textBox ({ width, height, value, placeholder }) {
   const textField = NSTextField.alloc().initWithFrame(
     NSMakeRect(0, 0, width, height)
   )
@@ -13,5 +13,3 @@ function textBox ({ width, height, value, placeholder }) {
     }
   }
 }
-
-module.exports = textBox

@@ -1,10 +1,11 @@
 /* eslint-disable eqeqeq */
 
 import { getSavedUserInput } from './get-saved-user-input'
+import * as createForm from './form/create-form'
 const createAlert = require('./create-alert')
 const createLabel = require('./create-label')
 const createStackView = require('./create-stack-view')
-const createForm = require('./form/create-form')
+
 const {
   formHeight,
   formPaddingBottom,

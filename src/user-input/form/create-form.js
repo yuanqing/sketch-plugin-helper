@@ -1,6 +1,4 @@
-module.exports = {
-  CHECK_BOX: require('./check-box'),
-  DROP_DOWN: require('./drop-down'),
-  RADIO_BUTTONS: require('./radio-buttons'),
-  TEXT_BOX: require('./text-box')
-}
+export { checkBox as CHECK_BOX } from './check-box'
+export { dropDown as DROP_DOWN } from './drop-down'
+export { radioButtons as RADIO_BUTTONS } from './radio-buttons'
+export { textBox as TEXT_BOX } from './text-box'
