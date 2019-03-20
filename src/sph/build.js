@@ -26,15 +26,15 @@ module.exports = {
     if (shouldWatch) {
       return watch({
         onReady: function () {
-          spinner('Watching...')
+          spinner.loading('Watching...')
         },
         onChange: function () {
           spinner.info('Change detected')
-          spinner('Building...')
+          spinner.loading('Building...')
         },
         onSuccess: function () {
           spinner.succeed('Built')
-          spinner('Watching...')
+          spinner.loading('Watching...')
         }
       }).catch(errorHandler(spinner))
     }
