@@ -1,11 +1,9 @@
-const path = require('path')
+import { join } from 'path'
 
-function createSymlinkPath (pluginDirectoryName) {
-  return path.join(
+export default function createSymlinkPath (pluginDirectoryName) {
+  return join(
     process.env.HOME,
     '/Library/Application Support/com.bohemiancoding.sketch3/Plugins',
     pluginDirectoryName
   )
 }
-
-module.exports = createSymlinkPath

@@ -1,8 +1,8 @@
-const version = require('../common/version')
-const createSpinner = require('./create-spinner')
-const errorHandler = require('./error-handler')
+import version from '../common/version'
+import createSpinner from './create-spinner'
+import errorHandler from './error-handler'
 
-module.exports = {
+export default {
   command: 'version <type>',
   describe: 'Updates the version of the Sketch plugin',
   handler: async function ({ type }) {

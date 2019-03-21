@@ -1,7 +1,5 @@
-module.exports = {
-  formHeight: 20,
-  formPaddingBottom: 12,
-  labelHeight: 20,
-  labelPaddingBottom: 6,
-  width: 300
-}
+export const formHeight = 20
+export const formPaddingBottom = 12
+export const labelHeight = 20
+export const labelPaddingBottom = 6
+export const width = 300

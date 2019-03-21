@@ -1,18 +1,16 @@
-const fs = require('fs-extra')
-const path = require('path')
+import { exists, symlink } from 'fs-extra'
+import { join } from 'path'
 
-const createSymlinkPath = require('./create-symlink-path')
-const readConfig = require('../read-config')
+import createSymlinkPath from './create-symlink-path'
+import readConfig from '../read-config'
 
-async function link () {
+export default async function link () {
   const { pluginName } = await readConfig()
   const pluginDirectoryName = `${pluginName}.sketchplugin`
-  const pluginDirectoryPath = path.join(process.cwd(), pluginDirectoryName)
+  const pluginDirectoryPath = join(process.cwd(), pluginDirectoryName)
   const symlinkPath = createSymlinkPath(pluginDirectoryName)
-  if (await fs.exists(symlinkPath)) {
+  if (await exists(symlinkPath)) {
     return Promise.reject(new Error('Plugin already symlinked'))
   }
-  return fs.symlink(pluginDirectoryPath, symlinkPath)
+  return symlink(pluginDirectoryPath, symlinkPath)
 }
-
-module.exports = link

@@ -1,9 +1,9 @@
-const chokidar = require('chokidar')
+import chokidar from 'chokidar'
 
-const build = require('./build')
-const { sourceDirectory } = require('./constants')
+import build from './build'
+import { sourceDirectory } from './constants'
 
-function watch ({ onReady, onChange, onSuccess }) {
+export default function watch ({ onReady, onChange, onSuccess }) {
   return new Promise(function (resolve, reject) {
     const watcher = chokidar.watch([sourceDirectory, './package.json'])
     watcher.on('ready', onReady)
@@ -15,5 +15,3 @@ function watch ({ onReady, onChange, onSuccess }) {
     })
   })
 }
-
-module.exports = watch

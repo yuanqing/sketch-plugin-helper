@@ -1,21 +1,21 @@
-const fs = require('fs-extra')
-const path = require('path')
+import { exists, remove } from 'fs-extra'
+import { join } from 'path'
 
-const readConfig = require('./read-config')
-const writeAppcast = require('./appcast/write-appcast')
-const writeBundle = require('./write-bundle')
-const writeManifest = require('./write-manifest')
+import readConfig from './read-config'
+import writeAppcast from './appcast/write-appcast'
+import writeBundle from './write-bundle'
+import writeManifest from './write-manifest'
 
-async function build (isDevelopment) {
+export default async function build (isDevelopment) {
   const config = await readConfig()
-  const pluginInnerDirectoryPath = path.join(
+  const pluginInnerDirectoryPath = join(
     process.cwd(),
     `${config.pluginName}.sketchplugin`,
     'Contents',
     'Sketch'
   )
-  if (await fs.exists(pluginInnerDirectoryPath)) {
-    await fs.remove(pluginInnerDirectoryPath)
+  if (await exists(pluginInnerDirectoryPath)) {
+    await remove(pluginInnerDirectoryPath)
   }
   return Promise.all([
     await writeAppcast(config),
@@ -30,5 +30,3 @@ async function build (isDevelopment) {
     })
   ])
 }
-
-module.exports = build

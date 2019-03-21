@@ -1,9 +1,9 @@
-const createSymlink = require('../common/symlink/create-symlink')
-const deleteSymlink = require('../common/symlink/delete-symlink')
-const createSpinner = require('./create-spinner')
-const errorHandler = require('./error-handler')
+import createSymlink from '../common/symlink/create-symlink'
+import deleteSymlink from '../common/symlink/delete-symlink'
+import createSpinner from './create-spinner'
+import errorHandler from './error-handler'
 
-module.exports = {
+export default {
   command: 'symlink',
   describe: 'Adds a symbolic link to the plugin to the Sketch plugin folder',
   builder: {

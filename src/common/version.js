@@ -1,15 +1,17 @@
-const mversionUpdate = require('util').promisify(require('mversion').update)
-const semver = require('semver')
+import { update } from 'mversion'
+import semver from 'semver'
 
-const readConfig = require('./read-config')
-const writeAppcast = require('./appcast/write-appcast')
+import readConfig from './read-config'
+import writeAppcast from './appcast/write-appcast'
 
-async function version (releaseType) {
+export default async function version (releaseType) {
   const config = await readConfig()
   const newVersion = semver.inc(config.versions[0], releaseType)
   return Promise.all([
     updateAppcast(newVersion, config),
-    mversionUpdate(newVersion)
+    new Promise(function (resolve) {
+      update(newVersion, resolve)
+    })
   ])
 }
 
@@ -20,5 +22,3 @@ function updateAppcast (newVersion, config) {
   }
   return writeAppcast(newConfig)
 }
-
-module.exports = version

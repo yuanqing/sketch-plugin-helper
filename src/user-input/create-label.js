@@ -1,4 +1,4 @@
-function createLabel ({ label, width, height }) {
+export default function createLabel ({ label, width, height }) {
   const textField = NSTextField.alloc().initWithFrame(
     NSMakeRect(0, 0, width, height)
   )
@@ -10,5 +10,3 @@ function createLabel ({ label, width, height }) {
   textField.setStringValue(label)
   return textField
 }
-
-module.exports = createLabel

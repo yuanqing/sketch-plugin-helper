@@ -1,16 +1,16 @@
 /* eslint-disable eqeqeq */
 
-const dashify = require('dashify')
-const fs = require('fs-extra')
-const path = require('path')
+import dashify from 'dashify'
+import { outputFile } from 'fs-extra'
+import { join } from 'path'
 
-const { bundleFileName, manifestFileName } = require('./constants')
+import { bundleFileName, manifestFileName } from './constants'
 
-async function writeManifest ({ config, outputDirectoryPath }) {
+export default async function writeManifest ({ config, outputDirectoryPath }) {
   const manifest = await createManifest(config)
-  const outputFilePath = path.join(outputDirectoryPath, manifestFileName)
+  const outputFilePath = join(outputDirectoryPath, manifestFileName)
   const fileContent = JSON.stringify(manifest, null, 2) + '\n'
-  return fs.outputFile(outputFilePath, fileContent)
+  return outputFile(outputFilePath, fileContent)
 }
 
 async function createManifest ({
@@ -125,5 +125,3 @@ function parseActionsConfig ({ actionsConfig, pluginIdentifier, commands }) {
     commands.push(command)
   })
 }
-
-module.exports = writeManifest

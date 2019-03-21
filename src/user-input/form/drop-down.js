@@ -1,4 +1,4 @@
-export function dropDown ({ width, height, value, possibleValues }) {
+export default function dropDown ({ width, height, value, possibleValues }) {
   const popUpButton = NSPopUpButton.alloc().initWithFrame(
     NSMakeRect(0, 0, width, height)
   )

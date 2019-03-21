@@ -1,9 +1,9 @@
-const fs = require('fs-extra')
-const xmlJs = require('xml-js')
+import { readFile } from 'fs-extra'
+import { xml2json } from 'xml-js'
 
-async function readAppcastVersions (appcastPath) {
-  const xml = await fs.readFile(appcastPath, 'utf8')
-  const appcast = JSON.parse(xmlJs.xml2json(xml, { compact: true, spaces: 2 }))
+export default async function readAppcastVersions (appcastPath) {
+  const xml = await readFile(appcastPath, 'utf8')
+  const appcast = JSON.parse(xml2json(xml, { compact: true, spaces: 2 }))
   const items = [].concat(appcast.rss.channel.item)
   return items.map(function (item) {
     return dropVersionPrefix(item.title._text)
@@ -16,5 +16,3 @@ function dropVersionPrefix (version) {
   }
   return version
 }
-
-module.exports = readAppcastVersions

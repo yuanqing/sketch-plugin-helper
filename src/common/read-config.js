@@ -1,14 +1,14 @@
-const path = require('path')
-const fs = require('fs-extra')
+import { join } from 'path'
+import { exists } from 'fs-extra'
 
-const readAppcastVersions = require('./appcast/read-appcast-versions')
-const getPackageJson = require('./get-package-json')
-const { appcastFileName, packageJsonConfigKey } = require('./constants')
+import readAppcastVersions from './appcast/read-appcast-versions'
+import getPackageJson from './get-package-json'
+import { appcastFileName, packageJsonConfigKey } from './constants'
 
-async function readConfig () {
+export default async function readConfig () {
   const packageJson = getPackageJson()
-  const appcastPath = path.join(process.cwd(), appcastFileName)
-  const versions = (await fs.exists(appcastPath))
+  const appcastPath = join(process.cwd(), appcastFileName)
+  const versions = (await exists(appcastPath))
     ? await readAppcastVersions(appcastPath)
     : [packageJson.version]
   return {
@@ -16,5 +16,3 @@ async function readConfig () {
     versions
   }
 }
-
-module.exports = readConfig

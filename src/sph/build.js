@@ -1,9 +1,9 @@
-const build = require('../common/build')
-const watch = require('../common/watch')
-const createSpinner = require('./create-spinner')
-const errorHandler = require('./error-handler')
+import build from '../common/build'
+import watch from '../common/watch'
+import createSpinner from './create-spinner'
+import errorHandler from './error-handler'
 
-module.exports = {
+export default {
   command: 'build',
   describe: 'Builds the plugin',
   builder: {

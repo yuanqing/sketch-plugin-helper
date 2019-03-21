@@ -1,16 +1,14 @@
-const execa = require('execa')
-const path = require('path')
+import execa from 'execa'
+import { join } from 'path'
 
-const { sourceDirectory } = require('../constants')
+import { sourceDirectory } from '../constants'
 
-async function lint () {
-  const eslintConfigPath = path.join(__dirname, 'eslintrc.json')
-  const sourceFilesGlob = path.join(sourceDirectory, '/**/*.js')
+export default async function lint () {
+  const eslintConfigPath = join(__dirname, 'eslintrc.json')
+  const sourceFilesGlob = join(sourceDirectory, '/**/*.js')
   return execa('eslint', [
     '--config',
     eslintConfigPath,
     sourceFilesGlob
   ]).stdout.pipe(process.stdout)
 }
-
-module.exports = lint

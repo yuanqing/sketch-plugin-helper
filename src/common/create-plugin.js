@@ -1,16 +1,16 @@
-const fs = require('fs-extra')
-const isUtf8 = require('is-utf8')
-const path = require('path')
-const recursiveReaddir = require('recursive-readdir')
+import { exists, outputFile, readFile } from 'fs-extra'
+import isUtf8 from 'is-utf8'
+import { join, resolve } from 'path'
+import recursiveReaddir from 'recursive-readdir'
 
-const interpolate = require('./interpolate')
+import interpolate from './interpolate'
 
-async function create ({ outputDirectoryPath, config }) {
-  const pluginDirectoryPath = path.join(
+export default async function createPlugin ({ outputDirectoryPath, config }) {
+  const pluginDirectoryPath = join(
     outputDirectoryPath,
     config.githubRepositoryName
   )
-  if (await fs.exists(pluginDirectoryPath)) {
+  if (await exists(pluginDirectoryPath)) {
     return Promise.reject(
       new Error(`Directory already exists: ${pluginDirectoryPath}`)
     )
@@ -19,21 +19,19 @@ async function create ({ outputDirectoryPath, config }) {
 }
 
 async function writePluginDirectory ({ pluginDirectoryPath, config }) {
-  const templateDirectoryPath = path.resolve(__dirname, '..', 'template')
+  const templateDirectoryPath = resolve(__dirname, '..', 'template')
   const filePaths = await recursiveReaddir(templateDirectoryPath)
   return Promise.all(
     filePaths.map(async function (filePath) {
-      const buffer = await fs.readFile(filePath)
-      const outputPath = path.join(
+      const buffer = await readFile(filePath)
+      const outputPath = join(
         pluginDirectoryPath,
         filePath.substring(templateDirectoryPath.length + 1)
       )
       const fileContents = isUtf8(buffer)
         ? interpolate(buffer.toString(), config)
         : buffer
-      return fs.outputFile(outputPath, fileContents)
+      return outputFile(outputPath, fileContents)
     })
   )
 }
-
-module.exports = create

@@ -1,12 +1,12 @@
-const {
+import {
   openUserInputDialog,
   saveUserInput,
   showMessage,
   TEXT_BOX,
   DROP_DOWN
-} = require('sketch-plugin-helper')
+} from 'sketch-plugin-helper'
 
-function helloWorld () {
+export default function helloWorld () {
   const userInput = openUserInputDialog({
     title: 'Settings',
     inputs: [
@@ -29,5 +29,3 @@ function helloWorld () {
   const { greeting, name } = userInput
   showMessage(`${greeting}, ${name}`)
 }
-
-module.exports = helloWorld

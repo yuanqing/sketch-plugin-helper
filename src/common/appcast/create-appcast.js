@@ -1,4 +1,4 @@
-function createAppcast ({
+export default function createAppcast ({
   pluginName,
   pluginDescription,
   githubUserName,
@@ -63,5 +63,3 @@ function mapVersionsToItems ({
     }
   })
 }
-
-module.exports = createAppcast

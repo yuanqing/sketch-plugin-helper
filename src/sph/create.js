@@ -1,8 +1,8 @@
-const createPlugin = require('../common/create-plugin')
-const createSpinner = require('./create-spinner')
-const errorHandler = require('./error-handler')
+import createPlugin from '../common/create-plugin'
+import createSpinner from './create-spinner'
+import errorHandler from './error-handler'
 
-module.exports = {
+export default {
   command: 'create',
   describe: 'Scaffolds a new Sketch plugin',
   builder: {

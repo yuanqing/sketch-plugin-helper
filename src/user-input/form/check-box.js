@@ -1,6 +1,6 @@
 /* eslint-disable eqeqeq */
 
-export function checkBox ({ width, height, label, value }) {
+export default function checkBox ({ width, height, label, value }) {
   const checkBox = NSButton.alloc().initWithFrame(
     NSMakeRect(0, 0, width, height)
   )

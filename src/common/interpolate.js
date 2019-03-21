@@ -1,11 +1,9 @@
-const mustache = require('mustache')
+import mustache from 'mustache'
 
 mustache.escape = function (text) {
   return text
 }
 
-function interpolate (string, data) {
+export default function interpolate (string, data) {
   return mustache.render(string, data)
 }
-
-module.exports = interpolate

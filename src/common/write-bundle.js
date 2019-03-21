@@ -1,11 +1,15 @@
-const fs = require('fs-extra')
-const path = require('path')
-const tempWrite = require('temp-write')
-const webpack = require('webpack')
+import { unlink } from 'fs-extra'
+import { join } from 'path'
+import tempWrite from 'temp-write'
+import webpack from 'webpack'
 
-const { bundleFileName, sourceDirectory } = require('./constants')
+import { bundleFileName, sourceDirectory } from './constants'
 
-async function writeBundle ({ config, isDevelopment, outputDirectoryPath }) {
+export default async function writeBundle ({
+  config,
+  isDevelopment,
+  outputDirectoryPath
+}) {
   const handlers = collectUniqueHandlers([].concat(config.actions, config.menu))
   const entryFileContent = generateEntryFileContent(handlers)
   const entryFilePath = await tempWrite(entryFileContent)
@@ -16,7 +20,7 @@ async function writeBundle ({ config, isDevelopment, outputDirectoryPath }) {
   })
   return new Promise(function (resolve, reject) {
     webpack(webpackConfig, async function (error, stats) {
-      await fs.unlink(entryFilePath)
+      await unlink(entryFilePath)
       if (error) {
         console.error(error.details)
       }
@@ -54,7 +58,7 @@ function generateEntryFileContent (handlers) {
   const code = []
   handlers.forEach(function (handler) {
     code.push(
-      `'${handler}':require('${path.join(
+      `'${handler}':require('${join(
         process.cwd(),
         sourceDirectory,
         handler
@@ -65,7 +69,7 @@ function generateEntryFileContent (handlers) {
 }
 
 const sketchModuleRegex = /^sketch(\/\w+)?$/
-const brfsWrapperPath = path.join(__dirname, 'brfs-wrapper')
+const brfsWrapperPath = join(__dirname, 'brfs-wrapper')
 
 function createWebpackConfig ({
   entryFilePath,
@@ -107,5 +111,3 @@ function createWebpackConfig ({
     ]
   }
 }
-
-module.exports = writeBundle

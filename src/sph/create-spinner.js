@@ -1,8 +1,8 @@
-const chalk = require('chalk')
-const ora = require('ora')
-const timestamp = require('time-stamp')
+import chalk from 'chalk'
+import ora from 'ora'
+import timestamp from 'time-stamp'
 
-function createSpinner () {
+export default function createSpinner () {
   return new Spinner()
 }
 
@@ -33,5 +33,3 @@ class Spinner {
 function prependTimestamp (text) {
   return `${chalk.gray(timestamp('HH:mm:ss'))} ${text}`
 }
-
-module.exports = createSpinner

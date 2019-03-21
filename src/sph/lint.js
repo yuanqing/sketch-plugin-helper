@@ -1,9 +1,9 @@
-const fix = require('../common/lint/fix')
-const lint = require('../common/lint/lint')
-const createSpinner = require('./create-spinner')
-const errorHandler = require('./error-handler')
+import fix from '../common/lint/fix'
+import lint from '../common/lint/lint'
+import createSpinner from './create-spinner'
+import errorHandler from './error-handler'
 
-module.exports = {
+export default {
   command: 'lint',
   describe: 'Lints the plugin implementation code in `src/`',
   builder: {

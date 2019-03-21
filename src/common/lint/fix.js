@@ -1,13 +1,11 @@
-const path = require('path')
-const execa = require('execa')
+import execa from 'execa'
+import { join } from 'path'
 
-const { sourceDirectory } = require('../constants')
+import { sourceDirectory } from '../constants'
 
-async function fix () {
-  const sourceFilesGlob = path.join(sourceDirectory, '/**/*.js')
+export default async function fix () {
+  const sourceFilesGlob = join(sourceDirectory, '/**/*.js')
   return execa('prettier-standard', [sourceFilesGlob]).stdout.pipe(
     process.stdout
   )
 }
-
-module.exports = fix

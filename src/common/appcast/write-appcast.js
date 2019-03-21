@@ -1,15 +1,13 @@
-const fs = require('fs-extra')
-const path = require('path')
-const xmlJs = require('xml-js')
+import { outputFile } from 'fs-extra'
+import { join } from 'path'
+import { json2xml } from 'xml-js'
 
-const createAppcast = require('./create-appcast')
-const { appcastFileName } = require('../constants')
+import createAppcast from './create-appcast'
+import { appcastFileName } from '../constants'
 
-function writeAppcast (config) {
+export default function writeAppcast (config) {
   const appcast = createAppcast(config)
-  const xml = xmlJs.json2xml(appcast, { compact: true, spaces: 2 }) + '\n'
-  const outputFilePath = path.join(process.cwd(), appcastFileName)
-  return fs.outputFile(outputFilePath, xml)
+  const xml = json2xml(appcast, { compact: true, spaces: 2 }) + '\n'
+  const outputFilePath = join(process.cwd(), appcastFileName)
+  return outputFile(outputFilePath, xml)
 }
-
-module.exports = writeAppcast

@@ -1,4 +1,4 @@
-function createAlert (title) {
+export default function createAlert (title) {
   const alert = NSAlert.alloc().init()
   alert.window().setAutorecalculatesKeyViewLoop(true)
   alert.setMessageText(title)
@@ -6,5 +6,3 @@ function createAlert (title) {
   alert.addButtonWithTitle('Cancel')
   return alert
 }
-
-module.exports = createAlert

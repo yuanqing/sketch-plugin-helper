@@ -1,16 +1,14 @@
-const fs = require('fs-extra')
+import { exists, unlink } from 'fs-extra'
 
-const createSymlinkPath = require('./create-symlink-path')
-const readConfig = require('../read-config')
+import createSymlinkPath from './create-symlink-path'
+import readConfig from '../read-config'
 
-async function unlink () {
+export default async function deleteSymlink () {
   const { pluginName } = await readConfig()
   const pluginDirectoryName = `${pluginName}.sketchplugin`
   const symlinkPath = createSymlinkPath(pluginDirectoryName)
-  if (await fs.exists(symlinkPath)) {
-    return fs.unlink(symlinkPath)
+  if (await exists(symlinkPath)) {
+    return unlink(symlinkPath)
   }
   return Promise.reject(new Error('Plugin symbolic link does not exist'))
 }
-
-module.exports = unlink
