@@ -24,8 +24,7 @@
   },
   "scripts": {
     "fix": "prettier-standard 'src/**/*.js'",
-    "lint": "standard 'src/**/*.js'",
-    "precommit": "lint-staged"
+    "lint": "standard 'src/**/*.js'"
   },
   "dependencies": {
     "brfs": "^2.0.2",
