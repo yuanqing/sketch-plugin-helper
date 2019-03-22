@@ -1,5 +1,3 @@
-/* eslint-disable eqeqeq */
-
 import { getSelectedDocument } from 'sketch/dom'
 
 export function getAllLayers () {
@@ -15,11 +13,11 @@ export function getSelectedLayers () {
 
 export function getSelectedOrAllLayers () {
   const selectedLayers = getSelectedLayers()
-  return selectedLayers.length != 0 ? selectedLayers : getAllLayers()
+  return selectedLayers.length !== 0 ? selectedLayers : getAllLayers()
 }
 
 export function getAllArtboards () {
   return getAllLayers().filter(function (layer) {
-    return layer.type == 'Artboard'
+    return layer.type === 'Artboard'
   })
 }

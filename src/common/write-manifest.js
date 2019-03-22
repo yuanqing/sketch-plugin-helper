@@ -1,5 +1,3 @@
-/* eslint-disable eqeqeq */
-
 import dashify from 'dashify'
 import { outputFile } from 'fs-extra'
 import { join } from 'path'
@@ -44,7 +42,7 @@ async function createManifest ({
       commands
     })
   }
-  if (menu.items.length == 1) {
+  if (menu.items.length === 1) {
     menu.isRoot = true
     delete menu.title
   }
@@ -66,7 +64,7 @@ async function createManifest ({
 function parseMenuConfig ({ menuConfig, pluginIdentifier, commands, menu }) {
   menuConfig.forEach(function (menuItem) {
     // separator
-    if (menuItem == '-') {
+    if (menuItem === '-') {
       menu.items.push('-')
       return
     }

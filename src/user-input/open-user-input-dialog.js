@@ -1,5 +1,3 @@
-/* eslint-disable eqeqeq */
-
 import getSavedUserInput from './get-saved-user-input'
 import * as createForm from './form/create-form'
 import createAlert from './create-alert'
@@ -27,7 +25,7 @@ export default function openUserInputDialog ({ title, inputs: inputsConfig }) {
   })
   const alert = createAlert(title)
   alert.setAccessoryView(stackView)
-  if (alert.runModal() == '1000') {
+  if (alert.runModal() === '1000') {
     return Object.keys(inputs).reduce(function (result, key) {
       const retrieveValue = inputs[key]
       result[key] = retrieveValue()
@@ -42,7 +40,7 @@ function parse ({ inputsConfig, savedUserInput }) {
   const views = []
   let stackViewHeight = 0
   inputsConfig.forEach(function ({ type, key, label, ...rest }) {
-    if (label && type != 'CHECK_BOX') {
+    if (label && type !== 'CHECK_BOX') {
       const labelView = createLabel({ label, width, height: labelHeight })
       views.push({
         view: labelView,

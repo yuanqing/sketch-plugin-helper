@@ -13,6 +13,7 @@ export default function textBox ({ width, height, value, placeholder }) {
     view: textField,
     retrieveValue: function () {
       const string = textField.stringValue()
+      // eslint-disable-next-line no-eval
       return shouldCastToNumber ? eval(string) : string
     }
   }

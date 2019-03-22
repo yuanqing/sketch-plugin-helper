@@ -1,5 +1,3 @@
-/* eslint-disable eqeqeq */
-
 export default function checkBox ({ width, height, label, value }) {
   const checkBox = NSButton.alloc().initWithFrame(
     NSMakeRect(0, 0, width, height)
@@ -11,7 +9,7 @@ export default function checkBox ({ width, height, label, value }) {
   return {
     view: checkBox,
     retrieveValue: function () {
-      return checkBox.stringValue() == '1'
+      return checkBox.stringValue() === '1'
     }
   }
 }

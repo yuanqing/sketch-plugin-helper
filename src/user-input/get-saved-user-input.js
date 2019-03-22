@@ -6,14 +6,15 @@ import isNumber from './is-number'
 
 export default function getSavedUserInput () {
   const { defaults } = getPackageJson()[packageJsonConfigKey]
-  if (typeof defaults == 'undefined') {
+  if (typeof defaults === 'undefined') {
     return {}
   }
   return Object.keys(defaults).reduce(function (results, key) {
     const savedSetting = Settings.settingForKey(key)
     const defaultValue = defaults[key]
     const value =
-      typeof savedSetting == 'undefined' ? defaultValue : savedSetting
+      typeof savedSetting === 'undefined' ? defaultValue : savedSetting
+    // eslint-disable-next-line no-eval
     results[key] = isNumber(defaultValue) ? eval(value) : value
     return results
   }, {})
