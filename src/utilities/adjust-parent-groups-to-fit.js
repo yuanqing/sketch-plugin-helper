@@ -1,6 +1,6 @@
 /* eslint-disable eqeqeq */
 
-export function adjustParentGroupsToFit (layer) {
+export default function adjustParentGroupsToFit (layer) {
   adjustParentGroupsToFitHelper(layer, {})
 }
 

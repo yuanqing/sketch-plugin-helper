@@ -1,6 +1,6 @@
 /* eslint-disable eqeqeq */
 
-export function iterateNestedLayers (layers, callback) {
+export default function iterateNestedLayers (layers, callback) {
   layers.forEach(function (layer) {
     callback(layer)
     const type = layer.type
