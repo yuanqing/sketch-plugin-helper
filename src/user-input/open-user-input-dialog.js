@@ -25,7 +25,8 @@ export default function openUserInputDialog ({ title, inputs: inputsConfig }) {
   })
   const alert = createAlert(title)
   alert.setAccessoryView(stackView)
-  if (alert.runModal() === '1000') {
+  // eslint-disable-next-line eqeqeq
+  if (alert.runModal() == '1000') {
     return Object.keys(inputs).reduce(function (result, key) {
       const retrieveValue = inputs[key]
       result[key] = retrieveValue()

@@ -1,0 +1,21 @@
+{
+  "extends": [
+    "standard",
+    "sketch"
+  ],
+  "globals": {
+    "NSLineBreakByTruncatingTail": 0,
+    "NSLayoutAttributeLeft": 0,
+    "NSOnState": 0,
+    "NSOffState": 0,
+    "NSRadioButton": 0,
+    "NSRadioModeMatrix": 0,
+    "NSStackViewGravityTop": 0,
+    "NSStringPboardType": 0,
+    "NSSwitchButton": 0,
+    "NSUserInterfaceLayoutOrientationVertical": 0
+  },
+  "rules": {
+    "eqeqeq": 2
+  }
+}
