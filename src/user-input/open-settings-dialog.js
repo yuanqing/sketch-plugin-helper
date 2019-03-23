@@ -1,22 +1,20 @@
-import { getSavedUserInput } from './get-saved-user-input'
+import { createAlert } from './form/create-alert'
+import { createLabel } from './form/create-label'
+import { createStackView } from './form/create-stack-view'
 import * as createForm from './form/create-form'
-import { createAlert } from './create-alert'
-import { createLabel } from './create-label'
-import { createStackView } from './create-stack-view'
+import { getSettings } from './get-settings'
 
-import {
-  formHeight,
-  formPaddingBottom,
-  labelHeight,
-  labelPaddingBottom,
-  width
-} from './dimensions'
+const formHeight = 20
+const formPaddingBottom = 12
+const labelHeight = 20
+const labelPaddingBottom = 6
+const width = 300
 
-export function openUserInputDialog ({ title, inputs: inputsConfig }) {
-  const savedUserInput = getSavedUserInput()
+export function openSettingsDialog ({ title, inputs: inputsConfig }) {
+  const settings = getSettings()
   const { inputs, views, stackViewHeight } = parse({
     inputsConfig,
-    savedUserInput
+    settings
   })
   const stackView = createStackView({
     width,
@@ -36,12 +34,19 @@ export function openUserInputDialog ({ title, inputs: inputsConfig }) {
   return null
 }
 
-function parse ({ inputsConfig, savedUserInput }) {
+function parse ({ inputsConfig, settings }) {
   const inputs = {}
   const views = []
   let stackViewHeight = 0
-  inputsConfig.forEach(function ({ type, key, label, ...rest }) {
+  inputsConfig.forEach(function ({
+    type,
+    key,
+    label,
+    value: inputsConfigValue,
+    ...rest
+  }) {
     if (label && type !== 'CHECK_BOX') {
+      // Create a label for forms that aren't check boxes
       const labelView = createLabel({ label, width, height: labelHeight })
       views.push({
         view: labelView,
@@ -49,7 +54,11 @@ function parse ({ inputsConfig, savedUserInput }) {
       })
       stackViewHeight += labelHeight + labelPaddingBottom
     }
-    const value = savedUserInput[key]
+    const settingsSavedValue = settings[key]
+    const value =
+      typeof settingsSavedValue !== 'undefined'
+        ? settingsSavedValue
+        : inputsConfigValue
     const { view, retrieveValue } = createForm[type]({
       label,
       value,

@@ -14,7 +14,7 @@ export function radioButtons ({ width, height, value, possibleValues }) {
   cells.forEach(function (cell, index) {
     cell.setTitle(possibleValues[index])
   })
-  const index = possibleValues.indexOf(value)
+  const index = typeof value !== 'undefined' ? possibleValues.indexOf(value) : 0
   matrix.selectCellAtRow_column(0, index)
   return {
     view: matrix,

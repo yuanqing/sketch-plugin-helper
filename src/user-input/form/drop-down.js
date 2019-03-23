@@ -5,7 +5,7 @@ export function dropDown ({ width, height, value, possibleValues }) {
   possibleValues.forEach(function (value) {
     popUpButton.addItemWithTitle(value)
   })
-  const index = possibleValues.indexOf(value)
+  const index = typeof value !== 'undefined' ? possibleValues.indexOf(value) : 0
   popUpButton.selectItemAtIndex(index)
   return {
     view: popUpButton,
