@@ -2,7 +2,7 @@ import chalk from 'chalk'
 import ora from 'ora'
 import timestamp from 'time-stamp'
 
-export default function createSpinner () {
+export function createSpinner () {
   return new Spinner()
 }
 

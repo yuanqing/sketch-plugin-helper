@@ -1,4 +1,4 @@
-export default function createAlert (title) {
+export function createAlert (title) {
   const alert = NSAlert.alloc().init()
   alert.window().setAutorecalculatesKeyViewLoop(true)
   alert.setMessageText(title)

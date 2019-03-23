@@ -1,4 +1,4 @@
-export default function createAppcast ({
+export function createAppcast ({
   pluginName,
   pluginDescription,
   githubUserName,

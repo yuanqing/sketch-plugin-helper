@@ -1,10 +1,10 @@
 import { exists, symlink } from 'fs-extra'
 import { join } from 'path'
 
-import createSymlinkPath from './create-symlink-path'
-import readConfig from '../read-config'
+import { createSymlinkPath } from './create-symlink-path'
+import { readConfig } from '../read-config'
 
-export default async function link () {
+export async function createSymlink () {
   const { pluginName } = await readConfig()
   const pluginDirectoryName = `${pluginName}.sketchplugin`
   const pluginDirectoryPath = join(process.cwd(), pluginDirectoryName)

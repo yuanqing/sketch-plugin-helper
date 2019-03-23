@@ -1,8 +1,8 @@
 import Settings from 'sketch/settings'
 
 import { packageJsonConfigKey } from '../common/constants'
-import getPackageJson from '../common/get-package-json'
-import isNumber from './is-number'
+import { getPackageJson } from '../common/get-package-json'
+import { isNumber } from './is-number'
 
 export function getSavedUserInput () {
   const { defaults } = getPackageJson()[packageJsonConfigKey]

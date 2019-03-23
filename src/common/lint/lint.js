@@ -3,7 +3,7 @@ import { join, resolve } from 'path'
 
 import { sourceDirectory } from '../constants'
 
-export default async function lint () {
+export async function lint () {
   const eslintConfigPath = resolve(
     __dirname,
     '..',

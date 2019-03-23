@@ -1,9 +1,9 @@
-import build from '../common/build'
-import watch from '../common/watch'
-import createSpinner from './create-spinner'
-import errorHandler from './error-handler'
+import { build as buildApi } from '../common/build'
+import { watch } from '../common/watch'
+import { createSpinner } from './create-spinner'
+import { errorHandler } from './error-handler'
 
-export default {
+export const build = {
   command: 'build',
   describe: 'Builds the plugin',
   builder: {
@@ -21,7 +21,7 @@ export default {
   handler: async function ({ isDevelopment, shouldWatch }) {
     const spinner = createSpinner()
     spinner.loading('Building...')
-    await build(isDevelopment || shouldWatch).catch(errorHandler(spinner))
+    await buildApi(isDevelopment || shouldWatch).catch(errorHandler(spinner))
     spinner.succeed('Built')
     if (shouldWatch) {
       return watch({

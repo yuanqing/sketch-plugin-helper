@@ -1,4 +1,4 @@
-export default function createStackView ({ width, height, views }) {
+export function createStackView ({ width, height, views }) {
   const stackView = NSStackView.alloc().initWithFrame(
     NSMakeRect(0, 0, width, height)
   )

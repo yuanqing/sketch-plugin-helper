@@ -3,9 +3,9 @@ import isUtf8 from 'is-utf8'
 import { join, resolve } from 'path'
 import recursiveReaddir from 'recursive-readdir'
 
-import interpolate from './interpolate'
+import { interpolate } from './interpolate'
 
-export default async function createPlugin ({ outputDirectoryPath, config }) {
+export async function createPlugin ({ outputDirectoryPath, config }) {
   const pluginDirectoryPath = join(
     outputDirectoryPath,
     config.githubRepositoryName

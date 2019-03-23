@@ -6,7 +6,7 @@ import {
   DROP_DOWN
 } from 'sketch-plugin-helper'
 
-export default function helloWorld () {
+export function helloWorld () {
   const userInput = openUserInputDialog({
     title: 'Settings',
     inputs: [

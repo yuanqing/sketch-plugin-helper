@@ -1,8 +1,8 @@
-import createPlugin from '../common/create-plugin'
-import createSpinner from './create-spinner'
-import errorHandler from './error-handler'
+import { createPlugin } from '../common/create-plugin'
+import { createSpinner } from './create-spinner'
+import { errorHandler } from './error-handler'
 
-export default {
+export const create = {
   command: 'create',
   describe: 'Scaffolds a new Sketch plugin',
   builder: {

@@ -4,7 +4,7 @@ import { join } from 'path'
 
 import { bundleFileName, manifestFileName } from './constants'
 
-export default async function writeManifest ({ config, outputDirectoryPath }) {
+export async function writeManifest ({ config, outputDirectoryPath }) {
   const manifest = await createManifest(config)
   const outputFilePath = join(outputDirectoryPath, manifestFileName)
   const fileContent = JSON.stringify(manifest, null, 2) + '\n'

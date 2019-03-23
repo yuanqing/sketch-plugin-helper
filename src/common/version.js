@@ -1,10 +1,10 @@
 import { update } from 'mversion'
 import semver from 'semver'
 
-import readConfig from './read-config'
-import writeAppcast from './appcast/write-appcast'
+import { readConfig } from './read-config'
+import { writeAppcast } from './appcast/write-appcast'
 
-export default async function version (releaseType) {
+export async function version (releaseType) {
   const config = await readConfig()
   const newVersion = semver.inc(config.versions[0], releaseType)
   return Promise.all([

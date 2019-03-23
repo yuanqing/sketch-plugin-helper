@@ -1,12 +1,12 @@
 import { exists, remove } from 'fs-extra'
 import { join } from 'path'
 
-import readConfig from './read-config'
-import writeAppcast from './appcast/write-appcast'
-import writeBundle from './write-bundle'
-import writeManifest from './write-manifest'
+import { readConfig } from './read-config'
+import { writeAppcast } from './appcast/write-appcast'
+import { writeBundle } from './write-bundle'
+import { writeManifest } from './write-manifest'
 
-export default async function build (isDevelopment) {
+export async function build (isDevelopment) {
   const config = await readConfig()
   const pluginInnerDirectoryPath = join(
     process.cwd(),

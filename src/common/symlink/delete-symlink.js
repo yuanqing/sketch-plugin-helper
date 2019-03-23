@@ -1,9 +1,9 @@
 import { exists, unlink } from 'fs-extra'
 
-import createSymlinkPath from './create-symlink-path'
-import readConfig from '../read-config'
+import { createSymlinkPath } from './create-symlink-path'
+import { readConfig } from '../read-config'
 
-export default async function deleteSymlink () {
+export async function deleteSymlink () {
   const { pluginName } = await readConfig()
   const pluginDirectoryName = `${pluginName}.sketchplugin`
   const symlinkPath = createSymlinkPath(pluginDirectoryName)

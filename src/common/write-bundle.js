@@ -5,7 +5,7 @@ import webpack from 'webpack'
 
 import { bundleFileName, sourceDirectory } from './constants'
 
-export default async function writeBundle ({
+export async function writeBundle ({
   config,
   isDevelopment,
   outputDirectoryPath

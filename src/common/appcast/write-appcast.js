@@ -2,10 +2,10 @@ import { outputFile } from 'fs-extra'
 import { join } from 'path'
 import { json2xml } from 'xml-js'
 
-import createAppcast from './create-appcast'
+import { createAppcast } from './create-appcast'
 import { appcastFileName } from '../constants'
 
-export default function writeAppcast (config) {
+export function writeAppcast (config) {
   const appcast = createAppcast(config)
   const xml = json2xml(appcast, { compact: true, spaces: 2 }) + '\n'
   const outputFilePath = join(process.cwd(), appcastFileName)

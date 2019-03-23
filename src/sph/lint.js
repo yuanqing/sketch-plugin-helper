@@ -1,9 +1,9 @@
-import fix from '../common/lint/fix'
-import lint from '../common/lint/lint'
-import createSpinner from './create-spinner'
-import errorHandler from './error-handler'
+import { fix } from '../common/lint/fix'
+import { lint as lintApi } from '../common/lint/lint'
+import { createSpinner } from './create-spinner'
+import { errorHandler } from './error-handler'
 
-export default {
+export const lint = {
   command: 'lint',
   describe: 'Lints the plugin implementation code in `src/`',
   builder: {
@@ -18,7 +18,7 @@ export default {
       await fix().catch(errorHandler(spinner))
       spinner.succeed('Fixed')
     } else {
-      await lint().catch(errorHandler(spinner))
+      await lintApi().catch(errorHandler(spinner))
       spinner.succeed('Linted')
     }
     return Promise.resolve()
