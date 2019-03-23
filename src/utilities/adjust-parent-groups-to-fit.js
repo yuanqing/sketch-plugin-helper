@@ -1,4 +1,4 @@
-export default function adjustParentGroupsToFit (layer) {
+export function adjustParentGroupsToFit (layer) {
   adjustParentGroupsToFitHelper(layer, {})
 }
 

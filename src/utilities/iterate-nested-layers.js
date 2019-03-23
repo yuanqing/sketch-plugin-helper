@@ -1,4 +1,4 @@
-export default function iterateNestedLayers (layers, callback) {
+export function iterateNestedLayers (layers, callback) {
   layers.forEach(function (layer) {
     callback(layer)
     const type = layer.type

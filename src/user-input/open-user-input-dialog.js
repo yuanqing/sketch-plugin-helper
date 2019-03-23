@@ -12,7 +12,7 @@ import {
   width
 } from './dimensions'
 
-export default function openUserInputDialog ({ title, inputs: inputsConfig }) {
+export function openUserInputDialog ({ title, inputs: inputsConfig }) {
   const savedUserInput = getSavedUserInput()
   const { inputs, views, stackViewHeight } = parse({
     inputsConfig,

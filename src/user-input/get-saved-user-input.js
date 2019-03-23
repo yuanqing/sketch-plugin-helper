@@ -4,7 +4,7 @@ import { packageJsonConfigKey } from '../common/constants'
 import getPackageJson from '../common/get-package-json'
 import isNumber from './is-number'
 
-export default function getSavedUserInput () {
+export function getSavedUserInput () {
   const { defaults } = getPackageJson()[packageJsonConfigKey]
   if (typeof defaults === 'undefined') {
     return {}

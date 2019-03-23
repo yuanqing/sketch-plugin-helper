@@ -1,7 +1,7 @@
 import { setSettingForKey } from 'sketch/settings'
 import { showMessage } from '../utilities/show-message'
 
-export default function saveUserInput (userInput, options) {
+export function saveUserInput (userInput, options) {
   if (typeof userInput === 'undefined') {
     return
   }
