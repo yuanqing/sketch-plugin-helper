@@ -27,7 +27,6 @@
     "lint": "eslint 'src/**/*.js'"
   },
   "dependencies": {
-    "brfs": "^2.0.2",
     "chalk": "^2.4.2",
     "chokidar": "^2.1.1",
     "dashify": "^2.0.0",
@@ -46,8 +45,10 @@
     "mversion": "^1.13.0",
     "ora": "^3.2.0",
     "prettier-standard": "^9.1.1",
+    "quote-stream": "^1.0.2",
     "recursive-readdir": "^2.2.2",
     "semver": "^5.6.0",
+    "static-module": "^3.0.2",
     "temp-write": "^3.4.0",
     "time-stamp": "^2.2.0",
     "transform-loader": "^0.2.4",

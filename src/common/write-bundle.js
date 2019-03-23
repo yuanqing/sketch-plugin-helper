@@ -69,7 +69,10 @@ function generateEntryFileContent (handlers) {
 }
 
 const sketchModuleRegex = /^sketch(\/\w+)?$/
-const brfsWrapperPath = join(__dirname, 'brfs-wrapper')
+const inlineFsReadFileSyncTransform = join(
+  __dirname,
+  'inline-fs-read-file-sync-transform'
+)
 
 function createWebpackConfig ({
   entryFilePath,
@@ -89,7 +92,7 @@ function createWebpackConfig ({
       rules: [
         {
           test: /\.js$/,
-          loader: `transform-loader?${brfsWrapperPath}`
+          loader: `transform-loader?${inlineFsReadFileSyncTransform}`
         }
       ]
     },
