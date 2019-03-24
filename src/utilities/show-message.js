@@ -7,13 +7,9 @@ export function showMessage (message, options) {
 }
 
 export function showSuccessMessage (message) {
-  showMessage(message, { symbol: '✅' })
-}
-
-export function showWarningMessage (message) {
-  showMessage(message, { symbol: '⚠️' })
+  showMessage(message, { symbol: '✔' })
 }
 
 export function showErrorMessage (message) {
-  showMessage(message, { symbol: '🔴' })
+  showMessage(message, { symbol: '✘' })
 }
