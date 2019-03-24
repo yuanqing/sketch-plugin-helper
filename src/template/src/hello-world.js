@@ -1,31 +1,32 @@
 import {
-  openUserInputDialog,
-  saveUserInput,
+  openSettingsDialog,
+  saveSettings,
   showMessage,
-  TEXT_BOX,
-  DROP_DOWN
+  DROP_DOWN,
+  TEXT_BOX
 } from 'sketch-plugin-helper'
 
 export function helloWorld () {
-  const userInput = openUserInputDialog({
+  const settings = openSettingsDialog({
     title: 'Settings',
     inputs: [
       {
+        type: DROP_DOWN,
         key: 'greeting',
         label: 'Greeting',
-        type: DROP_DOWN,
         possibleValues: ['Hello', 'Goodbye']
       },
       {
+        type: TEXT_BOX,
         key: 'name',
-        label: 'Name',
-        type: TEXT_BOX
+        label: 'Name'
       }
     ]
   })
-  if (userInput) {
-    saveUserInput(userInput)
+  if (!settings) {
+    return
   }
-  const { greeting, name } = userInput
+  saveSettings(settings)
+  const { greeting, name } = settings
   showMessage(`${greeting}, ${name}`)
 }
