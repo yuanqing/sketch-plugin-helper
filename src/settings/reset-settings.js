@@ -4,7 +4,7 @@ import { showMessage } from '../utilities/show-message'
 import { packageJsonConfigKey } from '../common/constants'
 import { getPackageJson } from '../common/get-package-json'
 
-export function resetSettings (options) {
+export function resetSettings () {
   const { defaultSettings } = getPackageJson()[packageJsonConfigKey]
   if (typeof defaultSettings === 'undefined') {
     return
@@ -13,9 +13,5 @@ export function resetSettings (options) {
     setSettingForKey(key, undefined)
     setSessionVariable(key, undefined)
   })
-  const successMessage =
-    typeof options !== 'undefined' && options.successMessage
-  if (successMessage) {
-    showMessage(successMessage)
-  }
+  showMessage('Reset settings')
 }
