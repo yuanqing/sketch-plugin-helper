@@ -25,7 +25,7 @@
         "label": "Hello World"
       }
     ],
-    "defaults": {
+    "defaultSettings": {
       "greeting": "Hello",
       "name": "{{authorName}}"
     }

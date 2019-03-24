@@ -1,7 +1,7 @@
-import { createAlert } from './form/create-alert'
-import { createLabel } from './form/create-label'
-import { createStackView } from './form/create-stack-view'
-import * as createForm from './form/create-form'
+import { createAlert } from './ui/create-alert'
+import { createLabel } from './ui/create-label'
+import { createStackView } from './ui/create-stack-view'
+import * as createForm from './ui/create-form'
 import { getSettings } from './get-settings'
 
 const formHeight = 20

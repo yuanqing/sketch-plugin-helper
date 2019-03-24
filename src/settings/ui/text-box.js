@@ -11,7 +11,7 @@ export function textBox (transform) {
     return {
       view: textField,
       retrieveValue: function () {
-        const string = textField.stringValue()
+        const string = `${textField.stringValue()}`
         return transform ? transform(string) : string
       }
     }
