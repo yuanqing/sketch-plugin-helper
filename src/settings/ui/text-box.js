@@ -3,7 +3,7 @@ export function textBox (transform) {
     const textField = NSTextField.alloc().initWithFrame(
       NSMakeRect(0, 0, width, height)
     )
-    const stringValue = value != null ? `${value}` : ''
+    const stringValue = value == null ? '' : `${value}`
     textField.setStringValue(stringValue)
     if (placeholder) {
       textField.setPlaceholderString(placeholder)
