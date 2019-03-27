@@ -8,7 +8,7 @@ export function getAllLayers () {
 
 export function getSelectedLayers () {
   const document = getSelectedDocument()
-  return document.selectedLayers.layers
+  return document.selectedLayers.layers.reverse()
 }
 
 export function getSelectedOrAllLayers () {
