@@ -1,4 +1,4 @@
-import { getSelectedDocument } from 'sketch/dom'
+import { getSelectedDocument } from './get-selected-document'
 
 export function getAllLayers () {
   const document = getSelectedDocument()
