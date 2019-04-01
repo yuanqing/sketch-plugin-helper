@@ -1,7 +1,7 @@
+import { createErrorHandler } from '../common/create-error-handler'
 import { fix } from '../common/lint/fix'
 import { lint as lintApi } from '../common/lint/lint'
-import { createSpinner } from './create-spinner'
-import { errorHandler } from './error-handler'
+import { createLogger } from '../common/create-logger'
 
 export const lint = {
   command: 'lint',
@@ -13,13 +13,13 @@ export const lint = {
     }
   },
   handler: async function ({ shouldFix }) {
-    const spinner = createSpinner()
+    const logger = createLogger()
     if (shouldFix) {
-      await fix().catch(errorHandler(spinner))
-      spinner.succeed('Fixed')
+      await fix().catch(createErrorHandler(logger))
+      logger.succeed('Fixed')
     } else {
-      await lintApi().catch(errorHandler(spinner))
-      spinner.succeed('Linted')
+      await lintApi().catch(createErrorHandler(logger))
+      logger.succeed('Linted')
     }
     return Promise.resolve()
   }

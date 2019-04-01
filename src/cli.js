@@ -1,5 +1,20 @@
-#!/usr/bin/env node
+import yargs from 'yargs'
 
-// eslint-disable-next-line no-global-assign
-require = require('esm')(module)
-module.exports = require('./sph/sph.js')
+import { build } from './commands/build'
+import { create } from './commands/create'
+import { lint } from './commands/lint'
+import { symlink } from './commands/symlink'
+import { test } from './commands/test'
+import { version } from './commands/version'
+
+yargs
+  .command(build)
+  .command(create)
+  .command(lint)
+  .command(symlink)
+  .command(test)
+  .command(version)
+  .demandCommand()
+  .help()
+  .version()
+  .parse()

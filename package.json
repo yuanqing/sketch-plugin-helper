@@ -20,13 +20,14 @@
   ],
   "main": "src/api.js",
   "bin": {
-    "sph": "src/cli.js"
+    "sph": "src/cli-esm.js"
   },
   "scripts": {
     "fix": "prettier-standard 'src/**/*.js'",
     "lint": "eslint 'src/**/*.js'"
   },
   "dependencies": {
+    "@skpm/timers": "^0.2.0",
     "chalk": "^2.4.2",
     "chokidar": "^2.1.1",
     "dashify": "^2.0.0",
@@ -39,15 +40,22 @@
     "eslint-plugin-standard": "^4.0.0",
     "esm": "^3.2.18",
     "execa": "^1.0.0",
+    "express": "^4.16.4",
     "fs-extra": "^7.0.1",
+    "get-port": "^4.2.0",
+    "globby": "^9.1.0",
     "is-utf8": "^0.2.1",
     "mustache": "^3.0.1",
     "mversion": "^1.13.0",
+    "nanoid": "^2.0.1",
+    "nanoid-dictionary": "^2.0.0",
     "ora": "^3.2.0",
+    "p-each-series": "^2.0.0",
     "prettier-standard": "^9.1.1",
     "quote-stream": "^1.0.2",
     "recursive-readdir": "^2.2.2",
     "semver": "^5.6.0",
+    "sketch-polyfill-fetch": "^0.4.3",
     "static-module": "^3.0.2",
     "temp-write": "^3.4.0",
     "time-stamp": "^2.2.0",

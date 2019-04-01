@@ -2,30 +2,30 @@ import chalk from 'chalk'
 import ora from 'ora'
 import timestamp from 'time-stamp'
 
-export function createSpinner () {
-  return new Spinner()
+export function createLogger () {
+  return new Logger()
 }
 
-class Spinner {
+class Logger {
   constructor () {
-    this.spinner = ora()
+    this.logger = ora()
   }
   loading (text) {
-    this.spinner.start(prependTimestamp(text))
+    this.logger.start(prependTimestamp(text))
     return this
   }
   info (text) {
-    this.spinner.stopAndPersist({
+    this.logger.stopAndPersist({
       text: prependTimestamp(text)
     })
     return this
   }
   succeed (text) {
-    this.spinner.succeed(prependTimestamp(text))
+    this.logger.succeed(prependTimestamp(text))
     return this
   }
   fail (text) {
-    this.spinner.fail(prependTimestamp(text))
+    this.logger.fail(prependTimestamp(text))
     return this
   }
 }

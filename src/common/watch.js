@@ -1,6 +1,6 @@
 import chokidar from 'chokidar'
 
-import { build } from './build'
+import { buildPlugin } from './build-plugin/build-plugin'
 import { sourceDirectory } from './constants'
 
 export function watch ({ onReady, onChange, onSuccess }) {
@@ -9,7 +9,7 @@ export function watch ({ onReady, onChange, onSuccess }) {
     watcher.on('ready', onReady)
     watcher.on('change', async function () {
       onChange()
-      await build(true).catch(reject)
+      await buildPlugin(true).catch(reject)
       onSuccess()
       resolve()
     })

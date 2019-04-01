@@ -1,6 +1,6 @@
-import { createPlugin } from '../common/create-plugin'
-import { createSpinner } from './create-spinner'
-import { errorHandler } from './error-handler'
+import { createErrorHandler } from '../common/create-error-handler'
+import { createLogger } from '../common/create-logger'
+import { scaffoldPlugin } from '../common/scaffold-plugin'
 
 export const create = {
   command: 'create',
@@ -28,14 +28,14 @@ export const create = {
     }
   },
   handler: async function (config) {
-    const spinner = createSpinner()
-    spinner.loading('Creating new plugin...')
+    const logger = createLogger()
+    logger.loading('Creating new plugin...')
     const outputDirectoryPath = process.cwd()
-    await createPlugin({
+    await scaffoldPlugin({
       outputDirectoryPath,
       config
-    }).catch(errorHandler(spinner))
-    spinner.succeed('Created new plugin')
+    }).catch(createErrorHandler(logger))
+    logger.succeed('Created new plugin')
     return Promise.resolve()
   }
 }

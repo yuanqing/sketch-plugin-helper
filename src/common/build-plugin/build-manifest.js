@@ -2,9 +2,10 @@ import dashify from 'dashify'
 import { outputFile } from 'fs-extra'
 import { join } from 'path'
 
-import { bundleFileName, manifestFileName } from './constants'
+import { bundleFileName, manifestFileName } from '../constants'
+import { createIdentifier } from '../create-identifier'
 
-export async function writeManifest ({ config, outputDirectoryPath }) {
+export async function buildManifest ({ config, outputDirectoryPath }) {
   const manifest = await createManifest(config)
   const outputFilePath = join(outputDirectoryPath, manifestFileName)
   const fileContent = JSON.stringify(manifest, null, 2) + '\n'
@@ -21,7 +22,10 @@ async function createManifest ({
   menu: menuConfig,
   actions: actionsConfig
 }) {
-  const pluginIdentifier = [githubUserName, githubRepositoryName].join('.')
+  const pluginIdentifier = createIdentifier([
+    githubUserName,
+    githubRepositoryName
+  ])
   const commands = []
   const menu = {
     title: pluginName,
@@ -71,10 +75,10 @@ function parseMenuConfig ({ menuConfig, pluginIdentifier, commands, menu }) {
     // menu item
     if (menuItem.handler) {
       const { label, handler, shortcut } = menuItem
-      const menuItemIdentifier = [
+      const menuItemIdentifier = createIdentifier([
         pluginIdentifier,
-        ...handler.split('/').map(dashify)
-      ].join('.')
+        ...handler.split('/')
+      ])
       menu.items.push(menuItemIdentifier)
       const command = {
         name: label,

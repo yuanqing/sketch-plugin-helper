@@ -2,8 +2,8 @@ import { join } from 'path'
 import { exists } from 'fs-extra'
 
 import { readAppcastVersions } from './appcast/read-appcast-versions'
-import { getPackageJson } from './get-package-json'
 import { appcastFileName, packageJsonConfigKey } from './constants'
+import { getPackageJson } from './get-package-json'
 
 export async function readConfig () {
   const packageJson = getPackageJson()

@@ -1,7 +1,7 @@
+import { createErrorHandler } from '../common/create-error-handler'
+import { createLogger } from '../common/create-logger'
 import { createSymlink } from '../common/symlink/create-symlink'
 import { deleteSymlink } from '../common/symlink/delete-symlink'
-import { createSpinner } from './create-spinner'
-import { errorHandler } from './error-handler'
 
 export const symlink = {
   command: 'symlink',
@@ -13,15 +13,15 @@ export const symlink = {
     }
   },
   handler: async function ({ shouldDelete }) {
-    const spinner = createSpinner()
+    const logger = createLogger()
     if (shouldDelete) {
-      spinner.loading('Deleting symbolic link...')
-      await deleteSymlink().catch(errorHandler(spinner))
-      spinner.succeed('Deleted symbolic link')
+      logger.loading('Deleting symbolic link...')
+      await deleteSymlink().catch(createErrorHandler(logger))
+      logger.succeed('Deleted symbolic link')
     } else {
-      spinner.loading('Creating symbolic link...')
-      await createSymlink().catch(errorHandler(spinner))
-      spinner.succeed('Created symbolic link')
+      logger.loading('Creating symbolic link...')
+      await createSymlink().catch(createErrorHandler(logger))
+      logger.succeed('Created symbolic link')
     }
     return Promise.resolve()
   }
