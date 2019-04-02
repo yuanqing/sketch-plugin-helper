@@ -2,35 +2,30 @@ export class ResultsLogger {
   constructor () {
     this.count = 0
     this.passCount = 0
-    this.log('TAP version 13')
-  }
-  log (message) {
-    console.log(message)
+    console.log('TAP version 13')
   }
   logTestName (testName) {
-    this.log(`# ${testName}`)
+    console.log(`# ${testName}`)
   }
   logAssertionPassed (message) {
     this.count += 1
     this.passCount += 1
-    this.log(`ok ${this.count} ${message || ''}`.trim())
+    console.log(`ok ${this.count} ${message || ''}`.trim())
   }
   logAssertionFailed (message) {
     this.count += 1
-    this.log(`not ok ${this.count} ${message || ''}`.trim())
+    console.log(`not ok ${this.count} ${message || ''}`.trim())
   }
-  logPlan () {
-    this.log(`1..${this.count}`)
-  }
-  end () {
-    this.log(`\n# tests ${this.count}`)
-    this.log(`# pass  ${this.passCount}`)
+  logResultsSummary () {
+    console.log(`1..${this.count}`)
+    console.log(`\n# tests ${this.count}`)
+    console.log(`# pass  ${this.passCount}`)
     const failCount = this.count - this.passCount
     if (failCount > 0) {
-      this.log(`# fail  ${failCount}`)
-      this.log(`\n# not ok`)
+      console.log(`# fail  ${failCount}`)
+      console.log('\n# not ok\n')
     } else {
-      this.log(`\n# ok`)
+      console.log('\n# ok\n')
     }
   }
 }

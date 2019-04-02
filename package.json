@@ -27,7 +27,6 @@
     "lint": "eslint 'src/**/*.js'"
   },
   "dependencies": {
-    "@skpm/timers": "^0.2.0",
     "chalk": "^2.4.2",
     "chokidar": "^2.1.1",
     "dashify": "^2.0.0",
@@ -41,6 +40,7 @@
     "esm": "^3.2.18",
     "fs-extra": "^7.0.1",
     "globby": "^9.1.0",
+    "is-promise": "^2.1.0",
     "is-utf8": "^0.2.1",
     "mustache": "^3.0.1",
     "mversion": "^1.13.0",
@@ -51,6 +51,7 @@
     "prettier-standard": "^9.1.1",
     "quote-stream": "^1.0.2",
     "recursive-readdir": "^2.2.2",
+    "run-series": "^1.1.8",
     "semver": "^5.6.0",
     "static-module": "^3.0.2",
     "temp-write": "^3.4.0",

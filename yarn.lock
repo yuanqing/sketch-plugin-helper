@@ -45,11 +45,6 @@
   dependencies:
     any-observable "^0.3.0"
 
-"@skpm/timers@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@skpm/timers/-/timers-0.2.0.tgz#c7f409627a7e24b1c893ce9b6ee86b93fa4195d6"
-  integrity sha512-xlCKvGNqWBPDUX4fE+dUEvBre1490eFsaSxOJiiKsbzNDNxRe/APloMIFkI2qaaRMqqYCPOjTIvnUb20h4YyLA==
-
 "@types/events@*":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@types/events/-/events-3.0.0.tgz#2862f3f58a9a7f7c3e78d79f130dd4d71c25c2a7"
@@ -4107,6 +4102,11 @@ run-queue@^1.0.0, run-queue@^1.0.3:
   integrity sha1-6Eg5bwV9Ij8kOGkkYY4laUFh7Ec=
   dependencies:
     aproba "^1.1.1"
+
+run-series@^1.1.8:
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/run-series/-/run-series-1.1.8.tgz#2c4558f49221e01cd6371ff4e0a1e203e460fc36"
+  integrity sha512-+GztYEPRpIsQoCSraWHDBs9WVy4eVME16zhOtDB4H9J4xN0XRhknnmLOl+4gRgZtu8dpp9N/utSPjKH/xmDzXg==
 
 rxjs@^6.3.3, rxjs@^6.4.0:
   version "6.4.0"

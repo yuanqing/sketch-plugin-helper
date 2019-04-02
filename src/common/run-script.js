@@ -3,7 +3,6 @@ import { outputFile, remove } from 'fs-extra'
 import generate from 'nanoid/generate'
 import lowercase from 'nanoid-dictionary/lowercase'
 import { join } from 'path'
-import { Transform } from 'stream'
 
 import { buildBundle } from './build-plugin/build-bundle'
 import { bundleFileName, manifestFileName } from './constants'
@@ -74,33 +73,33 @@ const sketchtoolBinaryPath = join(
   'sketchtool'
 )
 
-const PREFIX_QUOTE = /\n'/g
-const POSTFIX_QUOTE = /'\n/g
-const NEWLINE = /\\n/g
-
-function stripQuotes (string) {
-  return string
-    .substring(1)
-    .replace(PREFIX_QUOTE, '\n')
-    .replace(POSTFIX_QUOTE, '\n')
-    .replace(NEWLINE, '\n')
-}
-
-export function executePluginCommand ({ pluginDirectoryPath, identifier }) {
-  const transformStream = new Transform({
-    transform: function (chunk, encoding, callback) {
-      callback(null, stripQuotes(chunk.toString()))
-    }
-  })
+function executePluginCommand ({ pluginDirectoryPath, identifier }) {
   return new Promise(function (resolve, reject) {
     const child = spawn(sketchtoolBinaryPath, [
       'run',
       pluginDirectoryPath,
       identifier
     ])
-    child.stdout.pipe(transformStream).pipe(process.stdout)
+    child.stdout.on('data', function (chunk) {
+      console.log(stripQuotes(chunk.toString()))
+    })
     child.stderr.pipe(process.stderr)
     child.on('exit', resolve)
     child.on('error', reject)
   })
+}
+
+const QUOTE_PREFIX = /^'/g
+const QUOTE_POSTFIX = /'$/g
+const QUOTE_BEFORE_NEWLINE = /'\n/g
+const QUOTE_AFTER_NEWLINE = /\n'/g
+const ESCAPED_NEWLINE = /\\n/g
+
+function stripQuotes (string) {
+  return string
+    .replace(QUOTE_PREFIX, '')
+    .replace(QUOTE_POSTFIX, '')
+    .replace(QUOTE_BEFORE_NEWLINE, '\n')
+    .replace(QUOTE_AFTER_NEWLINE, '\n')
+    .replace(ESCAPED_NEWLINE, '\n')
 }

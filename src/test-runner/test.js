@@ -1,4 +1,5 @@
-import { setImmediate } from '@skpm/timers'
+import isPromise from 'is-promise'
+import pEachSeries from 'p-each-series'
 
 import { ResultsLogger } from './results-logger'
 import { TestSuite } from './test-suite'
@@ -13,22 +14,25 @@ export function test (name, handler) {
   })
   if (!isQueued) {
     isQueued = true
-    setImmediate(runAllTests)
+    setTimeout(runAllTests, 0)
   }
 }
 
-function runAllTests () {
+async function runAllTests () {
   const resultsLogger = new ResultsLogger()
   try {
-    tests.map(function ({ name, handler }) {
+    await pEachSeries(tests, async function ({ name, handler }) {
       const testSuite = new TestSuite({ name, resultsLogger })
-      handler(testSuite)
+      const result = handler(testSuite)
+      if (isPromise(result)) {
+        await result
+      }
       testSuite.checkAssertionCounts()
+      return Promise.resolve()
     })
   } catch (error) {
     throw error
   } finally {
-    resultsLogger.logPlan()
-    resultsLogger.end()
+    resultsLogger.logResultsSummary()
   }
 }
