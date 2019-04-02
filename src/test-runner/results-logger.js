@@ -1,13 +1,11 @@
-import fetch from 'sketch-polyfill-fetch'
-
 export class ResultsLogger {
   constructor () {
     this.count = 0
     this.passCount = 0
-    this.logs = ['TAP version 13']
+    this.log('TAP version 13')
   }
   log (message) {
-    this.logs.push(message)
+    console.log(message)
   }
   logTestName (testName) {
     this.log(`# ${testName}`)
@@ -34,16 +32,5 @@ export class ResultsLogger {
     } else {
       this.log(`\n# ok`)
     }
-    const body = {
-      logs: this.logs,
-      failed: failCount > 0
-    }
-    fetch(process.env.RESULTS_SERVER_ENDPOINT, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(body)
-    })
   }
 }

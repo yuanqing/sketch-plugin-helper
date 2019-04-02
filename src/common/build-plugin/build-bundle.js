@@ -13,8 +13,7 @@ export async function buildBundle ({
   isDevelopment,
   entryFilePaths,
   outputDirectoryPath,
-  library,
-  globals
+  library
 }) {
   const mode = isDevelopment ? 'development' : 'production'
   const webpackConfig = {
@@ -47,8 +46,7 @@ export async function buildBundle ({
     stats: 'errors-only',
     plugins: [
       new webpack.EnvironmentPlugin({
-        NODE_ENV: mode,
-        ...globals
+        NODE_ENV: mode
       })
     ]
   }

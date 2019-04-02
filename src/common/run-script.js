@@ -1,15 +1,16 @@
-import execa from 'execa'
+import { spawn } from 'child_process'
 import { outputFile, remove } from 'fs-extra'
 import generate from 'nanoid/generate'
 import lowercase from 'nanoid-dictionary/lowercase'
 import { join } from 'path'
+import { Transform } from 'stream'
 
 import { buildBundle } from './build-plugin/build-bundle'
 import { bundleFileName, manifestFileName } from './constants'
 import { createPluginDirectoryPath } from './create-plugin-directory-path'
 import { createPluginInnerDirectoryPath } from './create-plugin-inner-directory-path'
 
-export async function runScript ({ entryFilePaths, globals }) {
+export async function runScript (entryFilePaths) {
   const identifier = `__${createUniqueIdentifier()}`
   const pluginDirectoryPath = createPluginDirectoryPath(
     `${identifier}.sketchplugin`
@@ -23,8 +24,7 @@ export async function runScript ({ entryFilePaths, globals }) {
         isDevelopment: true,
         entryFilePaths,
         outputDirectoryPath,
-        library: identifier,
-        globals
+        library: identifier
       }),
       buildManifest({
         outputDirectoryPath,
@@ -46,7 +46,7 @@ function createUniqueIdentifier () {
   return generate(lowercase, 20)
 }
 
-async function buildManifest ({ outputDirectoryPath, identifier }) {
+function buildManifest ({ outputDirectoryPath, identifier }) {
   const manifest = {
     identifier,
     disableCocoaScriptPreprocessor: true,
@@ -74,14 +74,33 @@ const sketchtoolBinaryPath = join(
   'sketchtool'
 )
 
-export async function executePluginCommand ({
-  pluginDirectoryPath,
-  identifier
-}) {
-  return execa(sketchtoolBinaryPath, [
-    'run',
-    pluginDirectoryPath,
-    identifier,
-    '--without-activating'
-  ])
+const PREFIX_QUOTE = /\n'/g
+const POSTFIX_QUOTE = /'\n/g
+const NEWLINE = /\\n/g
+
+function stripQuotes (string) {
+  return string
+    .substring(1)
+    .replace(PREFIX_QUOTE, '\n')
+    .replace(POSTFIX_QUOTE, '\n')
+    .replace(NEWLINE, '\n')
+}
+
+export function executePluginCommand ({ pluginDirectoryPath, identifier }) {
+  const transformStream = new Transform({
+    transform: function (chunk, encoding, callback) {
+      callback(null, stripQuotes(chunk.toString()))
+    }
+  })
+  return new Promise(function (resolve, reject) {
+    const child = spawn(sketchtoolBinaryPath, [
+      'run',
+      pluginDirectoryPath,
+      identifier
+    ])
+    child.stdout.pipe(transformStream).pipe(process.stdout)
+    child.stderr.pipe(process.stderr)
+    child.on('exit', resolve)
+    child.on('error', reject)
+  })
 }
