@@ -9,6 +9,7 @@
     "fix": "sph lint --fix",
     "lint": "sph lint",
     "symlink": "sph symlink",
+    "test": "sph test",
     "unlink": "sph symlink --delete",
     "version": "sph version",
     "watch": "sph build --watch"
