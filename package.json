@@ -27,6 +27,8 @@
     "lint": "eslint 'src/**/*.js'"
   },
   "dependencies": {
+    "@babel/core": "^7.4.3",
+    "babel-loader": "^8.0.5",
     "chalk": "^2.4.2",
     "chokidar": "^2.1.1",
     "dashify": "^2.0.0",
