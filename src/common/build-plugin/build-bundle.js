@@ -11,7 +11,7 @@ const inlineFsReadFileSyncTransform = join(
 
 const transformOpenSketchDocumentPlugin = join(
   __dirname,
-  'babel-plugin-transform-open-sketch-document'
+  'babel-plugin-transform-relative-paths'
 )
 
 export async function buildBundle ({

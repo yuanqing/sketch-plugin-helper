@@ -21,7 +21,7 @@ export class ResultsLogger {
     console.log(`\n# tests ${this.count}`)
     console.log(`# pass  ${this.passCount}`)
     const failCount = this.count - this.passCount
-    if (failCount > 0) {
+    if (this.count === 0 || failCount > 0) {
       console.log(`# fail  ${failCount}`)
       console.log('\n# not ok\n')
     } else {

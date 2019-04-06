@@ -1,6 +1,6 @@
 import { getSelectedDocument } from './get-selected-document'
 
-export function getPageLayers () {
+export function getAllLayers () {
   const document = getSelectedDocument()
   const page = document.selectedPage
   return page.layers
@@ -11,7 +11,7 @@ export function getSelectedLayers () {
   return document.selectedLayers.layers.reverse()
 }
 
-export function getSelectedOrPageLayers () {
+export function getSelectedOrAllLayers () {
   const selectedLayers = getSelectedLayers()
   return selectedLayers.length !== 0 ? selectedLayers : getAllLayers()
 }
@@ -21,6 +21,3 @@ export function getAllArtboards () {
     return layer.type === 'Artboard'
   })
 }
-
-export const getAllLayers = getPageLayers
-export const getSelectedOrAllLayers = getSelectedOrPageLayers

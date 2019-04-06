@@ -9,14 +9,13 @@ import { bundleFileName, manifestFileName } from './constants'
 import { createPluginDirectoryPath } from './create-plugin-directory-path'
 import { createPluginInnerDirectoryPath } from './create-plugin-inner-directory-path'
 
+const pluginDirectoryPath = createPluginDirectoryPath(
+  'Sketch Plugin Helper.sketchplugin'
+)
+const outputDirectoryPath = createPluginInnerDirectoryPath(pluginDirectoryPath)
+
 export async function runScript (entryFilePaths) {
-  const identifier = `__${createUniqueIdentifier()}`
-  const pluginDirectoryPath = createPluginDirectoryPath(
-    `${identifier}.sketchplugin`
-  )
-  const outputDirectoryPath = createPluginInnerDirectoryPath(
-    pluginDirectoryPath
-  )
+  const identifier = createUniqueIdentifier()
   try {
     await Promise.all([
       buildBundle({
