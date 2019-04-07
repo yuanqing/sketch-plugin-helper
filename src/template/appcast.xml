@@ -5,10 +5,5 @@
     <link>https://raw.githubusercontent.com/{{githubUserName}}/{{githubRepositoryName}}/master/appcast.xml</link>
     <description>{{pluginDescription}}</description>
     <language>en</language>
-    <item>
-      <title>v0.1.0</title>
-      <description>0.1.0</description>
-      <enclosure url="https://github.com/{{githubUserName}}/{{githubRepositoryName}}/archive/v0.1.0.zip" sparkle:version="0.1.0"/>
-    </item>
   </channel>
 </rss>

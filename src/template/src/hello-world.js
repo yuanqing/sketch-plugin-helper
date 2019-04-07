@@ -6,7 +6,7 @@ import {
   TEXT_BOX
 } from 'sketch-plugin-helper'
 
-export function helloWorld () {
+export default function helloWorld () {
   const settings = openSettingsDialog({
     title: 'Settings',
     inputs: [
