@@ -1,9 +1,12 @@
-import dashify from 'dashify'
 import { outputFile } from 'fs-extra'
 import { join } from 'path'
 
 import { bundleFileName, manifestFileName } from '../constants'
-import { createIdentifier } from '../create-identifier'
+import {
+  createActionIdentifier,
+  createCommandIdentifier,
+  createPluginIdentifier
+} from '../create-identifier'
 
 export async function buildManifest ({ config, outputDirectoryPath }) {
   const manifest = await createManifest(config)
@@ -22,10 +25,10 @@ async function createManifest ({
   menu: menuConfig,
   actions: actionsConfig
 }) {
-  const pluginIdentifier = createIdentifier([
+  const pluginIdentifier = createPluginIdentifier({
     githubUserName,
     githubRepositoryName
-  ])
+  })
   const commands = []
   const menu = {
     title: pluginName,
@@ -75,14 +78,14 @@ function parseMenuConfig ({ menuConfig, pluginIdentifier, commands, menu }) {
     // menu item
     if (menuItem.handler) {
       const { label, handler, shortcut } = menuItem
-      const menuItemIdentifier = createIdentifier([
+      const identifier = createCommandIdentifier({
         pluginIdentifier,
-        ...handler.split('/')
-      ])
-      menu.items.push(menuItemIdentifier)
+        handlerName: handler
+      })
+      menu.items.push(identifier)
       const command = {
         name: label,
-        identifier: menuItemIdentifier,
+        identifier,
         script: bundleFileName,
         shortcut,
         handler
@@ -109,11 +112,11 @@ function parseMenuConfig ({ menuConfig, pluginIdentifier, commands, menu }) {
 function parseActionsConfig ({ actionsConfig, pluginIdentifier, commands }) {
   actionsConfig.forEach(function (actionConfig) {
     const name = actionConfig.name || actionConfig.handler
-    const identifier = [
+    const identifier = createActionIdentifier({
       pluginIdentifier,
-      dashify(name),
-      dashify(actionConfig.action)
-    ].join('.')
+      handlerName: name,
+      actionName: actionConfig.action
+    })
     const command = {
       name,
       identifier,

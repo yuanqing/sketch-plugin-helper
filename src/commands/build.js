@@ -6,17 +6,17 @@ import { watch } from '../common/watch'
 export const build = {
   command: 'build',
   describe: 'Builds the plugin',
-  builder: {
-    isDevelopment: {
+  builder: function (yargs) {
+    yargs.option('isDevelopment', {
       alias: ['development', 'develop', 'dev', 'd'],
       type: 'boolean',
       default: false
-    },
-    shouldWatch: {
+    })
+    yargs.option('shouldWatch', {
       alias: ['watch', 'w'],
       type: 'boolean',
       default: false
-    }
+    })
   },
   handler: async function ({ isDevelopment, shouldWatch }) {
     const logger = createLogger()

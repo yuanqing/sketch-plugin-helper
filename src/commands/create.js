@@ -5,27 +5,27 @@ import { scaffoldPlugin } from '../common/scaffold-plugin'
 export const create = {
   command: 'create',
   describe: 'Scaffolds a new Sketch plugin',
-  builder: {
-    pluginName: {
-      alias: ['n', 'name'],
+  builder: function (yargs) {
+    yargs.option('pluginName', {
+      alias: ['name', 'n'],
       demandOption: true
-    },
-    pluginDescription: {
-      alias: ['d', 'description'],
+    })
+    yargs.option('pluginDescription', {
+      alias: ['description', 'd'],
       demandOption: true
-    },
-    authorName: {
-      alias: ['a', 'author'],
+    })
+    yargs.option('authorName', {
+      alias: ['author', 'a'],
       demandOption: true
-    },
-    githubUserName: {
-      alias: ['u', 'username'],
+    })
+    yargs.option('githubUserName', {
+      alias: ['username', 'u'],
       demandOption: true
-    },
-    githubRepositoryName: {
-      alias: ['r', 'repository'],
+    })
+    yargs.option('githubRepositoryName', {
+      alias: ['repository', 'r'],
       demandOption: true
-    }
+    })
   },
   handler: async function (config) {
     const logger = createLogger()
