@@ -9,7 +9,8 @@ export function checkBox ({ width, height, label, value }) {
   return {
     view: checkBox,
     retrieveValue: function () {
-      return checkBox.stringValue() === '1'
+      // eslint-disable-next-line eqeqeq
+      return checkBox.stringValue() == '1'
     }
   }
 }
