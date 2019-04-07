@@ -29,6 +29,7 @@ const IGNORED_KEYS = {
   libraryID: true,
   objectID: true,
   path: true,
+  selected: true,
   sharedStyleId: true,
   symbolID: true
 }
