@@ -1,3 +1,4 @@
+export * from './settings/get-default-settings'
 export * from './settings/get-settings'
 export * from './settings/open-settings-dialog'
 export * from './settings/reset-settings'
