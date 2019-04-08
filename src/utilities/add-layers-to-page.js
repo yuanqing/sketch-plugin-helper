@@ -1,6 +1,6 @@
-import { getSelectedDocument } from './get-selected-document'
+import { getCurrentDocument } from './get-document'
 
-export function addLayersToPage (layers) {
-  const document = getSelectedDocument()
+export function addLayersToCurrentPage (layers) {
+  const document = getCurrentDocument()
   return document.selectedPage.sketchObject.addLayers(layers)
 }

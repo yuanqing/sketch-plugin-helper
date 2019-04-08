@@ -1,9 +1,9 @@
-import { getAllLayers } from './get-layers'
+import { getLayersOnCurrentPage } from './get-layer'
 import { iterateNestedLayers } from './iterate-nested-layers'
 
 export function findLayersByName (name) {
   const result = []
-  iterateNestedLayers(getAllLayers(), function (layer) {
+  iterateNestedLayers(getLayersOnCurrentPage(), function (layer) {
     if (layer.name === name) {
       result.push(layer)
     }

@@ -56,9 +56,7 @@ function parse ({ inputsConfig, settings }) {
     }
     const settingsSavedValue = settings[key]
     const value =
-      typeof settingsSavedValue !== 'undefined'
-        ? settingsSavedValue
-        : inputsConfigValue
+      inputsConfigValue != null ? inputsConfigValue : settingsSavedValue
     const { view, retrieveValue } = createForm[type]({
       label,
       value,
