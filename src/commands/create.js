@@ -50,6 +50,6 @@ export const create = {
       outputDirectoryPath,
       config
     }).catch(createErrorHandler(logger))
-    logger.succeed('Created new plugin')
+    logger.succeed('Scaffolded new plugin')
   }
 }
