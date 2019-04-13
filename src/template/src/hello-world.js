@@ -1,6 +1,6 @@
 import {
   openSettingsDialog,
-  saveSettings,
+  saveTemporarySettings,
   showMessage,
   DROP_DOWN,
   TEXT_BOX
@@ -8,7 +8,7 @@ import {
 
 export default function helloWorld () {
   const settings = openSettingsDialog({
-    title: 'Settings',
+    title: 'Hello, World',
     inputs: [
       {
         type: DROP_DOWN,
@@ -26,7 +26,7 @@ export default function helloWorld () {
   if (!settings) {
     return
   }
-  saveSettings(settings)
+  saveTemporarySettings(settings)
   const { greeting, name } = settings
   showMessage(`${greeting}, ${name}`)
 }

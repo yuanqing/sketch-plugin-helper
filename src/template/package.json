@@ -1,6 +1,15 @@
 {
-  "private": true,
+  "name": "{{githubRepositoryName}}",
   "version": "0.0.0",
+  "description": "{{pluginDescription}}",
+  "keywords": [
+    "plugin",
+    "sketch",
+    "sketch-plugin-helper"
+  ],
+  "license": "MIT",
+  "author": "{{authorName}}",
+  "repository": "{{githubUserName}}/{{githubRepositoryName}}",
   "devDependencies": {
     "sketch-plugin-helper": "*"
   },
@@ -15,11 +24,7 @@
     "watch": "sph build --watch"
   },
   "sketch-plugin-helper": {
-    "pluginName": "{{pluginName}}",
-    "pluginDescription": "{{pluginDescription}}",
-    "authorName": "{{authorName}}",
-    "githubUserName": "{{githubUserName}}",
-    "githubRepositoryName": "{{githubRepositoryName}}",
+    "name": "{{pluginName}}",
     "menu": [
       {
         "handler": "hello-world",
