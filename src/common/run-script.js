@@ -13,23 +13,23 @@ const pluginDirectoryPath = createPluginDirectoryPath('Sketch Plugin Helper')
 const outputDirectoryPath = createPluginInnerDirectoryPath(pluginDirectoryPath)
 
 export async function runScript (entryFilePaths) {
-  const identifier = createUniqueIdentifier()
+  const uuid = createUuid()
   try {
     await Promise.all([
       buildBundle({
         isDevelopment: true,
         entryFilePaths,
         outputDirectoryPath,
-        library: identifier
+        library: uuid
       }),
       buildManifest({
         outputDirectoryPath,
-        identifier
+        identifier: uuid
       })
     ])
     await runPluginCommand({
       pluginDirectoryPath,
-      identifier,
+      commandIdentifier: uuid,
       shouldRunInBackground: false
     })
   } catch (error) {
@@ -39,7 +39,7 @@ export async function runScript (entryFilePaths) {
   }
 }
 
-function createUniqueIdentifier () {
+function createUuid () {
   return generate(lowercase, 20)
 }
 
@@ -53,7 +53,10 @@ function buildManifest ({ outputDirectoryPath, identifier }) {
         script: bundleFileName,
         handler: identifier
       }
-    ]
+    ],
+    menu: {
+      items: []
+    }
   }
   const outputFilePath = join(outputDirectoryPath, manifestFileName)
   const fileContent = JSON.stringify(manifest, null, 2) + '\n'
