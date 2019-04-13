@@ -12,7 +12,9 @@ export async function readConfig () {
   const packageJson = getPackageJson()
   const appcastPath = join(process.cwd(), appcastFileName)
   const sketchPluginHelperConfig = packageJson[packageJsonConfigKey]
-  const appcastVersions = (await exists(appcastPath)) ? await readAppcastVersions(appcastPath) : null
+  const appcastVersions = (await exists(appcastPath))
+    ? await readAppcastVersions(appcastPath)
+    : null
   return {
     pluginName: sketchPluginHelperConfig.name,
     pluginDescription: packageJson.description,
