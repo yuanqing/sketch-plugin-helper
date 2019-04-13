@@ -4,12 +4,12 @@ import { exists } from 'fs-extra'
 import { readAppcastVersions } from './appcast/read-appcast-versions'
 import { appcastFileName, packageJsonConfigKey } from './constants'
 import { createPluginDirectoryPath } from './create-plugin-directory-path'
-import { getPackageJson } from './get-package-json'
 
 const slashRegularExpression = /\//g
 
 export async function readConfig () {
-  const packageJson = getPackageJson()
+  const packageJsonPath = join(process.cwd(), 'package.json')
+  const packageJson = require(packageJsonPath)
   const appcastPath = join(process.cwd(), appcastFileName)
   const sketchPluginHelperConfig = packageJson[packageJsonConfigKey]
   const appcastVersions = (await exists(appcastPath))

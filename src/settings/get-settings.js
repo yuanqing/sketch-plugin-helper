@@ -1,11 +1,8 @@
 import { sessionVariable, settingForKey } from 'sketch/settings'
 
-import { packageJsonConfigKey } from '../common/constants'
-import { getPackageJson } from '../common/get-package-json'
-
 export function getSettings () {
-  const { defaultSettings } = getPackageJson()[packageJsonConfigKey]
-  if (typeof defaultSettings === 'undefined') {
+  const defaultSettings = preval.require('./get-default-settings')
+  if (!defaultSettings) {
     return {}
   }
   return Object.keys(defaultSettings).reduce(function (results, key) {

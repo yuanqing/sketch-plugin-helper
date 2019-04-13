@@ -1,7 +1,9 @@
-import { packageJsonConfigKey } from '../common/constants'
-import { getPackageJson } from '../common/get-package-json'
+const { join } = require('path')
 
-export function getDefaultSettings () {
-  const { defaultSettings } = getPackageJson()[packageJsonConfigKey]
-  return defaultSettings || {}
+const { packageJsonConfigKey } = require('../common/constants')
+
+module.exports = function getDefaultSettings () {
+  const packageJsonPath = join(process.cwd(), 'package.json')
+  const { defaultSettings } = require(packageJsonPath)[packageJsonConfigKey]
+  return defaultSettings || null
 }

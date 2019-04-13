@@ -13,7 +13,8 @@
     "NSStackViewGravityTop": 0,
     "NSStringPboardType": 0,
     "NSSwitchButton": 0,
-    "NSUserInterfaceLayoutOrientationVertical": 0
+    "NSUserInterfaceLayoutOrientationVertical": 0,
+    "preval": 0
   },
   "rules": {
     "eqeqeq": 2

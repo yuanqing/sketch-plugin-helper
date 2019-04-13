@@ -4,12 +4,8 @@ import webpack from 'webpack'
 import { bundleFileName } from '../constants'
 
 const sketchModuleRegularExpression = /^sketch(\/\w+)?$/
-const inlineFsReadFileSyncTransform = join(
-  __dirname,
-  'inline-fs-read-file-sync-transform'
-)
 
-const transformOpenSketchDocumentPlugin = join(
+const babelPluginTransformRelativePaths = join(
   __dirname,
   'babel-plugin-transform-relative-paths'
 )
@@ -34,15 +30,11 @@ export async function buildBundle ({
       rules: [
         {
           test: /\.js$/,
-          loader: `transform-loader?${inlineFsReadFileSyncTransform}`
-        },
-        {
-          test: /\.js$/,
           exclude: /(node_modules)/,
           use: {
             loader: 'babel-loader',
             options: {
-              plugins: [transformOpenSketchDocumentPlugin]
+              plugins: ['preval', babelPluginTransformRelativePaths]
             }
           }
         }
