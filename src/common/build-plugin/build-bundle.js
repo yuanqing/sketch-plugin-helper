@@ -3,7 +3,7 @@ import webpack from 'webpack'
 
 import { bundleFileName } from '../constants'
 
-const sketchModuleRegex = /^sketch(\/\w+)?$/
+const sketchModuleRegularExpression = /^sketch(\/\w+)?$/
 const inlineFsReadFileSyncTransform = join(
   __dirname,
   'inline-fs-read-file-sync-transform'
@@ -52,7 +52,7 @@ export async function buildBundle ({
     target: 'node',
     externals: [
       function (context, request, callback) {
-        if (sketchModuleRegex.test(request)) {
+        if (sketchModuleRegularExpression.test(request)) {
           return callback(null, `commonjs ${request}`)
         }
         return callback()

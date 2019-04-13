@@ -11,11 +11,11 @@ import { readConfig } from '../read-config'
 
 export async function buildPlugin (isDevelopment) {
   const config = await readConfig()
-  const pluginInnerDirectoryPath = createPluginInnerDirectoryPath(
+  const outputDirectoryPath = createPluginInnerDirectoryPath(
     join(process.cwd(), `${config.pluginName}.sketchplugin`)
   )
-  if (await exists(pluginInnerDirectoryPath)) {
-    await remove(pluginInnerDirectoryPath)
+  if (await exists(outputDirectoryPath)) {
+    await remove(outputDirectoryPath)
   }
   const entryFilePath = await writeEntryFile(config)
   await Promise.all([
@@ -23,18 +23,20 @@ export async function buildPlugin (isDevelopment) {
     await buildBundle({
       isDevelopment,
       entryFilePaths: [entryFilePath],
-      outputDirectoryPath: pluginInnerDirectoryPath
+      outputDirectoryPath
     }),
     await buildManifest({
       config,
-      outputDirectoryPath: pluginInnerDirectoryPath
+      outputDirectoryPath
     })
   ])
   return remove(entryFilePath)
 }
 
 function writeEntryFile (config) {
-  const handlers = collectUniqueHandlers([].concat(config.actions, config.menu))
+  const handlers = collectUniqueHandlers(
+    [].concat(config.actions, config.menuConfig)
+  )
   const entryFileContent = createEntryFileContent(handlers)
   return tempWrite(entryFileContent)
 }

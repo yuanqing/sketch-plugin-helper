@@ -1,8 +1,7 @@
 export function createAppcast ({
   pluginName,
   pluginDescription,
-  githubUserName,
-  githubRepositoryName,
+  repository,
   versions
 }) {
   return {
@@ -23,7 +22,7 @@ export function createAppcast ({
           _text: pluginName
         },
         link: {
-          _text: `https://raw.githubusercontent.com/${githubUserName}/${githubRepositoryName}/master/appcast.xml`
+          _text: `https://raw.githubusercontent.com/${repository}/master/appcast.xml`
         },
         description: {
           _text: pluginDescription
@@ -32,8 +31,7 @@ export function createAppcast ({
           _text: 'en'
         },
         item: mapVersionsToItems({
-          githubUserName,
-          githubRepositoryName,
+          repository,
           versions
         })
       }
@@ -41,11 +39,7 @@ export function createAppcast ({
   }
 }
 
-function mapVersionsToItems ({
-  githubUserName,
-  githubRepositoryName,
-  versions
-}) {
+function mapVersionsToItems ({ repository, versions }) {
   return versions.map(function (version) {
     return {
       title: {
@@ -56,7 +50,7 @@ function mapVersionsToItems ({
       },
       enclosure: {
         _attributes: {
-          url: `https://github.com/${githubUserName}/${githubRepositoryName}/archive/v${version}.zip`,
+          url: `https://github.com/${repository}/archive/v${version}.zip`,
           'sparkle:version': version
         }
       }

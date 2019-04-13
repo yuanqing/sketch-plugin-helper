@@ -14,14 +14,14 @@ const sketchtoolBinaryPath = join(
 
 export function runPluginCommand ({
   pluginDirectoryPath,
-  identifier,
+  commandIdentifier,
   shouldRunInBackground
 }) {
   return new Promise(function (resolve, reject) {
     const child = spawn(sketchtoolBinaryPath, [
       'run',
       pluginDirectoryPath,
-      identifier,
+      commandIdentifier,
       ...[shouldRunInBackground && '--without-activating']
     ])
     child.stdout.on('data', function (chunk) {

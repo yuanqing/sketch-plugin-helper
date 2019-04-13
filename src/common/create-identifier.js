@@ -1,12 +1,5 @@
 import dashify from 'dashify'
 
-export function createPluginIdentifier ({
-  githubUserName,
-  githubRepositoryName
-}) {
-  return createIdentifier([githubUserName, githubRepositoryName])
-}
-
 export function createCommandIdentifier ({ pluginIdentifier, handlerName }) {
   return createIdentifier([pluginIdentifier, ...handlerName.split('/')])
 }

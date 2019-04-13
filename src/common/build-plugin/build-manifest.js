@@ -4,8 +4,7 @@ import { join } from 'path'
 import { bundleFileName, manifestFileName } from '../constants'
 import {
   createActionIdentifier,
-  createCommandIdentifier,
-  createPluginIdentifier
+  createCommandIdentifier
 } from '../create-identifier'
 
 export async function buildManifest ({ config, outputDirectoryPath }) {
@@ -19,16 +18,12 @@ async function createManifest ({
   pluginName,
   pluginDescription,
   authorName,
-  githubUserName,
-  githubRepositoryName,
+  repository,
+  pluginIdentifier,
   versions,
-  menu: menuConfig,
-  actions: actionsConfig
+  menuConfig,
+  actionsConfig
 }) {
-  const pluginIdentifier = createPluginIdentifier({
-    githubUserName,
-    githubRepositoryName
-  })
   const commands = []
   const menu = {
     title: pluginName,
@@ -57,10 +52,10 @@ async function createManifest ({
     name: pluginName,
     description: pluginDescription,
     author: authorName,
-    homepage: `https://github.com/${githubUserName}/${githubRepositoryName}`,
+    homepage: `https://github.com/${repository}`,
     version: versions[0],
     identifier: pluginIdentifier,
-    appcast: `https://raw.githubusercontent.com/${githubUserName}/${githubRepositoryName}/master/appcast.xml`,
+    appcast: `https://raw.githubusercontent.com/${repository}/master/appcast.xml`,
     bundleVersion: 1,
     disableCocoaScriptPreprocessor: true,
     commands,
