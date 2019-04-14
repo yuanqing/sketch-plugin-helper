@@ -40,11 +40,12 @@ export function createAppcast ({
 }
 
 function mapVersionsToItems ({ repository, versions }) {
-  if (versions.length === 1 && versions[0] === '0.0.0') {
-    return []
-  }
-  return versions.map(function (version) {
-    return {
+  const items = []
+  versions.map(function (version) {
+    if (version === '0.0.0') {
+      return
+    }
+    items.push({
       title: {
         _text: `v${version}`
       },
@@ -57,6 +58,7 @@ function mapVersionsToItems ({ repository, versions }) {
           'sparkle:version': version
         }
       }
-    }
+    })
   })
+  return items
 }
