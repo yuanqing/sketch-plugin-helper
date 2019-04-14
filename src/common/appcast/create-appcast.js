@@ -40,6 +40,9 @@ export function createAppcast ({
 }
 
 function mapVersionsToItems ({ repository, versions }) {
+  if (versions.length === 1 && versions[0] === '0.0.0') {
+    return []
+  }
   return versions.map(function (version) {
     return {
       title: {
