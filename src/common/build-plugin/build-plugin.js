@@ -35,7 +35,7 @@ export async function buildPlugin (isDevelopment) {
 
 function writeEntryFile (config) {
   const handlers = collectUniqueHandlers(
-    [].concat(config.actions, config.menuConfig)
+    [].concat(config.actionsConfig, config.menuConfig)
   )
   const entryFileContent = createEntryFileContent(handlers)
   return tempWrite(entryFileContent)
