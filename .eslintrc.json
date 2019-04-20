@@ -4,6 +4,7 @@
     "sketch"
   ],
   "globals": {
+    "CGPointMake": 0,
     "CGColorCreateGenericRGB": 0,
     "NSLineBreakByTruncatingTail": 0,
     "NSLayoutAttributeLeft": 0,
