@@ -1,8 +1,7 @@
 export function createAlert (title) {
-  const alert = NSAlert.alloc().init()
-  alert.window().setAutorecalculatesKeyViewLoop(true)
-  alert.setMessageText(title)
-  alert.addButtonWithTitle('OK')
-  alert.addButtonWithTitle('Cancel')
-  return alert
+  const view = NSAlert.alloc().init()
+  view.setMessageText(title)
+  view.addButtonWithTitle('OK')
+  view.addButtonWithTitle('Cancel')
+  return view
 }

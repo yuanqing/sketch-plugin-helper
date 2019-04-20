@@ -1,32 +1,23 @@
 import { createAlert } from './ui/create-alert'
+import { createDivider } from './ui/create-divider'
 import { createLabel } from './ui/create-label'
-import { createStackView } from './ui/create-stack-view'
-import * as createForm from './ui/create-form'
+import * as createInput from './ui/input/create-input'
 import { getSettings } from './get-settings'
 
-const formHeight = 20
-const formPaddingBottom = 12
-const labelHeight = 20
-const labelPaddingBottom = 6
 const width = 300
 
 export function openSettingsDialog ({ title, inputs: inputsConfig }) {
   const settings = getSettings()
-  const { inputs, views, stackViewHeight } = parse({
+  const { formView, retrieveValues } = createFormView({
     inputsConfig,
     settings
   })
-  const stackView = createStackView({
-    width,
-    height: stackViewHeight,
-    views
-  })
   const alert = createAlert(title)
-  alert.setAccessoryView(stackView)
+  alert.setAccessoryView(formView)
   // eslint-disable-next-line eqeqeq
   if (alert.runModal() == '1000') {
-    return Object.keys(inputs).reduce(function (result, key) {
-      const retrieveValue = inputs[key]
+    return Object.keys(retrieveValues).reduce(function (result, key) {
+      const retrieveValue = retrieveValues[key]
       result[key] = retrieveValue()
       return result
     }, {})
@@ -34,47 +25,49 @@ export function openSettingsDialog ({ title, inputs: inputsConfig }) {
   return null
 }
 
-function parse ({ inputsConfig, settings }) {
-  const inputs = {}
-  const views = []
-  let stackViewHeight = 0
-  inputsConfig.forEach(function ({
-    type,
-    key,
-    label,
-    value: inputsConfigValue,
-    ...rest
-  }) {
+function createFormView ({ inputsConfig, settings }) {
+  const formView = NSView.alloc().init()
+  formView.setFlipped(true)
+  const retrieveValues = {}
+  let y = 0
+  inputsConfig.forEach(function (inputConfig) {
+    if (inputConfig === '-') {
+      const { view, height } = createDivider({
+        width,
+        y
+      })
+      y += height
+      formView.addSubview(view)
+      return
+    }
+    const { type, key, label, value: inputsConfigValue, ...rest } = inputConfig
     if (label && type !== 'CHECK_BOX') {
       // Create a label for forms that aren't check boxes
-      const labelView = createLabel({ label, width, height: labelHeight })
-      views.push({
-        view: labelView,
-        paddingBottom: labelPaddingBottom
+      const { view, height } = createLabel({
+        width,
+        y,
+        label
       })
-      stackViewHeight += labelHeight + labelPaddingBottom
+      y += height
+      formView.addSubview(view)
     }
     const settingsSavedValue = settings[key]
     const value =
       inputsConfigValue != null ? inputsConfigValue : settingsSavedValue
-    const { view, retrieveValue } = createForm[type]({
+    const { view, height, retrieveValue } = createInput[type]({
+      width,
+      y,
       label,
       value,
-      width,
-      height: formHeight,
       ...rest
     })
-    views.push({
-      view,
-      paddingBottom: formPaddingBottom
-    })
-    stackViewHeight += formHeight + formPaddingBottom
-    inputs[key] = retrieveValue
+    y += height
+    formView.addSubview(view)
+    retrieveValues[key] = retrieveValue
   })
-  stackViewHeight -= formPaddingBottom
+  formView.setFrame(NSMakeRect(0, 0, width, y))
   return {
-    inputs,
-    views,
-    stackViewHeight
+    formView,
+    retrieveValues
   }
 }
