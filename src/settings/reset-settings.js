@@ -1,4 +1,6 @@
 import { setSettingForKey, setSessionVariable } from 'sketch/settings'
+
+import { flattenObject } from './nested-object/flatten-object'
 import { showMessage } from '../utilities/show-message'
 
 export function resetSettings () {
@@ -6,7 +8,8 @@ export function resetSettings () {
   if (!defaultSettings) {
     return
   }
-  Object.keys(defaultSettings).forEach(function (key) {
+  const flattenedDefaultSettings = flattenObject(defaultSettings)
+  Object.keys(flattenedDefaultSettings).forEach(function (key) {
     setSettingForKey(key, undefined)
     setSessionVariable(key, undefined)
   })

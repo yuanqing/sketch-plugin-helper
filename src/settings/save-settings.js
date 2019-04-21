@@ -1,4 +1,6 @@
 import { setSettingForKey, setSessionVariable } from 'sketch/settings'
+
+import { flattenObject } from './nested-object/flatten-object'
 import { showMessage } from '../utilities/show-message'
 
 export const saveSettings = saveSettingsFactory(setSettingForKey)
@@ -6,18 +8,18 @@ export const saveTemporarySettings = saveSettingsFactory(setSessionVariable)
 
 function saveSettingsFactory (saveValue) {
   return function (settings, options) {
-    if (typeof settings === 'undefined') {
+    if (!settings) {
       return
     }
-    Object.keys(settings).forEach(function (key) {
-      const value = settings[key]
-      if (typeof value === 'undefined') {
+    const flattenedSettings = flattenObject(settings)
+    Object.keys(flattenedSettings).forEach(function (key) {
+      const value = flattenedSettings[key]
+      if (value == null) {
         return
       }
       saveValue(key, value)
     })
-    const successMessage =
-      typeof options !== 'undefined' && options.successMessage
+    const successMessage = options && options.successMessage
     if (successMessage) {
       showMessage(successMessage)
     }

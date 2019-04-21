@@ -3,11 +3,13 @@ import { createDivider } from './ui/create-divider'
 import { createLabel } from './ui/create-label'
 import * as createInput from './ui/input/create-input'
 import { getSettings } from './get-settings'
+import { flattenObject } from './nested-object/flatten-object'
+import { unflattenObject } from './nested-object/unflatten-object'
 
 const width = 300
 
 export function openSettingsDialog ({ title, inputs: inputsConfig }) {
-  const settings = getSettings()
+  const settings = flattenObject(getSettings())
   const { formView, retrieveValues } = createFormView({
     inputsConfig,
     settings
@@ -16,11 +18,12 @@ export function openSettingsDialog ({ title, inputs: inputsConfig }) {
   alert.setAccessoryView(formView)
   // eslint-disable-next-line eqeqeq
   if (alert.runModal() == '1000') {
-    return Object.keys(retrieveValues).reduce(function (result, key) {
+    const result = {}
+    Object.keys(retrieveValues).forEach(function (key) {
       const retrieveValue = retrieveValues[key]
       result[key] = retrieveValue()
-      return result
-    }, {})
+    })
+    return unflattenObject(result)
   }
   return null
 }
