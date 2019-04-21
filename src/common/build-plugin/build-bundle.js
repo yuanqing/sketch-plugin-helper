@@ -1,5 +1,6 @@
 import { join } from 'path'
 import webpack from 'webpack'
+import TerserPlugin from 'terser-webpack-plugin'
 
 import { bundleFileName } from '../constants'
 
@@ -55,7 +56,18 @@ export async function buildBundle ({
       new webpack.EnvironmentPlugin({
         NODE_ENV: mode
       })
-    ]
+    ],
+    optimization: {
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {
+            output: {
+              comments: false
+            }
+          }
+        })
+      ]
+    }
   }
   return new Promise(function (resolve, reject) {
     webpack(webpackConfig, async function (error, stats) {

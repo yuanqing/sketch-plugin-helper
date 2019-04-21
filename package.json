@@ -58,6 +58,7 @@
     "recursive-readdir": "^2.2.2",
     "semver": "^6.0.0",
     "temp-write": "^3.4.0",
+    "terser-webpack-plugin": "^1.2.3",
     "time-stamp": "^2.2.0",
     "transform-loader": "^0.2.4",
     "webpack": "^4.29.6",
