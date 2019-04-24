@@ -16,9 +16,7 @@ export function getLayersOnAllPages () {
 }
 
 export function getArtboardsOnCurrentPage () {
-  return getLayersOnCurrentPage().filter(function (layer) {
-    return layer.type === 'Artboard'
-  })
+  return getLayersOnCurrentPage().filter(filterArtboardsCallback)
 }
 
 export function getSelectedLayers () {
@@ -29,4 +27,12 @@ export function getSelectedLayers () {
 export function getSelectedLayersOrLayersOnCurrentPage () {
   const selectedLayers = getSelectedLayers()
   return selectedLayers.length !== 0 ? selectedLayers : getLayersOnCurrentPage()
+}
+
+export function getSelectedArtboards () {
+  return getSelectedLayers().filter(filterArtboardsCallback)
+}
+
+function filterArtboardsCallback (layer) {
+  return layer.type === 'Artboard'
 }
