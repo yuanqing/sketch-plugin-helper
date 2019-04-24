@@ -31,7 +31,6 @@ export async function buildBundle ({
       rules: [
         {
           test: /\.js$/,
-          exclude: /(node_modules)/,
           use: {
             loader: 'babel-loader',
             options: {
