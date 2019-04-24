@@ -68,6 +68,12 @@ function createFormView ({ inputsConfig, settings }) {
     formView.addSubview(view)
     retrieveValues[key] = retrieveValue
   })
+  const subviews = formView.subviews()
+  subviews.forEach(function (subview, index) {
+    if (index < subviews.length - 1) {
+      subview.setNextKeyView(subviews[index + 1])
+    }
+  })
   formView.setFrame(NSMakeRect(0, 0, width, y))
   return {
     formView,
