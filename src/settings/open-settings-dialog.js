@@ -11,7 +11,7 @@ const width = 300
 export function openSettingsDialog ({ title, inputs: inputsConfig }) {
   const settings = flattenObject(getSettings())
   const { formView, retrieveValues } = createFormView({
-    inputsConfig,
+    inputsConfig: inputsConfig.filter(Boolean),
     settings
   })
   const alert = createAlert(title)
