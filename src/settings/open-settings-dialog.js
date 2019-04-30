@@ -16,6 +16,11 @@ export function openSettingsDialog ({ title, inputs: inputsConfig }) {
   })
   const alert = createAlert(title)
   alert.setAccessoryView(formView)
+  const subviews = formView.subviews()
+  if (subviews[0]) {
+    // set focus to be on the first form element
+    alert.window().setInitialFirstResponder(subviews[0])
+  }
   // eslint-disable-next-line eqeqeq
   if (alert.runModal() == '1000') {
     const result = {}
