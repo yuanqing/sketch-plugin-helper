@@ -19,6 +19,10 @@ export function getArtboardsOnCurrentPage () {
   return getLayersOnCurrentPage().filter(filterArtboardsCallback)
 }
 
+export function getArtboardsOnAllPages () {
+  return getLayersOnAllPages().filter(filterArtboardsCallback)
+}
+
 export function getSelectedLayers () {
   const document = getCurrentDocument()
   return document.selectedLayers.layers.reverse()

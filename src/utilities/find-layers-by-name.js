@@ -1,5 +1,5 @@
 import { getLayersOnCurrentPage } from './get-layer'
-import { iterateNestedLayers } from './iterate-nested-layers'
+import { iterateNestedLayers } from './iterate-layers'
 
 export function findLayersByName (name) {
   const result = []

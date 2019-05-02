@@ -7,3 +7,10 @@ export function iterateNestedLayers (layers, callback) {
     }
   })
 }
+
+export function iterateParentLayers (layer, callback) {
+  while (layer.parent != null && layer.parent.type !== 'Page') {
+    callback(layer.parent)
+    layer = layer.parent
+  }
+}

@@ -5,30 +5,37 @@ import tempWrite from 'temp-write'
 import { buildAppcast } from '../appcast/build-appcast'
 import { buildBundle } from './build-bundle'
 import { buildManifest } from './build-manifest'
+import { copyResources } from './copy-resources'
 import { sourceDirectory } from '../constants'
 import { createPluginInnerDirectoryPath } from '../create-plugin-inner-directory-path'
 import { readConfig } from '../read-config'
 
 export async function buildPlugin (isDevelopment) {
   const config = await readConfig()
-  const outputDirectoryPath = createPluginInnerDirectoryPath(
-    join(process.cwd(), `${config.pluginName}.sketchplugin`)
+  const pluginDirectoryPath = join(
+    process.cwd(),
+    `${config.pluginName}.sketchplugin`
   )
-  if (await exists(outputDirectoryPath)) {
-    await remove(outputDirectoryPath)
+  if (await exists(pluginDirectoryPath)) {
+    await remove(pluginDirectoryPath)
   }
+  const innerDirectoryPath = createPluginInnerDirectoryPath(pluginDirectoryPath)
+  const resourcesDirectoryPath = createPluginResourcesDirectoryPath(
+    pluginDirectoryPath
+  )
   const entryFilePath = await writeEntryFile(config)
   await Promise.all([
     await buildAppcast(config),
     await buildBundle({
       isDevelopment,
       entryFilePaths: [entryFilePath],
-      outputDirectoryPath
+      outputDirectoryPath: innerDirectoryPath
     }),
     await buildManifest({
       config,
-      outputDirectoryPath
-    })
+      outputDirectoryPath: innerDirectoryPath
+    }),
+    await copyResources(resourcesDirectoryPath)
   ])
   return remove(entryFilePath)
 }
@@ -75,4 +82,8 @@ function createEntryFileContent (handlers) {
     )
   })
   return `module.exports={${code.join(',')}}`
+}
+
+function createPluginResourcesDirectoryPath (pluginDirectoryPath) {
+  return join(pluginDirectoryPath, 'Contents', 'Resources')
 }
