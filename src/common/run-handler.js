@@ -4,10 +4,10 @@ import { createCommandIdentifier } from './create-identifier'
 
 export async function runHandler ({ handlerName, shouldRunInBackground }) {
   const { pluginDirectoryPath, pluginIdentifier } = await readConfig()
-  const identifier = createCommandIdentifier({ pluginIdentifier, handlerName })
+  const commandIdentifier = createCommandIdentifier({ pluginIdentifier, handlerName })
   return runPluginCommand({
     pluginDirectoryPath,
-    identifier,
+    commandIdentifier,
     shouldRunInBackground
   })
 }

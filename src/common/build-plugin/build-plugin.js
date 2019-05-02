@@ -7,7 +7,7 @@ import { buildBundle } from './build-bundle'
 import { buildManifest } from './build-manifest'
 import { copyResources } from './copy-resources'
 import { sourceDirectory } from '../constants'
-import { createPluginInnerDirectoryPath } from '../create-plugin-inner-directory-path'
+import { createPluginInnerDirectoryPath, createPluginResourcesDirectoryPath } from '../create-plugin-directory-path'
 import { readConfig } from '../read-config'
 
 export async function buildPlugin (isDevelopment) {
@@ -82,8 +82,4 @@ function createEntryFileContent (handlers) {
     )
   })
   return `module.exports={${code.join(',')}}`
-}
-
-function createPluginResourcesDirectoryPath (pluginDirectoryPath) {
-  return join(pluginDirectoryPath, 'Contents', 'Resources')
 }

@@ -10,3 +10,11 @@ export function createPluginDirectoryPath (pluginName) {
     `${pluginName}.sketchplugin`
   )
 }
+
+export function createPluginInnerDirectoryPath (pluginDirectoryPath) {
+  return join(pluginDirectoryPath, 'Contents', 'Sketch')
+}
+
+export function createPluginResourcesDirectoryPath (pluginDirectoryPath) {
+  return join(pluginDirectoryPath, 'Contents', 'Resources')
+}
