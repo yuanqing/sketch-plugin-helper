@@ -5,7 +5,10 @@ import { join } from 'path'
 
 import { buildBundle } from './build-plugin/build-bundle'
 import { bundleFileName, manifestFileName } from './constants'
-import { createPluginDirectoryPath, createPluginInnerDirectoryPath } from './create-plugin-directory-path'
+import {
+  createPluginDirectoryPath,
+  createPluginInnerDirectoryPath
+} from './create-plugin-directory-path'
 import { runPluginCommand } from './run-plugin-command'
 
 const pluginDirectoryPath = createPluginDirectoryPath('Sketch Plugin Helper')

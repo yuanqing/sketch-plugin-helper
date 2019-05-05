@@ -7,10 +7,13 @@ import { buildBundle } from './build-bundle'
 import { buildManifest } from './build-manifest'
 import { copyResources } from './copy-resources'
 import { sourceDirectory } from '../constants'
-import { createPluginInnerDirectoryPath, createPluginResourcesDirectoryPath } from '../create-plugin-directory-path'
+import {
+  createPluginInnerDirectoryPath,
+  createPluginResourcesDirectoryPath
+} from '../create-plugin-directory-path'
 import { readConfig } from '../read-config'
 
-export async function buildPlugin (isDevelopment) {
+export async function buildPlugin ({ development }) {
   const config = await readConfig()
   const pluginDirectoryPath = join(
     process.cwd(),
@@ -27,7 +30,7 @@ export async function buildPlugin (isDevelopment) {
   await Promise.all([
     await buildAppcast(config),
     await buildBundle({
-      isDevelopment,
+      development,
       entryFilePaths: [entryFilePath],
       outputDirectoryPath: innerDirectoryPath
     }),

@@ -12,12 +12,12 @@ const babelPluginTransformRelativePaths = join(
 )
 
 export async function buildBundle ({
-  isDevelopment,
+  development,
   entryFilePaths,
   outputDirectoryPath,
   library
 }) {
-  const mode = isDevelopment ? 'development' : 'production'
+  const mode = development ? 'development' : 'production'
   const webpackConfig = {
     mode,
     entry: entryFilePaths,
@@ -40,7 +40,7 @@ export async function buildBundle ({
         }
       ]
     },
-    devtool: isDevelopment ? 'source-map' : 'none',
+    devtool: development ? 'source-map' : 'none',
     target: 'node',
     externals: [
       function (context, request, callback) {
