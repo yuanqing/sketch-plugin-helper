@@ -12,7 +12,7 @@
 
 ## Quick start
 
-Specify the `defaultSettings` for your plugin in the `sketch-plugin-helper` field of your `package.json` file. For example:
+Specify the `defaultSettings` for your plugin in the `sketch-plugin-helper` field of your `package.json`. For example:
 
 ```jsonc
 {
@@ -97,21 +97,19 @@ import {
 } from 'sketch-plugin-helper'
 ```
 
----
-
 ### const settings = getSettings()
 
 Returns the currently-saved plugin settings.
 
 #### *Return value*
 
-- `settings` is an `object`
+- `settings` is an `object`.
 
 ---
 
 ### const result = openSettingsDialog(options)
 
-Opens a dialog with one or more form fields (configured via the `formFields` key of `options`).
+Opens a dialog with one or more form fields as specified in the given `options`.
 
 #### *Return value*
 
@@ -120,73 +118,82 @@ Opens a dialog with one or more form fields (configured via the `formFields` key
 
 #### *Parameters*
 
-`options` (`object`)
+- `options` (`object`)
+  - `options.title` (`string`) is the title of the dialog.
+  - `options.formFields` (`object[]`) is an array of configuration objects corresponding to each form field.
 
-- `options.title` (`string`) is the title of the dialog.
-- `options.formFields` (`object[]`) is an array of configuration objects for each form field.
+Each form field configuration object in `options.formFields` has the following mandatory keys:
+- `type` (`string`) is one of `CHECK_BOX`, `DROP_DOWN`, `RADIO_BUTTONS`, `TEXT_BOX`, or `NUMERIC_TEXT_BOX`.
+- `key` (`string`) is an identifier for the form field. The value of the form field will be stored in `result` based on the `key`.
+- `label` (`string`) is the label for the form field.
 
-#### *Example*
+Fields of type `DROP_DOWN` and `RADIO_BUTTONS` also require a `possibleValues` (`array`) key.
 
-Currently, five form field types are supported.
+The different types of form fields and their corresponding values in the `result` object are as below:
 
-`type` | Description | Value in `result`
+Type | Description | Value in `result`
 :--|:--|:--
 `CHECK_BOX` | For boolean input | Either `true` or `false`
-`DROP_DOWN` or `RADIO_BUTTONS` | To restrict input to a particular set of values | A value from the `possibleValues` array
+`DROP_DOWN` | For restricting input to a particular set of `possibleValues` | A value from the `possibleValues` array
+`RADIO_BUTTONS` | For restricting input to a particular set of `possibleValues` | A value from the `possibleValues` array
 `TEXT_BOX` | For free-text input | A `string`
 `NUMERIC_TEXT_BOX` | For free-text, numeric input | A `number`
 
-Here is an example of an `options` object that opens a dialog with all five form field types:
+#### *Example*
 
 ```js
-const options = {
-  title: 'Settings',
-  formFields: [
-    {
-      type: CHECK_BOX,
-      key: 'foo',
-      label: 'Foo'
-    },
-    {
-      type: DROP_DOWN,
-      key: 'bar',
-      label: 'Bar',
-      possibleValues: [1, 2, 3]
-    },
-    {
-      type: RADIO_BUTTONS,
-      key: 'biz',
-      label: 'biz',
-      possibleValues: ['x', 'y']
-    },
-    {
-      type: TEXT_BOX,
-      key: 'baz',
-      label: 'baz'
-    },
-    {
-      type: NUMERIC_TEXT_BOX,
-      key: 'qux',
-      label: 'qux'
-    }
-  ]
+export default function () {
+  // ...
+  const options = {
+    title: 'Settings',
+    formFields: [
+      {
+        type: CHECK_BOX,
+        key: 'foo',
+        label: 'Foo'
+      },
+      {
+        type: DROP_DOWN,
+        key: 'bar',
+        label: 'Bar',
+        possibleValues: [1, 2, 3]
+      },
+      {
+        type: RADIO_BUTTONS,
+        key: 'baz',
+        label: 'Baz',
+        possibleValues: ['x', 'y']
+      },
+      {
+        type: TEXT_BOX,
+        key: 'qux',
+        label: 'Qux'
+      },
+      {
+        type: NUMERIC_TEXT_BOX,
+        key: 'biz',
+        label: 'Biz'
+      }
+    ]
+  }
+  const result = openSettingsDialog(options)
+  if (result === null) {
+    return
+  }
+  console.log(result.foo) //=> true or false
+  console.log(result.bar) //=> 1, 2 or 3
+  console.log(result.baz) //=> 'x' or 'y'
+  console.log(result.qux) //=> a string
+  console.log(result.biz) //=> a number
+  // ...
 }
-const result = openSettingsDialog(options)
-if (result === null) {
-  return
-}
-console.log(result.foo) //=> true or false
-console.log(result.bar) //=> 1, 2 or 3
-console.log(result.biz) //=> 'x' or 'y'
-console.log(result.baz) //=> a string
-console.log(result.qux) //=> a number
 ```
 
 ---
 
 ### resetSettings()
 
-Resets all plugin settings to the `defaultSettings` as specified in the `sketch-plugin-helper` field of your `package.json` file.
+Resets all plugin settings to the `defaultSettings` as specified in the `sketch-plugin-helper` field of your `package.json`.
 
 ---
 
