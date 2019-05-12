@@ -8,7 +8,6 @@ export async function lint () {
     __dirname,
     '..',
     '..',
-    '..',
     '.eslintrc.json'
   )
   const sourceFilesGlob = join(sourceDirectory, '/**/*.js')

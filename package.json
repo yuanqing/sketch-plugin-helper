@@ -13,7 +13,6 @@
   "author": "Lim Yuan Qing",
   "repository": "yuanqing/sketch-plugin-helper",
   "files": [
-    ".eslintrc.json",
     "src"
   ],
   "main": "src/api.js",
@@ -22,7 +21,7 @@
   },
   "scripts": {
     "fix": "prettier-standard 'src/**/*.js'",
-    "lint": "eslint 'src/**/*.js'"
+    "lint": "eslint --config src/.eslintrc.json 'src/**/*.js'"
   },
   "dependencies": {
     "@babel/core": "^7.4.4",
