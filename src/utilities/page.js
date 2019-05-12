@@ -1,13 +1,13 @@
 import { Page } from 'sketch/dom'
 
-import { getCurrentDocument } from './get-document'
-
-export function getCurrentPage () {
-  return getCurrentDocument().selectedPage
-}
+import { getCurrentDocument } from './document'
 
 export function getAllPages () {
   return getCurrentDocument().pages
+}
+
+export function getCurrentPage () {
+  return getCurrentDocument().selectedPage
 }
 
 export function getSymbolsPage () {

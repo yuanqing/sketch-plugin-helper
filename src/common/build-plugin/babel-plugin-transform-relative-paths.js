@@ -18,7 +18,7 @@ export default function () {
           )
           return
         }
-        if (callee.name === 'openSketchDocument') {
+        if (callee.name === 'openDocument') {
           node.arguments[0] = createAbsolutePath(
             node.arguments[0],
             sourceFilePath

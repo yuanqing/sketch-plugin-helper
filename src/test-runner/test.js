@@ -2,7 +2,7 @@ import isPromise from 'is-promise'
 import pEachSeries from 'p-each-series'
 
 import { compareSketchDocuments } from './compare-sketch-documents'
-import { openSketchDocument } from '../utilities/open-sketch-document'
+import { openDocument } from '../utilities/open-sketch-document'
 import { ResultsLogger } from './results-logger'
 import { TestSuite } from './test-suite'
 
@@ -34,9 +34,9 @@ export function snapshotTest (name, inputFilePath, snapshotFilePath, handler) {
 function createSnapshotTest ({ inputFilePath, snapshotFilePath, handler }) {
   return async function (t) {
     t.plan(1)
-    const inputFile = await openSketchDocument(inputFilePath)
+    const inputFile = await openDocument(inputFilePath)
     handler(inputFile)
-    const snapshotFile = await openSketchDocument(snapshotFilePath)
+    const snapshotFile = await openDocument(snapshotFilePath)
     t.true(compareSketchDocuments(inputFile, snapshotFile))
     inputFile.close()
     snapshotFile.close()

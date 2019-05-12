@@ -1,15 +1,13 @@
 import UI from 'sketch/ui'
 
-export function showMessage (message, options) {
-  UI.message(
-    options && options.symbol ? `${options.symbol} ${message}` : message
-  )
+export function showErrorMessage (message) {
+  UI.message(`✔ ${message}`)
+}
+
+export function showMessage (message) {
+  UI.message(message)
 }
 
 export function showSuccessMessage (message) {
-  showMessage(message, { symbol: '✔' })
-}
-
-export function showErrorMessage (message) {
-  showMessage(message, { symbol: '✘' })
+  UI.message(`✔ ${message}`)
 }
