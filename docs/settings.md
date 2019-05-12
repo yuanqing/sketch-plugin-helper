@@ -12,13 +12,13 @@
 
 ## Quick start
 
-Specify the default settings for your plugin in the `sketch-plugin-helper` field of your `package.json` file. For example:
+Specify the `defaultSettings` for your plugin in the `sketch-plugin-helper` field of your `package.json` file. For example:
 
-```json
+```jsonc
 {
-  ...
+  // ...
   "sketch-plugin-helper": {
-    ...
+    // ...
     "defaultSettings": {
       "greeting": "Hello",
       "name": "Alice"
