@@ -2,15 +2,15 @@
 
 > Functions to obtain user input via a dialog box, and to retrieve, save, and reset plugin settings
 
-- [Quick start](#quick-start)
-- [API](#api)
-  - [**getSettings**](#const-settings--getsettings)
-  - [**openSettingsDialog**](#const-result--opensettingsdialogoptions)
-  - [**resetSettings**](#resetsettings)
-  - [**saveSettings**](#savesettingssettings)
-  - [**saveTemporarySettings**](#savetemporarysettingssettings)
+- [**Usage**](#usage)
+- [**API**](#api)
+  - [getSettings()](#const-settings--getsettings)
+  - [openSettingsDialog(options)](#const-result--opensettingsdialogoptions)
+  - [resetSettings()](#resetsettings)
+  - [saveSettings(settings)](#savesettingssettings)
+  - [saveTemporarySettings(settings)](#savetemporarysettingssettings)
 
-## Quick start
+## Usage
 
 Specify the `defaultSettings` for your plugin in the `sketch-plugin-helper` field of your `package.json`. For example:
 
