@@ -1,6 +1,6 @@
 # Utilities
 
-> Helper functions and abstractions over the [Sketch API](https://github.com/BohemianCoding/SketchAPI) to ease common plugin tasks.
+> Helper functions and abstractions over the [Sketch API](https://github.com/BohemianCoding/SketchAPI) for common plugin tasks.
 
 - [**Document**](#document)
   - [getCurrentDocument()](#const-document--getcurrentdocument)
@@ -14,22 +14,22 @@
   - [getArtboardsOnCurrentPage()](#const-artboards--getartboardsoncurrentpage)
   - [getSelectedArtboards()](#const-artboards--getselectedartboards)
 - [**Layer**](#layer)
+  - [addLayersToCurrentPage(layers)](#addlayerstocurrentpagelayers)
+  - [adjustParentGroupsToFit(layer)](#adjustparentgroupstofitlayer)
+  - [calculateCoordinatesRelativeToArtboard(layer)](#const-coordinates--calculatecoordinatesrelativetoartboardlayer)
+  - [calculateCoordinatesRelativeToPage(layer)](#const-coordinates--calculatecoordinatesrelativetopagelayer)
+  - [findLayersByNameOnCurrentPage(name)](#const-layers--findlayersbynameoncurrentpagename)
   - [getLayersOnAllPages()](#const-layers--getlayersonallpages)
   - [getLayersOnCurrentPage()](#const-layers--getlayersoncurrentpage)
   - [getSelectedLayers()](#const-layers--getselectedlayers)
   - [getSelectedLayersOrLayersOnCurrentPage()](#const-layers--getselectedlayersorlayersoncurrentpage)
-  - [findLayersByNameOnCurrentPage(name)](#const-layers--findlayersbynameoncurrentpagename)
-  - [addLayersToPage(layers, [page])](#addlayerstopagelayers-page)
-  - [adjustParentGroupsToFit(layer)](#adjustparentgroupstofitlayer)
-  - [iterateNestedLayers(layers, callback)](#iteratenestedlayerslayers-callback)
+  - [iterateChildLayers(layers, callback)](#iteratechildlayerslayers-callback)
   - [iterateParentLayers(layer, callback)](#iterateparentlayerslayer-callback)
-  - [calculateCoordinatesRelativeToArtboard(layer)](#const-coordinates--calculatecoordinatesrelativetoartboardlayer)
-  - [calculateCoordinatesRelativeToPage(layer)](#const-coordinates--calculatecoordinatesrelativetopagelayer)
 - [**Directory**](#directory)
   - [getPluginDirectoryPath()](#const-path--getplugindirectorypath)
   - [getPluginInnerDirectoryPath()](#const-path--getplugininnerdirectorypath)
   - [getPluginResourcesDirectoryPath()](#const-path--getpluginresourcesdirectorypath)
-- [**Show message**](#show-message)
+- [**System feedback**](#system-feedback)
   - [showErrorMessage(message)](#showerrormessagemessage)
   - [showMessage(message)](#showmessagemessage)
   - [showSuccessMessage(message)](#showsuccessmessagemessage)
@@ -151,7 +151,7 @@ Gets the selected artboards.
 
 ```js
 import {
-  addLayersToPage,
+  addLayersToCurrentPage,
   adjustParentGroupsToFit,
   calculateCoordinatesRelativeToPage,
   calculateCoordinatesRelativeToArtboard,
@@ -160,10 +160,65 @@ import {
   getLayersOnCurrentPage,
   getSelectedLayers,
   getSelectedLayersOrLayersOnCurrentPage,
-  iterateNestedLayers,
+  iterateChildLayers,
   iterateParentLayers,
 } from 'sketch-plugin-helper'
 ```
+
+### addLayersToCurrentPage(layers)
+
+Adds the given `layers` to the specified `page` of the current document. If `page` is not specified, then `layers` are added to the current page.
+
+#### *Parameters*
+
+- `layers` ([`Layer[]`](https://developer.sketch.com/reference/api/#layer))
+- `page` ([`Page`](https://developer.sketch.com/reference/api/#page))
+
+---
+
+### adjustParentGroupsToFit(layer)
+
+Updates the sizes of all parent groups of the given `layer` to fit their contents. This is useful if the size or position of `layer` had changed.
+
+#### *Parameters*
+
+- `layer` ([`Layer`](https://developer.sketch.com/reference/api/#layer))
+---
+
+### const coordinates = calculateCoordinatesRelativeToArtboard(layer)
+
+Calculates the `x` and `y` coordinates of the given `layer` relative to its parent artboard.
+
+#### *Return value*
+
+- If `layer` is in an artboard, then `coordinates` is an `object`.
+- If `layer` is not in an artboard, then `coordinates` is `null`.
+
+---
+
+### const coordinates = calculateCoordinatesRelativeToPage(layer)
+
+Calculates the `x` and `y` coordinates of the given `layer` relative to the page.
+
+#### *Return value*
+
+- `coordinates` is an `object`.
+
+---
+
+### const layers = findLayersByNameOnCurrentPage(name)
+
+Finds layers with the given `name` on the current page.
+
+#### *Parameters*
+
+- `name` (`string`)
+
+#### *Return value*
+
+- `layers` is an array of [`Layer`](https://developer.sketch.com/reference/api/#layer) objects.
+
+---
 
 ### const layers = getLayersOnAllPages()
 
@@ -205,80 +260,25 @@ Gets the selected layers, or the layers on the current page if no layers are sel
 
 ---
 
-### const layers = findLayersByNameOnCurrentPage(name)
+### iterateChildLayers(layers, callback)
 
-Finds layers with the given `name` on the current page.
-
-#### *Parameters*
-
-- `name` (`string`)
-
-#### *Return value*
-
-- `layers` is an array of [`Layer`](https://developer.sketch.com/reference/api/#layer) objects.
-
----
-
-### addLayersToPage(layers, [page])
-
-Adds the given `layers` to the specified `page` of the current document. If `page` is not specified, then `layers` are added to the current page.
+For each layer in `layers`, recursively iterates through the child layers of each layer, passing each child layer to the given `callback`.
 
 #### *Parameters*
 
 - `layers` ([`Layer[]`](https://developer.sketch.com/reference/api/#layer))
-- `page` ([`Page`](https://developer.sketch.com/reference/api/#page))
-
----
-
-### adjustParentGroupsToFit(layer)
-
-Updates the sizes of all parent groups of the given `layer` to fit their contents. This is useful if the size or position of `layer` had changed.
-
-#### *Parameters*
-
-- `layer` ([`Layer`](https://developer.sketch.com/reference/api/#layer))
-
----
-
-### iterateNestedLayers(layers, callback)
-
-For each layer in `layers`, recursively iterates through the child layers of each layer, passing each child layer to the `callback`.
-
-#### *Parameters*
-
-- `layers` ([`Layer[]`](https://developer.sketch.com/reference/api/#layer))
-- `callback` (`function`) with the function signature `function (childLayer) {}`
+- `callback` (`function`) has the function signature `function (childLayer) {}`
 
 ---
 
 ### iterateParentLayers(layer, callback)
 
-Recursively iterates through the parent layers of the given `layer`, passing each parent layer to the `callback`.
+Recursively iterates through the parent layers of the given `layer`, passing each parent layer to the given `callback`.
 
 #### *Parameters*
 
 - `layer` ([`Layer`](https://developer.sketch.com/reference/api/#layer))
-- `callback` (`function`) with the function signature `function (parentLayer) {}`
-
----
-
-### const coordinates = calculateCoordinatesRelativeToArtboard(layer)
-
-Calculates the coordinates of the given `layer` relative to its parent artboard.
-
-#### *Return value*
-
-- `coordinates` is an `object`.
-
----
-
-### const coordinates = calculateCoordinatesRelativeToPage(layer)
-
-Calculates the coordinates of the given `layer` relative to its parent artboard.
-
-#### *Return value*
-
-- `coordinates` is an `object`.
+- `callback` (`function`) has the function signature `function (parentLayer) {}`
 
 ---
 
@@ -322,7 +322,7 @@ Gets the path to the plugin’s `Contents/Resources` directory.
 
 ---
 
-## Show message
+## System feedback
 
 ```js
 import {
