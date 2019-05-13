@@ -1,6 +1,6 @@
 # Utilities
 
-> Helper functions and abstractions over the [Sketch API](https://github.com/BohemianCoding/SketchAPI) for common plugin tasks.
+> Helper functions and abstractions over the [Sketch API](https://github.com/BohemianCoding/SketchAPI) for common plugin tasks
 
 - [**Document**](#document)
   - [getCurrentDocument()](#const-document--getcurrentdocument)
