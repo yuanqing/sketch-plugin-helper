@@ -1,10 +1,10 @@
 # Utilities
 
-> Helper functions and abstractions over the [Sketch API](https://github.com/BohemianCoding/SketchAPI) for common plugin tasks
+> Helper functions and abstractions over the [Sketch API](https://github.com/BohemianCoding/SketchAPI) to ease common plugin tasks
 
 - [**Document**](#document)
   - [getCurrentDocument()](#const-document--getcurrentdocument)
-  - [openDocument(filePath)](#const-document--opendocumentfilepath)
+  - [openDocument(filePath)](#const-document--await-opendocumentfilepath)
 - [**Page**](#page)
   - [getAllPages()](#const-pages--getallpages)
   - [getCurrentPage()](#const-page--getcurrentpage)
@@ -14,25 +14,27 @@
   - [getArtboardsOnCurrentPage()](#const-artboards--getartboardsoncurrentpage)
   - [getSelectedArtboards()](#const-artboards--getselectedartboards)
 - [**Layer**](#layer)
-  - [addLayersToCurrentPage(layers)](#addlayerstocurrentpagelayers)
-  - [adjustParentGroupsToFit(layer)](#adjustparentgroupstofitlayer)
-  - [calculateCoordinatesRelativeToArtboard(layer)](#const-coordinates--calculatecoordinatesrelativetoartboardlayer)
-  - [calculateCoordinatesRelativeToPage(layer)](#const-coordinates--calculatecoordinatesrelativetopagelayer)
-  - [findLayersByNameOnCurrentPage(name)](#const-layers--findlayersbynameoncurrentpagename)
   - [getLayersOnAllPages()](#const-layers--getlayersonallpages)
   - [getLayersOnCurrentPage()](#const-layers--getlayersoncurrentpage)
   - [getSelectedLayers()](#const-layers--getselectedlayers)
   - [getSelectedLayersOrLayersOnCurrentPage()](#const-layers--getselectedlayersorlayersoncurrentpage)
+  - [findLayersByNameOnCurrentPage(name)](#const-layers--findlayersbynameoncurrentpagename)
+  - [addLayersToCurrentPage(layers)](#addlayerstocurrentpagelayers)
   - [iterateChildLayers(layers, callback)](#iteratechildlayerslayers-callback)
   - [iterateParentLayers(layer, callback)](#iterateparentlayerslayer-callback)
+  - [calculateCoordinatesRelativeToArtboard(layer)](#const-coordinates--calculatecoordinatesrelativetoartboardlayer)
+  - [calculateCoordinatesRelativeToPage(layer)](#const-coordinates--calculatecoordinatesrelativetopagelayer)
+  - [adjustParentGroupsToFit(layer)](#adjustparentgroupstofitlayer)
 - [**Directory**](#directory)
   - [getPluginDirectoryPath()](#const-path--getplugindirectorypath)
   - [getPluginInnerDirectoryPath()](#const-path--getplugininnerdirectorypath)
   - [getPluginResourcesDirectoryPath()](#const-path--getpluginresourcesdirectorypath)
 - [**System feedback**](#system-feedback)
-  - [showErrorMessage(message)](#showerrormessagemessage)
   - [showMessage(message)](#showmessagemessage)
   - [showSuccessMessage(message)](#showsuccessmessagemessage)
+  - [showErrorMessage(message)](#showerrormessagemessage)
+
+---
 
 ## Document
 
@@ -47,23 +49,19 @@ import {
 
 Gets the currently-open document.
 
-#### *Return value*
-
 - `document` is a [`Document`](https://developer.sketch.com/reference/api/#document) object.
 
 ---
 
-### const document = openDocument(filePath)
+### const document = await openDocument(filePath)
 
 Opens the Sketch document at the given `filePath`.
+
+- `document` is a [`Document`](https://developer.sketch.com/reference/api/#document) object.
 
 #### *Parameters*
 
 - `filePath` (`string`)
-
-#### *Return value*
-
-- `document` is a [`Document`](https://developer.sketch.com/reference/api/#document) object.
 
 ---
 
@@ -81,8 +79,6 @@ import {
 
 Gets all pages of the current document.
 
-#### *Return value*
-
 - `pages` is an array of [`Page`](https://developer.sketch.com/reference/api/#page) objects.
 
 ---
@@ -91,8 +87,6 @@ Gets all pages of the current document.
 
 Gets the current page of the current document.
 
-#### *Return value*
-
 - `page` is a [`Page`](https://developer.sketch.com/reference/api/#page) object.
 
 ---
@@ -100,8 +94,6 @@ Gets the current page of the current document.
 ### const page = getSymbolsPage()
 
 Gets the Symbols page of the current document.
-
-#### *Return value*
 
 - `page` is a [`Page`](https://developer.sketch.com/reference/api/#page) object.
 
@@ -121,8 +113,6 @@ import {
 
 Gets all artboards on all pages.
 
-#### *Return value*
-
 - `artboards` is an array of [`Artboard`](https://developer.sketch.com/reference/api/#artboard) objects.
 
 ---
@@ -130,8 +120,6 @@ Gets all artboards on all pages.
 ### const artboards = getArtboardsOnCurrentPage()
 
 Gets all artboards on the current page.
-
-#### *Return value*
 
 - `artboards` is an array of [`Artboard`](https://developer.sketch.com/reference/api/#artboard) objects.
 
@@ -141,8 +129,6 @@ Gets all artboards on the current page.
 
 Gets the selected artboards.
 
-#### *Return value*
-
 - `artboards` is an array of [`Artboard`](https://developer.sketch.com/reference/api/#artboard) objects.
 
 ---
@@ -151,80 +137,25 @@ Gets the selected artboards.
 
 ```js
 import {
-  addLayersToCurrentPage,
-  adjustParentGroupsToFit,
-  calculateCoordinatesRelativeToPage,
-  calculateCoordinatesRelativeToArtboard,
-  findLayersByNameOnCurrentPage,
   getLayersOnAllPages,
   getLayersOnCurrentPage,
   getSelectedLayers,
   getSelectedLayersOrLayersOnCurrentPage,
+  findLayersByNameOnCurrentPage,
+  addLayersToCurrentPage,
   iterateChildLayers,
-  iterateParentLayers
+  iterateParentLayers,
+  calculateCoordinatesRelativeToPage,
+  calculateCoordinatesRelativeToArtboard,
+  adjustParentGroupsToFit
 } from 'sketch-plugin-helper'
 ```
-
-### addLayersToCurrentPage(layers)
-
-Adds the given `layers` to the specified `page` of the current document. If `page` is not specified, then `layers` are added to the current page.
-
-#### *Parameters*
-
-- `layers` ([`Layer[]`](https://developer.sketch.com/reference/api/#layer))
-- `page` ([`Page`](https://developer.sketch.com/reference/api/#page))
-
----
-
-### adjustParentGroupsToFit(layer)
-
-Updates the sizes of all parent groups of the given `layer` to fit their contents. This is useful if the size or position of `layer` had changed.
-
-#### *Parameters*
-
-- `layer` ([`Layer`](https://developer.sketch.com/reference/api/#layer))
----
-
-### const coordinates = calculateCoordinatesRelativeToArtboard(layer)
-
-Calculates the `x` and `y` coordinates of the given `layer` relative to its parent artboard.
-
-#### *Return value*
-
-- If `layer` is in an artboard, then `coordinates` is an `object`.
-- If `layer` is not in an artboard, then `coordinates` is `null`.
-
----
-
-### const coordinates = calculateCoordinatesRelativeToPage(layer)
-
-Calculates the `x` and `y` coordinates of the given `layer` relative to the page.
-
-#### *Return value*
-
-- `coordinates` is an `object`.
-
----
-
-### const layers = findLayersByNameOnCurrentPage(name)
-
-Finds layers with the given `name` on the current page.
-
-#### *Parameters*
-
-- `name` (`string`)
-
-#### *Return value*
-
-- `layers` is an array of [`Layer`](https://developer.sketch.com/reference/api/#layer) objects.
 
 ---
 
 ### const layers = getLayersOnAllPages()
 
 Gets all top-level layers on all pages.
-
-#### *Return value*
 
 - `layers` is an array of [`Layer`](https://developer.sketch.com/reference/api/#layer) objects.
 
@@ -234,8 +165,6 @@ Gets all top-level layers on all pages.
 
 Gets all top-level layers on the current page.
 
-#### *Return value*
-
 - `layers` is an array of [`Layer`](https://developer.sketch.com/reference/api/#layer) objects.
 
 ---
@@ -243,8 +172,6 @@ Gets all top-level layers on the current page.
 ### const layers = getSelectedLayers()
 
 Gets the selected layers.
-
-#### *Return value*
 
 - `layers` is an array of [`Layer`](https://developer.sketch.com/reference/api/#layer) objects.
 
@@ -254,9 +181,29 @@ Gets the selected layers.
 
 Gets the selected layers, or the top-level layers on the current page if no layers are selected.
 
-#### *Return value*
+- `layers` is an array of [`Layer`](https://developer.sketch.com/reference/api/#layer) objects.
+
+---
+
+### const layers = findLayersByNameOnCurrentPage(name)
+
+Finds layers with the given `name` on the current page.
 
 - `layers` is an array of [`Layer`](https://developer.sketch.com/reference/api/#layer) objects.
+
+#### *Parameters*
+
+- `name` (`string`)
+
+---
+
+### addLayersToCurrentPage(layers)
+
+Adds the given `layers` to the specified `page` of the current document. If `page` is not specified, then `layers` are added to the current page.
+
+#### *Parameters*
+
+- `layers` ([`Layer[]`](https://developer.sketch.com/reference/api/#layer))
 
 ---
 
@@ -267,7 +214,7 @@ For each layer in `layers`, recursively iterates through the child layers of eac
 #### *Parameters*
 
 - `layers` ([`Layer[]`](https://developer.sketch.com/reference/api/#layer))
-- `callback` (`function`) has the signature `function (childLayer) {}`
+- `callback` (`function (childLayer)`)
 
 ---
 
@@ -278,7 +225,34 @@ Recursively iterates through the parent layers of the given `layer`, passing eac
 #### *Parameters*
 
 - `layer` ([`Layer`](https://developer.sketch.com/reference/api/#layer))
-- `callback` (`function`) has the signature `function (parentLayer) {}`
+- `callback` (`function (parentLayer)`)
+
+---
+
+### const coordinates = calculateCoordinatesRelativeToArtboard(layer)
+
+Calculates the `x` and `y` coordinates of the given `layer` relative to its parent artboard.
+
+- If `layer` is in an artboard, then `coordinates` is an `object`.
+- If `layer` is not in an artboard, then `coordinates` is `null`.
+
+---
+
+### const coordinates = calculateCoordinatesRelativeToPage(layer)
+
+Calculates the `x` and `y` coordinates of the given `layer` relative to the page.
+
+- `coordinates` is an `object`.
+
+---
+
+### adjustParentGroupsToFit(layer)
+
+Updates the sizes of all parent groups of the given `layer` to fit their contents. This is useful if the size or position of `layer` had changed.
+
+#### *Parameters*
+
+- `layer` ([`Layer`](https://developer.sketch.com/reference/api/#layer))
 
 ---
 
@@ -296,8 +270,6 @@ import {
 
 Gets the path to the plugin directory.
 
-#### *Return value*
-
 - `path` is a `string`.
 
 ---
@@ -305,8 +277,6 @@ Gets the path to the plugin directory.
 ### const path = getPluginInnerDirectoryPath()
 
 Gets the path to the plugin’s inner `Contents/Sketch` directory.
-
-#### *Return value*
 
 - `path` is a `string`.
 
@@ -316,8 +286,6 @@ Gets the path to the plugin’s inner `Contents/Sketch` directory.
 
 Gets the path to the plugin’s `Contents/Resources` directory.
 
-#### *Return value*
-
 - `path` is a `string`.
 
 ---
@@ -326,21 +294,11 @@ Gets the path to the plugin’s `Contents/Resources` directory.
 
 ```js
 import {
-  showErrorMessage,
   showMessage,
-  showSuccessMessage
+  showSuccessMessage,
+  showErrorMessage
 } from 'sketch-plugin-helper'
 ```
-
-### showErrorMessage(message)
-
-Shows an error message to the user.
-
-#### *Parameters*
-
-- `message` (`string`)
-
----
 
 ### showMessage(message)
 
@@ -355,6 +313,16 @@ Shows a message to the user.
 ### showSuccessMessage(message)
 
 Shows a success message to the user.
+
+#### *Parameters*
+
+- `message` (`string`)
+
+---
+
+### showErrorMessage(message)
+
+Shows an error message to the user.
 
 #### *Parameters*
 

@@ -16,7 +16,7 @@
 
 ## Usage
 
-Specify the `defaultSettings` for your plugin in the `sketch-plugin-helper` field of your `package.json`. For example:
+Specify the `defaultSettings` for your plugin in the `sketch-plugin-helper` field of your `package.json`:
 
 ```jsonc
 {
@@ -31,7 +31,7 @@ Specify the `defaultSettings` for your plugin in the `sketch-plugin-helper` fiel
 }
 ```
 
-To retrieve the currently-saved settings, use `getSettings`. For example:
+To retrieve the currently-saved settings, use `getSettings`:
 
 ```js
 import { getSettings } from 'sketch-plugin-helper'
@@ -45,7 +45,7 @@ export default function () {
 }
 ```
 
-To get and save user input, use `openSettingsDialog` and `saveSettings`. For example:
+To get and save user input, use `openSettingsDialog` and `saveSettings`:
 
 ```js
 import {

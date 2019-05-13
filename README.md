@@ -25,7 +25,7 @@ $ sph create
 
 - [Utilities](docs/utilities.md)
 - [Settings](docs/settings.md)
-- [Test Runner](docs/test-runner.md)
+- [Tests](docs/tests.md)
 
 ## CLI
 
