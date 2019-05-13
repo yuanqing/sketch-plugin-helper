@@ -4,7 +4,7 @@ import { flattenObject } from './nested-object/flatten-object'
 import { unflattenObject } from './nested-object/unflatten-object'
 
 export function getSettings () {
-  const defaultSettings = preval.require('./get-default-settings')
+  const defaultSettings = preval.require('./preval-get-default-settings')
   if (!defaultSettings) {
     return {}
   }

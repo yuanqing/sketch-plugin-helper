@@ -10,6 +10,7 @@ import { test } from './commands/test'
 import { version } from './commands/version'
 
 yargs
+  .scriptName('sph')
   .command(build)
   .command(create)
   .command(lint)

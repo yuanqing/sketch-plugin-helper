@@ -5,7 +5,7 @@ import { createLogger } from '../common/create-logger'
 
 export const lint = {
   command: 'lint',
-  describe: 'Lints the plugin implementation code in `src/`',
+  describe: 'Lints the plugin implementation code',
   builder: function (yargs) {
     yargs.option('shouldFix', {
       alias: ['fix', 'f'],

@@ -4,7 +4,7 @@ import { updateVersion } from '../common/update-version'
 
 export const version = {
   command: 'version <type>',
-  describe: 'Updates the version of the Sketch plugin',
+  describe: 'Updates the plugin version',
   builder: function (yargs) {
     yargs.positional('type', {
       type: 'string',

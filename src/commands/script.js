@@ -1,14 +1,14 @@
 import { runScript } from '../common/run-script'
 
 export const script = {
-  command: 'script <pattern>',
+  command: 'script <file>',
   describe: 'Runs the given script in Sketch',
   builder: function (yargs) {
-    yargs.positional('pattern', {
+    yargs.positional('file', {
       type: 'string'
     })
   },
-  handler: async function ({ pattern }) {
-    return runScript(pattern)
+  handler: async function ({ file }) {
+    return runScript(file)
   }
 }

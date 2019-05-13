@@ -1,10 +1,10 @@
 import { setSettingForKey, setSessionVariable } from 'sketch/settings'
 
 import { flattenObject } from './nested-object/flatten-object'
-import { showMessage } from '../utilities/show-message'
+import { showMessage } from '../utilities/system-feedback'
 
 export function resetSettings () {
-  const defaultSettings = preval.require('./get-default-settings')
+  const defaultSettings = preval.require('./preval-get-default-settings')
   if (!defaultSettings) {
     return
   }

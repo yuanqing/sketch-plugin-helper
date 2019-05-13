@@ -2,7 +2,7 @@ import isPromise from 'is-promise'
 import pEachSeries from 'p-each-series'
 
 import { compareSketchDocuments } from './compare-sketch-documents'
-import { openDocument } from '../utilities/open-sketch-document'
+import { openDocument } from '../utilities/document'
 import { ResultsLogger } from './results-logger'
 import { TestSuite } from './test-suite'
 

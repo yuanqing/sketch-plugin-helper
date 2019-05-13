@@ -3,15 +3,15 @@ import { join } from 'path'
 import { runTests } from '../test-runner/run-tests'
 
 export const test = {
-  command: 'test [pattern]',
-  describe: 'Runs tests for your plugin',
+  command: 'test [files..]',
+  describe: 'Runs tests for the plugin',
   builder: function (yargs) {
-    yargs.positional('pattern', {
+    yargs.positional('files', {
       type: 'string',
-      default: join('src', '**', '__tests__', '*.js')
+      default: [join('src', '**', '__tests__', '*.js')]
     })
   },
-  handler: async function ({ pattern }) {
-    return runTests(pattern)
+  handler: async function ({ files }) {
+    return runTests(files)
   }
 }

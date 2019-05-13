@@ -1,5 +1,5 @@
 export function getPluginDirectoryPath () {
-  const pluginName = preval.require('../common/get-plugin-name')
+  const pluginName = preval.require('./preval-get-plugin-name')
   return `${
     process.env.HOME
   }/Library/Application Support/com.bohemiancoding.sketch3/Plugins/${pluginName}.sketchplugin`
