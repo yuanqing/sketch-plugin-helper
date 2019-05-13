@@ -1,14 +1,18 @@
 # Settings
 
-> Functions to obtain user input via a dialog box, and to retrieve, save, and reset plugin settings
+> Functions to get user input via a dialog box, and to get, save, and reset plugin settings
 
 - [**Usage**](#usage)
-- [**API**](#api)
-  - [getSettings()](#const-settings--getsettings)
+- [**Get user input**](#get-user-input)
   - [openSettingsDialog(options)](#const-result--opensettingsdialogoptions)
+- [**Get settings**](#get-settings)
+  - [getSettings()](#const-settings--getsettings)
+- [**Save and reset settings**](#save-and-reset-settings)
   - [resetSettings()](#resetsettings)
   - [saveSettings(settings)](#savesettingssettings)
   - [saveTemporarySettings(settings)](#savetemporarysettingssettings)
+
+---
 
 ## Usage
 
@@ -35,13 +39,13 @@ import { getSettings } from 'sketch-plugin-helper'
 export default function () {
   // ...
   const settings = getSettings()
-  console.log(settings.greeting) //=> 'Hello' or 'Goodbye'
-  console.log(settings.name)     //=> A string
+  console.log(settings.greeting) //=> 'Hello'
+  console.log(settings.name)     //=> 'Alice'
   // ...
 }
 ```
 
-To obtain and save user input, use `openSettingsDialog` and `saveSettings`. For example:
+To get and save user input, use `openSettingsDialog` and `saveSettings`. For example:
 
 ```js
 import {
@@ -80,15 +84,13 @@ export default function () {
 }
 ```
 
-## API
+---
+
+## Get user input
 
 ```js
 import {
-  getSettings,
   openSettingsDialog,
-  resetSettings,
-  saveSettings,
-  saveTemporarySettings,
   CHECK_BOX,
   DROP_DOWN,
   RADIO_BUTTONS,
@@ -96,16 +98,6 @@ import {
   NUMERIC_TEXT_BOX
 } from 'sketch-plugin-helper'
 ```
-
-### const settings = getSettings()
-
-Returns the currently-saved plugin settings.
-
-#### *Return value*
-
-- `settings` is an `object`.
-
----
 
 ### const result = openSettingsDialog(options)
 
@@ -190,6 +182,32 @@ export default function () {
 ```
 
 ---
+
+## Get settings
+
+```js
+import { getSettings } from 'sketch-plugin-helper'
+```
+
+### const settings = getSettings()
+
+Returns the currently-saved plugin settings.
+
+#### *Return value*
+
+- `settings` is an `object`.
+
+---
+
+## Save and reset settings
+
+```js
+import {
+  resetSettings,
+  saveSettings,
+  saveTemporarySettings,
+} from 'sketch-plugin-helper'
+```
 
 ### resetSettings()
 
