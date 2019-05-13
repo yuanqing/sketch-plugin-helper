@@ -99,7 +99,7 @@ Gets the current page of the current document.
 
 ### const page = getSymbolsPage()
 
-Gets the Symbol page of the current document.
+Gets the Symbols page of the current document.
 
 #### *Return value*
 
@@ -129,7 +129,7 @@ Gets all artboards on all pages.
 
 ### const artboards = getArtboardsOnCurrentPage()
 
-Gets the artboards on the current page.
+Gets all artboards on the current page.
 
 #### *Return value*
 
@@ -222,7 +222,7 @@ Finds layers with the given `name` on the current page.
 
 ### const layers = getLayersOnAllPages()
 
-Gets all layers on all pages.
+Gets all top-level layers on all pages.
 
 #### *Return value*
 
@@ -232,7 +232,7 @@ Gets all layers on all pages.
 
 ### const layers = getLayersOnCurrentPage()
 
-Gets the layers on the current page.
+Gets all top-level layers on the current page.
 
 #### *Return value*
 
@@ -252,7 +252,7 @@ Gets the selected layers.
 
 ### const layers = getSelectedLayersOrLayersOnCurrentPage()
 
-Gets the selected layers, or the layers on the current page if no layers are selected.
+Gets the selected layers, or the top-level layers on the current page if no layers are selected.
 
 #### *Return value*
 
@@ -267,7 +267,7 @@ For each layer in `layers`, recursively iterates through the child layers of eac
 #### *Parameters*
 
 - `layers` ([`Layer[]`](https://developer.sketch.com/reference/api/#layer))
-- `callback` (`function`) has the function signature `function (childLayer) {}`
+- `callback` (`function`) has the signature `function (childLayer) {}`
 
 ---
 
@@ -278,7 +278,7 @@ Recursively iterates through the parent layers of the given `layer`, passing eac
 #### *Parameters*
 
 - `layer` ([`Layer`](https://developer.sketch.com/reference/api/#layer))
-- `callback` (`function`) has the function signature `function (parentLayer) {}`
+- `callback` (`function`) has the signature `function (parentLayer) {}`
 
 ---
 
