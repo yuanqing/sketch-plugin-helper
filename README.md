@@ -2,15 +2,6 @@
 
 > An opinionated, batteries-included toolkit for making [Sketch](https://www.sketch.com/) plugins
 
-- [Features](#features)
-- [Quick start](#quick-start)
-- [API](#api)
-- [CLI](#cli)
-- [Installation](#installation)
-- [License](#license)
-
-## Features
-
 - Concise, declarative APIs for obtaining multi-field user input
 - Automatically generate your plugin’s [`appcast.xml`](https://developer.sketch.com/guides/publishing-plugins/#the-appcastxml-file) and [`manifest.json`](https://developer.sketch.com/guides/plugin-bundles/#manifest) files
 - Utility functions for the most common plugin tasks
@@ -19,7 +10,7 @@
 - Make assertions on the result of running your plugin tests, including comparing the actual result against an expected Sketch file
 - All the tools you need – builder, linter, test runner – available via an intuitive CLI, bundled in a single dependency
 
-*The above is also a list of the key differences between `sketch-plugin-helper` and [`skpm`](https://github.com/skpm/skpm).*
+*The above is also a list of the key feature differences between `sketch-plugin-helper` and [`skpm`](https://github.com/skpm/skpm).*
 
 ## Quick start
 
