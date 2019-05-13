@@ -1,11 +1,8 @@
 import { getCurrentDocument } from './document'
 import { getCurrentPage, getAllPages } from './page'
 
-export function addLayersToPage (
-  layers,
-  page = getCurrentDocument().selectedPage
-) {
-  return page.sketchObject.addLayers(layers)
+export function addLayersToCurrentPage (layers) {
+  return getCurrentDocument().selectedPage.sketchObject.addLayers(layers)
 }
 
 export function adjustParentGroupsToFit (layer) {
@@ -21,6 +18,9 @@ function adjustParentGroupsToFitHelper (layer, adjustedGroupIds) {
 }
 
 export function calculateCoordinatesRelativeToArtboard (layer) {
+  if (layer.parent.type === 'Page') {
+    return null
+  }
   return calculateCoordinatesRelativeToArtboardHelper(layer, {
     x: layer.frame.x,
     y: layer.frame.y
@@ -61,7 +61,7 @@ function calculateCoordinatesRelativeToPageHelper (layer, result) {
 
 export function findLayersByNameOnCurrentPage (name) {
   const result = []
-  iterateNestedLayers(getLayersOnCurrentPage(), function (layer) {
+  iterateChildLayers(getLayersOnCurrentPage(), function (layer) {
     if (layer.name === name) {
       result.push(layer)
     }
@@ -93,12 +93,12 @@ export function getSelectedLayersOrLayersOnCurrentPage () {
   return selectedLayers.length !== 0 ? selectedLayers : getLayersOnCurrentPage()
 }
 
-export function iterateNestedLayers (layers, callback) {
+export function iterateChildLayers (layers, callback) {
   layers.forEach(function (layer) {
     callback(layer)
     const type = layer.type
     if (type === 'Artboard' || type === 'Group') {
-      iterateNestedLayers(layer.layers, callback)
+      iterateChildLayers(layer.layers, callback)
     }
   })
 }
