@@ -161,7 +161,7 @@ import {
   getSelectedLayers,
   getSelectedLayersOrLayersOnCurrentPage,
   iterateChildLayers,
-  iterateParentLayers,
+  iterateParentLayers
 } from 'sketch-plugin-helper'
 ```
 
