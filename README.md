@@ -7,7 +7,6 @@
 - [API](#api)
 - [CLI](#cli)
 - [Installation](#installation)
-- [Prior art](#prior-art)
 - [License](#license)
 
 ## Features
