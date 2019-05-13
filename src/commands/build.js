@@ -9,7 +9,7 @@ export const build = {
   describe: 'Builds the plugin',
   builder: function (yargs) {
     yargs.option('development', {
-      alias: ['develop', 'dev', 'd'],
+      alias: ['dev', 'd'],
       type: 'boolean',
       default: false
     })

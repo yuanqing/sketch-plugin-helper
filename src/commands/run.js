@@ -7,14 +7,14 @@ export const run = {
     yargs.positional('handler', {
       type: 'string'
     })
-    yargs.option('shouldRunInBackground', {
-      alias: ['background', 'b'],
+    yargs.option('background', {
+      alias: ['b'],
       default: false,
       describe: 'Whether to run the plugin in the background',
       type: 'boolean'
     })
   },
-  handler: async function ({ handler: handlerName, shouldRunInBackground }) {
-    return runHandler({ handlerName, shouldRunInBackground })
+  handler: async function ({ handler: handlerName, background }) {
+    return runHandler({ handlerName, shouldRunInBackground: background })
   }
 }
