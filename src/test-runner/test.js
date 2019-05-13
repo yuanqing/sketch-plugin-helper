@@ -2,7 +2,7 @@ import isPromise from 'is-promise'
 import pEachSeries from 'p-each-series'
 
 import { compareSketchDocuments } from './compare-sketch-documents'
-import { openDocument, closeDocument } from '../utilities/document'
+import { openDocument } from '../utilities/document'
 import { ResultsLogger } from './results-logger'
 import { TestSuite } from './test-suite'
 
@@ -50,8 +50,8 @@ function createFileComparisonTestHandler ({
     handler(inputDocument)
     const expectedOutputDocument = await openDocument(expectedOutputFilePath)
     t.true(compareSketchDocuments(inputDocument, expectedOutputDocument))
-    closeDocument(inputDocument)
-    closeDocument(expectedOutputDocument)
+    inputDocument.close()
+    expectedOutputDocument.close()
   }
 }
 
@@ -64,7 +64,7 @@ async function runAllTests () {
       if (isPromise(result)) {
         await result
       }
-      testSuite.checkexpectedAssertionCounts()
+      testSuite.checkAssertionCounts()
       return Promise.resolve()
     })
   } catch (error) {
