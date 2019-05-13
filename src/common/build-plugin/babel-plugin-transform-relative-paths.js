@@ -7,7 +7,7 @@ export default function () {
       CallExpression: function ({ node }, state) {
         const callee = node.callee
         const sourceFilePath = state.file.opts.filename
-        if (callee.name === 'snapshotTest') {
+        if (callee.name === 'test' && node.arguments.length === 4) {
           node.arguments[1] = createAbsolutePath(
             node.arguments[1],
             sourceFilePath

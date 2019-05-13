@@ -2,57 +2,69 @@ import isPromise from 'is-promise'
 import pEachSeries from 'p-each-series'
 
 import { compareSketchDocuments } from './compare-sketch-documents'
-import { openDocument } from '../utilities/document'
+import { openDocument, closeDocument } from '../utilities/document'
 import { ResultsLogger } from './results-logger'
 import { TestSuite } from './test-suite'
 
 const tests = []
 let isQueued = false
 
-export function test (name, handler) {
-  tests.push({
-    name,
-    handler
-  })
+export function test (...args) {
+  const length = args.length
+  if (length !== 3 && length !== 4) {
+    throw new Error('Incorrect number of arguments passed to `test`')
+  }
+  if (length === 3) {
+    const [name, expectedAssertionCount, handler] = args
+    tests.push({
+      name,
+      expectedAssertionCount,
+      handler
+    })
+  }
+  if (length === 4) {
+    const [name, inputDocumentPath, expectedOutputFilePath, handler] = args
+    tests.push({
+      name,
+      expectedAssertionCount: 1,
+      handler: createFileComparisonTestHandler({
+        inputDocumentPath,
+        expectedOutputFilePath,
+        handler
+      })
+    })
+  }
   if (!isQueued) {
     isQueued = true
     setTimeout(runAllTests, 0)
   }
 }
 
-export function snapshotTest (name, inputFilePath, snapshotFilePath, handler) {
-  tests.push({
-    name,
-    handler: createSnapshotTest({ inputFilePath, snapshotFilePath, handler })
-  })
-  if (!isQueued) {
-    isQueued = true
-    setTimeout(runAllTests, 0)
-  }
-}
-
-function createSnapshotTest ({ inputFilePath, snapshotFilePath, handler }) {
+function createFileComparisonTestHandler ({
+  inputDocumentPath,
+  expectedOutputFilePath,
+  handler
+}) {
   return async function (t) {
-    t.plan(1)
-    const inputFile = await openDocument(inputFilePath)
-    handler(inputFile)
-    const snapshotFile = await openDocument(snapshotFilePath)
-    t.true(compareSketchDocuments(inputFile, snapshotFile))
-    inputFile.close()
-    snapshotFile.close()
+    const inputDocument = await openDocument(inputDocumentPath)
+    handler(inputDocument)
+    const expectedOutputDocument = await openDocument(expectedOutputFilePath)
+    t.true(compareSketchDocuments(inputDocument, expectedOutputDocument))
+    closeDocument(inputDocument)
+    closeDocument(expectedOutputDocument)
   }
 }
 
 async function runAllTests () {
   const resultsLogger = new ResultsLogger()
   try {
-    await pEachSeries(tests, async function ({ name, handler }) {
-      const testSuite = new TestSuite({ name, resultsLogger })
+    await pEachSeries(tests, async function ({ name, expectedAssertionCount, handler }) {
+      const testSuite = new TestSuite({ name, expectedAssertionCount, resultsLogger })
       const result = handler(testSuite)
       if (isPromise(result)) {
         await result
       }
-      testSuite.checkAssertionCounts()
+      testSuite.checkexpectedAssertionCounts()
       return Promise.resolve()
     })
   } catch (error) {

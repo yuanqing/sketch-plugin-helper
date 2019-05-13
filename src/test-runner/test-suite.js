@@ -1,6 +1,6 @@
 export class TestSuite {
-  constructor ({ name, resultsLogger }) {
-    this.expectedCount = null
+  constructor ({ name, expectedAssertionCount, resultsLogger }) {
+    this.expectedCount = expectedAssertionCount
     this.actualCount = 0
     this.failed = false
     this.resultsLogger = resultsLogger
@@ -18,23 +18,29 @@ export class TestSuite {
     this.actualCount += 1
     this.resultsLogger.logAssertionFailed()
   }
-  plan (count) {
-    if (this.expectedCount === null) {
-      this.expectedCount = count
-      return
+  checkAssertionCounts () {
+    if (this.failed === false && this.actualCount !== this.expectedCount) {
+      this.resultsLogger.logAssertionFailed('plan != count')
     }
-    this.resultsLogger.logAssertionFailed('plan called twice')
   }
-  true (object) {
-    if (object === true) {
+  pass () {
+    this.assertionPassed()
+  }
+  fail () {
+    this.assertionFailed()
+  }
+  true (value) {
+    if (value === true) {
       this.assertionPassed()
       return
     }
     this.assertionFailed()
   }
-  checkAssertionCounts () {
-    if (this.failed === false && this.actualCount !== this.expectedCount) {
-      this.resultsLogger.logAssertionFailed('plan != count')
+  false (value) {
+    if (value === false) {
+      this.assertionPassed()
+      return
     }
+    this.assertionFailed()
   }
 }
