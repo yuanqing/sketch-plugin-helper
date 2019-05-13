@@ -33,8 +33,9 @@ $ sph create
 
 ## API
 
-- [Settings](docs/settings.md)
 - [Utilities](docs/utilities.md)
+- [Settings](docs/settings.md)
+- [Test Runner](docs/test-runner.md)
 
 ## CLI
 
