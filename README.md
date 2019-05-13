@@ -14,12 +14,12 @@
 - Concise, declarative APIs for obtaining multi-field user input
 - Automatically generate your plugin’s [`appcast.xml`](https://developer.sketch.com/guides/publishing-plugins/#the-appcastxml-file) and [`manifest.json`](https://developer.sketch.com/guides/plugin-bundles/#manifest) files
 - Utility functions for the most common plugin tasks
+- A prescribed, convention-over-configuration directory structure for your plugin
 - Lint and fix your plugin code with [`standard`](https://github.com/standard/standard) and [`prettier-standard`](https://github.com/sheerun/prettier-standard)
 - Make assertions on the result of running your plugin tests, including comparing the actual result against an expected Sketch file
-- A prescribed, convention-over-configuration directory structure for your plugin code
-- All the tools you need – builder, linter, test runner – available via an intuitive CLI, and in a single dependency
+- All the tools you need – builder, linter, test runner – available via an intuitive CLI, bundled in a single dependency
 
-*The above is also a list of the key differences between **sketch-plugin-helper** and [**skpm**](https://github.com/skpm/skpm).*
+*The above is also a list of the key differences between `sketch-plugin-helper` and [`skpm`](https://github.com/skpm/skpm).*
 
 ## Quick start
 
