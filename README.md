@@ -1,28 +1,26 @@
 # sketch-plugin-helper [![npm Version](https://badgen.net/npm/v/sketch-plugin-helper)](https://www.npmjs.org/package/sketch-plugin-helper)
 
-> An opinionated, batteries-included toolkit for making [Sketch](https://www.sketch.com/) plugins
+> A batteries-included toolkit for making [Sketch](https://www.sketch.com/) plugins
 
-- Concise, declarative APIs for obtaining multi-field user input
+## Features
+
+- A concise, declarative API for obtaining multi-field user input
 - Automatically generate your plugin’s [`appcast.xml`](https://developer.sketch.com/guides/publishing-plugins/#the-appcastxml-file) and [`manifest.json`](https://developer.sketch.com/guides/plugin-bundles/#manifest) files
 - Utility functions for the most common plugin tasks
 - A prescribed, convention-over-configuration directory structure for your plugin
-- Make assertions on the result of running your plugin tests, including asserting that the actual result matches an expected Sketch file
-- All the tools you need – builder, linter, test runner – available via an intuitive CLI, bundled in a single dependency
+- Write plugin tests that make assertions on the result of running your plugin code, including asserting that the actual resulting Sketch file matches an expected Sketch file
+- All the tools you need – builder, linter, test runner – available via an intuitive CLI (`sph`), bundled in a single dependency
 
-*The above is also a list of the key feature differences between `sketch-plugin-helper` and [`skpm`](https://github.com/skpm/skpm).*
+*The above is also a list of the key differences between `sketch-plugin-helper` and [`skpm`](https://github.com/skpm/skpm).*
 
 ## Quick start
 
 Requires [Node.js](https://nodejs.org/).
 
-First:
-
 ```
 $ npm i -g sketch-plugin-helper
 $ sph create
 ```
-
-
 
 ## API
 
