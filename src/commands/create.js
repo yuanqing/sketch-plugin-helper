@@ -52,10 +52,10 @@ function prompt (name) {
     },
     {
       type: 'input',
-      name: 'githubUserName',
-      message: 'Github user name',
+      name: 'githubUsername',
+      message: 'Github username',
       default: function ({ authorName }) {
-        return createGithubUserName(authorName)
+        return createGithubUsername(authorName)
       }
     }
   ]
@@ -63,6 +63,6 @@ function prompt (name) {
 }
 
 const spaceRegularExpression = /\s+/g
-function createGithubUserName (authorName) {
+function createGithubUsername (authorName) {
   return authorName.toLowerCase().replace(spaceRegularExpression, '')
 }

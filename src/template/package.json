@@ -9,7 +9,7 @@
   ],
   "license": "MIT",
   "author": "{{authorName}}",
-  "repository": "{{githubUserName}}/{{pluginName}}",
+  "repository": "{{githubUsername}}/{{pluginName}}",
   "devDependencies": {
     "sketch-plugin-helper": "*"
   },

@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
     <title>{{pluginDisplayName}}</title>
-    <link>https://raw.githubusercontent.com/{{githubUserName}}/{{pluginName}}/master/appcast.xml</link>
+    <link>https://raw.githubusercontent.com/{{githubUsername}}/{{pluginName}}/master/appcast.xml</link>
     <description>{{pluginDescription}}</description>
     <language>en</language>
   </channel>
