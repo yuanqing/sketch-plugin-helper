@@ -1,34 +1,39 @@
 # Testing Your Plugin
 
-> Write and run tests for your Sketch plugin
+> A fuss-free way to write and run tests in Sketch
 
-- [**Usage**](#usage)
+- [Quick start](#quick-start)
 - [**Test**](#test)
-  - [test(name, expectedAssertionCount, handler)](#testname-expectedassertioncount-handler)
   - [test(name, inputFilePath, expectedOutputFilePath, handler)](#testname-inputfilepath-expectedoutputfilepath-handler)
+  - [test(name, expectedAssertionCount, handler)](#testname-expectedassertioncount-handler)
 
 ---
 
-## Usage
+## Quick start
 
-First, write a test:
+Test files must match the glob pattern `src/**/__tests__/*.js`.
+
+Consider a toy example. Supposing that our implementation is `src/foo.js`, our test file would be `src/__tests__/foo.js`:
 
 ```js
-// src/__tests__/foo.js
+import foo from '../foo'
 
-import { test } from 'sketch-plugin-helper'
-
-test('foo', 1, function (t) {
-  t.pass()
-})
+test(
+  'foo',
+  '__fixtures__/input.sketch',
+  '__fixtures__/expected-output.sketch',
+  function () {
+    foo()
+  }
+)
 ```
 
-Then, run the test via `sph test`:
+This test file has only one test. It asserts that: Given an input document at `__fixtures__/input.sketch`, executing `foo()` will result in a document that is equal to the expected output document at `__fixtures__/expected-output.sketch`.
+
+Running the `sketch test` command will run our test in Sketch, and give the following:
 
 ```
-$ ls src/__tests__
-foo.js
-$ sph test
+$ sketch test
 TAP version 13
 # foo
 ok 1
@@ -40,8 +45,6 @@ ok 1
 # ok
 ```
 
-By default, `sph test` runs tests that match the glob pattern `src/**/__tests__/*.js`.
-
 ---
 
 ## Test
@@ -49,6 +52,21 @@ By default, `sph test` runs tests that match the glob pattern `src/**/__tests__/
 ```js
 import { test } from 'sketch-plugin-helper'
 ```
+
+### test(name, inputFilePath, expectedOutputFilePath, handler)
+
+1. Opens the Sketch document at `inputFilePath`.
+2. Executes the given `handler`, passing it the [`Document`](https://developer.sketch.com/reference/api/#document) at `inputFilePath`.
+3. Asserts that the resulting Sketch document is equal to the Sketch document at `expectedOutputFilePath`; the test passes if and only if this assertion passes.
+
+#### *Parameters*
+
+- `name` (`string`)
+- `inputFilePath` (`string`)
+- `expectedOutputFilePath` (`string`)
+- `handler` (`function (document)`), where `document` is the [`Document`](https://developer.sketch.com/reference/api/#document) at `inputFilePath`
+
+---
 
 ### test(name, expectedAssertionCount, handler)
 
@@ -68,43 +86,3 @@ The test passes if and only if:
 - `name` (`string`)
 - `expectedAssertionCount` (`number`)
 - `handler` (`function (t)`), where `t` is the test execution context object
-
-#### *Example*
-
-```js
-test('foo', 1, function (t) {
-  t.pass()
-})
-```
-
----
-
-### test(name, inputFilePath, expectedOutputFilePath, handler)
-
-1. Opens the Sketch document at `inputFilePath`.
-2. Executes the given `handler`, passing it the [`Document`](https://developer.sketch.com/reference/api/#document) at `inputFilePath`.
-3. Asserts that the resulting Sketch document is equal to the Sketch document at `expectedOutputFilePath`.
-
-The test passes if and only if the assertion passes.
-
-#### *Parameters*
-
-- `name` (`string`)
-- `inputFilePath` (`string`)
-- `expectedOutputFilePath` (`string`)
-- `handler` (`function (document)`), where `document` is the [`Document`](https://developer.sketch.com/reference/api/#document) at `inputFilePath`
-
-#### *Example*
-
-```js
-import foo from '../foo'
-
-test(
-  'foo',
-  '__fixtures__/input.sketch',
-  '__fixtures__/expected-output.sketch',
-  function (document) {
-    foo(document.selectedPage.layers)
-  }
-)
-```
