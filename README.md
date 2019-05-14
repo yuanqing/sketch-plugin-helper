@@ -36,7 +36,7 @@ sketch <command>
 
 Commands:
   sketch build           Builds the plugin
-  sketch create          Scaffolds a new Sketch plugin
+  sketch create <name>   Scaffolds a new Sketch plugin
   sketch lint            Lints the plugin implementation code
   sketch run <handler>   Runs the given plugin handler in Sketch
   sketch script <file>   Runs the given script in Sketch
