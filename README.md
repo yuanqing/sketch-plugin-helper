@@ -23,9 +23,9 @@ $ sph create
 
 ## API
 
-- [Utilities](docs/utilities.md)
-- [Settings](docs/settings.md)
-- [Tests](docs/tests.md)
+- [Getting User Input](docs/settings.md)
+- [Sketch Plugin Utilities](docs/utilities.md)
+- [Testing Your Plugin](docs/tests.md)
 
 ## CLI
 

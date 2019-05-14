@@ -1,6 +1,6 @@
-# Tests
+# Testing Your Plugin
 
-> Write and run assertion tests on your Sketch plugins
+> Write and run tests for your Sketch plugin
 
 - [**Usage**](#usage)
 - [**Test**](#test)

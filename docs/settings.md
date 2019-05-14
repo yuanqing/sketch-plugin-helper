@@ -1,6 +1,6 @@
-# Settings
+# Getting User Input
 
-> Functions to get user input via a dialog box, and to get, save, and reset plugin settings
+> Functions to obtain user input via a dialog box, and to get, save, and reset plugin settings
 
 - [**Usage**](#usage)
 - [**Get user input**](#get-user-input)

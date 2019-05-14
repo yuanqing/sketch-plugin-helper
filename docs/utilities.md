@@ -1,6 +1,6 @@
-# Utilities
+# Sketch Plugin Utilities
 
-> Helper functions and abstractions over the [Sketch API](https://github.com/BohemianCoding/SketchAPI) to ease common plugin tasks
+> Helper functions and abstractions over the [Sketch API](https://github.com/BohemianCoding/SketchAPI) to ease the most common plugin tasks
 
 - [**Document**](#document)
   - [getCurrentDocument()](#const-document--getcurrentdocument)
@@ -199,7 +199,7 @@ Finds layers with the given `name` on the current page.
 
 ### addLayersToCurrentPage(layers)
 
-Adds the given `layers` to the specified `page` of the current document. If `page` is not specified, then `layers` are added to the current page.
+Adds the given `layers` to the current page.
 
 #### *Parameters*
 
