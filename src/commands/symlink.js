@@ -5,7 +5,7 @@ import { deleteSymlink } from '../common/symlink/delete-symlink'
 
 export const symlink = {
   command: 'symlink',
-  describe: 'Adds a symbolic link to the plugin to the Sketch plugin folder',
+  describe: 'Installs the plugin as a symlink',
   builder: function (yargs) {
     yargs.option('delete', {
       alias: ['d'],

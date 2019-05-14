@@ -6,7 +6,6 @@
 - Automatically generate your plugin’s [`appcast.xml`](https://developer.sketch.com/guides/publishing-plugins/#the-appcastxml-file) and [`manifest.json`](https://developer.sketch.com/guides/plugin-bundles/#manifest) files
 - Utility functions for the most common plugin tasks
 - A prescribed, convention-over-configuration directory structure for your plugin
-- Lint and fix your plugin code with [`standard`](https://github.com/standard/standard) and [`prettier-standard`](https://github.com/sheerun/prettier-standard)
 - Make assertions on the result of running your plugin tests, including comparing the actual result against an expected Sketch file
 - All the tools you need – builder, linter, test runner – available via an intuitive CLI, bundled in a single dependency
 
@@ -23,9 +22,9 @@ $ sph create
 
 ## API
 
-- [Getting User Input](docs/settings.md)
-- [Sketch Plugin Utilities](docs/utilities.md)
-- [Testing Your Plugin](docs/tests.md)
+- [Getting User Input](docs/getting-user-input.md)
+- [Plugin Utilities](docs/plugin-utilities.md)
+- [Testing Your Plugin](docs/testing-your-plugin.md)
 
 ## CLI
 
@@ -39,9 +38,8 @@ Commands:
   sph lint            Lints the plugin implementation code
   sph run <handler>   Runs the given plugin handler in Sketch
   sph script <file>   Runs the given script in Sketch
-  sph symlink         Adds a symbolic link to the plugin to the Sketch plugin
-                      folder
-  sph test [files..]  Runs tests for the plugin
+  sph symlink         Installs the plugin as a symlink
+  sph test            Runs tests for the plugin
   sph version <type>  Updates the plugin version
 
 Options:
