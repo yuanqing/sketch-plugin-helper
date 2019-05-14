@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
-    <title>{{pluginName}}</title>
-    <link>https://raw.githubusercontent.com/{{githubUserName}}/{{githubRepositoryName}}/master/appcast.xml</link>
+    <title>{{pluginDisplayName}}</title>
+    <link>https://raw.githubusercontent.com/{{githubUserName}}/{{pluginName}}/master/appcast.xml</link>
     <description>{{pluginDescription}}</description>
     <language>en</language>
   </channel>

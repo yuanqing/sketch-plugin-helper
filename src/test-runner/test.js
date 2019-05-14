@@ -58,8 +58,16 @@ function createFileComparisonTestHandler ({
 async function runAllTests () {
   const resultsLogger = new ResultsLogger()
   try {
-    await pEachSeries(tests, async function ({ name, expectedAssertionCount, handler }) {
-      const testSuite = new TestSuite({ name, expectedAssertionCount, resultsLogger })
+    await pEachSeries(tests, async function ({
+      name,
+      expectedAssertionCount,
+      handler
+    }) {
+      const testSuite = new TestSuite({
+        name,
+        expectedAssertionCount,
+        resultsLogger
+      })
       const result = handler(testSuite)
       if (isPromise(result)) {
         await result

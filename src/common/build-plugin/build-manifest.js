@@ -15,7 +15,7 @@ export async function buildManifest ({ config, outputDirectoryPath }) {
 }
 
 async function createManifest ({
-  pluginName,
+  pluginDisplayName,
   pluginDescription,
   authorName,
   repository,
@@ -26,7 +26,7 @@ async function createManifest ({
 }) {
   const commands = []
   const menu = {
-    title: pluginName,
+    title: pluginDisplayName,
     items: []
   }
   if (menuConfig) {
@@ -45,7 +45,7 @@ async function createManifest ({
     })
   }
   return {
-    name: pluginName,
+    name: pluginDisplayName,
     description: pluginDescription,
     author: authorName,
     homepage: `https://github.com/${repository}`,

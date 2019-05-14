@@ -4,7 +4,7 @@ import { join } from 'path'
 import { readConfig } from '../read-config'
 
 export async function createSymlink () {
-  const { pluginName, pluginDirectoryPath } = await readConfig()
-  const buildPath = join(process.cwd(), `${pluginName}.sketchplugin`)
+  const { pluginDisplayName, pluginDirectoryPath } = await readConfig()
+  const buildPath = join(process.cwd(), `${pluginDisplayName}.sketchplugin`)
   return symlink(buildPath, pluginDirectoryPath)
 }

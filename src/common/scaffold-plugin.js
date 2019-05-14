@@ -9,10 +9,7 @@ mustache.escape = function (text) {
 }
 
 export async function scaffoldPlugin ({ outputDirectoryPath, config }) {
-  const pluginDirectoryPath = join(
-    outputDirectoryPath,
-    config.githubRepositoryName
-  )
+  const pluginDirectoryPath = join(outputDirectoryPath, config.pluginName)
   if (await exists(pluginDirectoryPath)) {
     return Promise.reject(
       new Error(`Directory already exists: ${pluginDirectoryPath}`)

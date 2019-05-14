@@ -17,7 +17,7 @@ export async function buildPlugin ({ development }) {
   const config = await readConfig()
   const pluginDirectoryPath = join(
     process.cwd(),
-    `${config.pluginName}.sketchplugin`
+    `${config.pluginDisplayName}.sketchplugin`
   )
   if (await exists(pluginDirectoryPath)) {
     await remove(pluginDirectoryPath)

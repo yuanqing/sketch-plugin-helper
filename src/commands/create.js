@@ -1,44 +1,9 @@
-import dashify from 'dashify'
 import gitUserName from 'git-user-name'
-import { prompt } from 'inquirer'
+import inquirer from 'inquirer'
 
 import { createErrorHandler } from '../common/create-error-handler'
 import { createLogger } from '../common/create-logger'
 import { scaffoldPlugin } from '../common/scaffold-plugin'
-
-const spaceRegularExpression = /\s+/g
-function createGithubUserName (authorName) {
-  return authorName.toLowerCase().replace(spaceRegularExpression, '')
-}
-
-const questions = [
-  {
-    type: 'input',
-    name: 'pluginName',
-    message: 'Plugin display name'
-  },
-  {
-    type: 'input',
-    name: 'pluginDescription',
-    message: 'Plugin description'
-  },
-  {
-    type: 'input',
-    name: 'authorName',
-    message: 'Author name',
-    default: function () {
-      return gitUserName()
-    }
-  },
-  {
-    type: 'input',
-    name: 'githubUserName',
-    message: 'Github user name',
-    default: function ({authorName}) {
-      return createGithubUserName(authorName)
-    }
-  }
-]
 
 export const create = {
   command: 'create <name>',
@@ -48,17 +13,56 @@ export const create = {
       type: 'string'
     })
   },
-  handler: async function ({name}) {
-    const config = await prompt(questions)
+  handler: async function ({ name }) {
+    const config = await prompt(name)
     const outputDirectoryPath = process.cwd()
     const logger = createLogger()
     await scaffoldPlugin({
       outputDirectoryPath,
       config: {
         ...config,
-        githubRepositoryName: name
+        pluginName: name
       }
     }).catch(createErrorHandler(logger))
     logger.succeed('Scaffolded new plugin')
   }
+}
+
+function prompt (name) {
+  const questions = [
+    {
+      type: 'input',
+      name: 'pluginDisplayName',
+      message: 'Plugin display name',
+      default: name
+    },
+    {
+      type: 'input',
+      name: 'pluginDescription',
+      message: 'Plugin description',
+      default: name
+    },
+    {
+      type: 'input',
+      name: 'authorName',
+      message: 'Author name',
+      default: function () {
+        return gitUserName()
+      }
+    },
+    {
+      type: 'input',
+      name: 'githubUserName',
+      message: 'Github user name',
+      default: function ({ authorName }) {
+        return createGithubUserName(authorName)
+      }
+    }
+  ]
+  return inquirer.prompt(questions)
+}
+
+const spaceRegularExpression = /\s+/g
+function createGithubUserName (authorName) {
+  return authorName.toLowerCase().replace(spaceRegularExpression, '')
 }

@@ -1,5 +1,5 @@
 export function createAppcast ({
-  pluginName,
+  pluginDisplayName,
   pluginDescription,
   repository,
   versions
@@ -19,7 +19,7 @@ export function createAppcast ({
       },
       channel: {
         title: {
-          _text: pluginName
+          _text: pluginDisplayName
         },
         link: {
           _text: `https://raw.githubusercontent.com/${repository}/master/appcast.xml`

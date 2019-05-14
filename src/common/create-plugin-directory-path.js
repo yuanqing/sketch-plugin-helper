@@ -1,13 +1,13 @@
 import { join } from 'path'
 
-export function createPluginDirectoryPath (pluginName) {
+export function createPluginDirectoryPath (pluginDisplayName) {
   return join(
     process.env.HOME,
     'Library',
     'Application Support',
     'com.bohemiancoding.sketch3',
     'Plugins',
-    `${pluginName}.sketchplugin`
+    `${pluginDisplayName}.sketchplugin`
   )
 }
 

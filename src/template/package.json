@@ -1,5 +1,5 @@
 {
-  "name": "{{githubRepositoryName}}",
+  "name": "{{pluginName}}",
   "version": "0.0.0",
   "description": "{{pluginDescription}}",
   "keywords": [
@@ -9,7 +9,7 @@
   ],
   "license": "MIT",
   "author": "{{authorName}}",
-  "repository": "{{githubUserName}}/{{githubRepositoryName}}",
+  "repository": "{{githubUserName}}/{{pluginName}}",
   "devDependencies": {
     "sketch-plugin-helper": "*"
   },
@@ -24,16 +24,12 @@
     "watch": "sketch build --watch"
   },
   "sketch-plugin-helper": {
-    "name": "{{pluginName}}",
+    "displayName": "{{pluginDisplayName}}",
     "menu": [
       {
         "handler": "hello-world",
         "label": "Hello World"
       }
-    ],
-    "defaultSettings": {
-      "greeting": "Hello",
-      "name": "{{authorName}}"
-    }
+    ]
   }
 }

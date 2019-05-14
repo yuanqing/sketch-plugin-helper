@@ -2,9 +2,9 @@ const { join } = require('path')
 
 const { packageJsonConfigKey } = require('../common/constants')
 
-module.exports = function getPluginName () {
+module.exports = function getPluginDisplayName () {
   const packageJsonPath = join(process.cwd(), 'package.json')
   const packageJson = require(packageJsonPath)
-  const { name } = packageJson[packageJsonConfigKey]
-  return name || packageJson.name
+  const { displayName } = packageJson[packageJsonConfigKey]
+  return displayName || packageJson.name
 }
