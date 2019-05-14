@@ -15,7 +15,7 @@ const questions = [
   {
     type: 'input',
     name: 'pluginName',
-    message: 'Plugin name'
+    message: 'Plugin display name'
   },
   {
     type: 'input',
@@ -37,27 +37,27 @@ const questions = [
     default: function ({authorName}) {
       return createGithubUserName(authorName)
     }
-  },
-  {
-    type: 'input',
-    name: 'githubRepositoryName',
-    message: 'Github repository name',
-    default: function ({pluginName}) {
-      return `sketch-${dashify(pluginName)}`
-    }
   }
 ]
 
 export const create = {
-  command: 'create',
+  command: 'create <name>',
   describe: 'Scaffolds a new Sketch plugin',
-  handler: async function () {
+  builder: function (yargs) {
+    yargs.positional('name', {
+      type: 'string'
+    })
+  },
+  handler: async function ({name}) {
     const config = await prompt(questions)
     const outputDirectoryPath = process.cwd()
     const logger = createLogger()
     await scaffoldPlugin({
       outputDirectoryPath,
-      config
+      config: {
+        ...config,
+        githubRepositoryName: name
+      }
     }).catch(createErrorHandler(logger))
     logger.succeed('Scaffolded new plugin')
   }
