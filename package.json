@@ -17,7 +17,7 @@
   ],
   "main": "src/api.js",
   "bin": {
-    "sph": "src/cli-esm.js"
+    "sketch": "src/cli-esm.js"
   },
   "scripts": {
     "fix": "prettier-standard 'src/**/*.js'",

@@ -9,7 +9,7 @@
 - Utility functions for the most common plugin tasks
 - A prescribed, convention-over-configuration directory structure for your plugin
 - Write plugin tests that make assertions on the result of running your plugin code, including asserting that the actual resulting Sketch file matches an expected Sketch file
-- All the tools you need – builder, linter, test runner – available via an intuitive CLI (`sph`), bundled in a single dependency
+- All the tools you need – builder, linter, test runner – available via an intuitive CLI (`sketch`), bundled in a single dependency
 
 *The above is also a list of the key differences between `sketch-plugin-helper` and [`skpm`](https://github.com/skpm/skpm).*
 
@@ -19,7 +19,7 @@ Requires [Node.js](https://nodejs.org/).
 
 ```
 $ npm i -g sketch-plugin-helper
-$ sph create
+$ sketch create
 ```
 
 ## API
@@ -31,18 +31,18 @@ $ sph create
 ## CLI
 
 ```
-$ sph --help
-sph <command>
+$ sketch --help
+sketch <command>
 
 Commands:
-  sph build           Builds the plugin
-  sph create          Scaffolds a new Sketch plugin
-  sph lint            Lints the plugin implementation code
-  sph run <handler>   Runs the given plugin handler in Sketch
-  sph script <file>   Runs the given script in Sketch
-  sph symlink         Installs the plugin as a symlink
-  sph test            Runs tests for the plugin
-  sph version <type>  Updates the plugin version
+  sketch build           Builds the plugin
+  sketch create          Scaffolds a new Sketch plugin
+  sketch lint            Lints the plugin implementation code
+  sketch run <handler>   Runs the given plugin handler in Sketch
+  sketch script <file>   Runs the given script in Sketch
+  sketch symlink         Installs the plugin as a symlink
+  sketch test            Runs tests for the plugin
+  sketch version <type>  Updates the plugin version
 
 Options:
   --help     Show help                                                 [boolean]
