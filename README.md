@@ -6,7 +6,7 @@
 - Automatically generate your plugin’s [`appcast.xml`](https://developer.sketch.com/guides/publishing-plugins/#the-appcastxml-file) and [`manifest.json`](https://developer.sketch.com/guides/plugin-bundles/#manifest) files
 - Utility functions for the most common plugin tasks
 - A prescribed, convention-over-configuration directory structure for your plugin
-- Make assertions on the result of running your plugin tests, including comparing the actual result against an expected Sketch file
+- Make assertions on the result of running your plugin tests, including asserting that the actual result matches an expected Sketch file
 - All the tools you need – builder, linter, test runner – available via an intuitive CLI, bundled in a single dependency
 
 *The above is also a list of the key feature differences between `sketch-plugin-helper` and [`skpm`](https://github.com/skpm/skpm).*
@@ -15,10 +15,14 @@
 
 Requires [Node.js](https://nodejs.org/).
 
+First:
+
 ```
 $ npm i -g sketch-plugin-helper
 $ sph create
 ```
+
+
 
 ## API
 
