@@ -1,9 +1,15 @@
+import dashify from 'dashify'
 import gitUserName from 'git-user-name'
 import { prompt } from 'inquirer'
 
 import { createErrorHandler } from '../common/create-error-handler'
 import { createLogger } from '../common/create-logger'
 import { scaffoldPlugin } from '../common/scaffold-plugin'
+
+const spaceRegularExpression = /\s+/g
+function createGithubUserName (authorName) {
+  return authorName.toLowerCase().replace(spaceRegularExpression, '')
+}
 
 const questions = [
   {
@@ -28,14 +34,17 @@ const questions = [
     type: 'input',
     name: 'githubUserName',
     message: 'Github user name',
-    default: function () {
-      return gitUserName()
+    default: function ({authorName}) {
+      return createGithubUserName(authorName)
     }
   },
   {
     type: 'input',
     name: 'githubRepositoryName',
-    message: 'Github repository name'
+    message: 'Github repository name',
+    default: function ({pluginName}) {
+      return `sketch-${dashify(pluginName)}`
+    }
   }
 ]
 
