@@ -2,7 +2,7 @@
 
 > Functions to obtain user input via a dialog box, and to get, save, and reset plugin settings
 
-- [**Usage**](#usage)
+- [Quick start](#quick-start)
 - [**Get user input**](#get-user-input)
   - [openSettingsDialog(options)](#const-result--opensettingsdialogoptions)
 - [**Get settings**](#get-settings)
@@ -14,7 +14,7 @@
 
 ---
 
-## Usage
+## Quick start
 
 Specify the `defaultSettings` for your plugin in the `sketch-plugin-helper` field of your `package.json`:
 
