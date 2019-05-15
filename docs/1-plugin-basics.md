@@ -170,7 +170,7 @@ A plugin scaffolded via `sketch create` will have the following `scripts` define
 }
 ```
 
-Each script directly utilises the `sketch` CLI:
+Each script directly utilises the `sketch` CLI (bundled with `sketch-plugin-helper`):
 
 ```
 $ sketch --help
