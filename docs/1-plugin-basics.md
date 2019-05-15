@@ -1,12 +1,13 @@
 # Plugin Basics
 
-- [Directory structure](#directory-structure)
-- [Configuration options](#configuration-options)
-  - [`displayName`](#displayname)
-  - [`menu`](#menu)
-  - [`actions`](#actions)
-  - [`defaultSettings`](#defaultsettings)
-- [CLI](#cli)
+- [**Directory structure**](#directory-structure)
+- [**Configuration options**](#configuration-options)
+  - [A note on plugin handlers](#a-note-on-plugin-handlers)
+  - [`"displayName"`](#displayname)
+  - [`"menu"`](#menu)
+  - [`"actions"`](#actions)
+  - [`"defaultSettings"`](#defaultsettings)
+- [**CLI**](#cli)
 
 ---
 
@@ -41,6 +42,12 @@ All configuration options for your plugin are specified on the **`"sketch-plugin
 
 ---
 
+### A note on plugin handlers
+
+Functions that are used as plugin `handlers` (as configured in the [**`"menu"`**](#menu) and [**`"actions"`**](#actions) keys in your `package.json`) must be the `default` export of the file.
+
+---
+
 ### `"displayName"`
 
 The name of your plugin, shown when you go to **Plugins** in the Sketch menu bar.
@@ -61,12 +68,12 @@ The name of your plugin, shown when you go to **Plugins** in the Sketch menu bar
 
 ### `"menu"`
 
-An array that specifies the plugin commands shown when we go to **Plugins › `<displayName>`** in the Sketch menu bar.
+An array that specifies the plugin menu commands shown when you go to **Plugins › `<displayName>`** in the Sketch menu bar.
 
 Each object in the array has these keys:
-- **`"handler"`** is the path to a JavaScript file in the `src` directory. (The `.js` extension can be omitted.) The `default` export of the given file is used as the handler for the plugin command.
-- **`"name"`** is the name of the plugin command.
-- **`"shortcut"`** *(optional)* is the keyboard shortcut for running the plugin command.
+- **`"handler"`** is the path to a JavaScript file in the `src` directory. (The `.js` extension can be omitted.) The `default` export of the given file is used as the handler for the menu command.
+- **`"name"`** is the name of the menu command.
+- **`"shortcut"`** *(optional)* is the keyboard shortcut for running the menu command.
 
 Use a **`"-"`** in the array to specify a separator between commands in the menu.
 
