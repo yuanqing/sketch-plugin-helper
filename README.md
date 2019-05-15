@@ -41,7 +41,7 @@ export default function () {
 
 In `package.json`, specify `hello-world` as the ***handler*** for our plugin command:
 
-```jsonc
+```diff
  {
    // ...
    "sketch-plugin-helper": {
@@ -57,7 +57,7 @@ In `package.json`, specify `hello-world` as the ***handler*** for our plugin com
  }
 ```
 
-Then, build our plugin, and install it in Sketch as a symbolic link:
+Then, build our plugin, and install the plugin in Sketch as a symbolic link:
 
 ```
 $ npm run build && npm run symlink
