@@ -18,15 +18,15 @@
 
 Specify the `defaultSettings` for your plugin in the `sketch-plugin-helper` field of your `package.json`:
 
-```
+```diff
 {
   ...
   "sketch-plugin-helper": {
     ...
-    "defaultSettings": {
-      "greeting": "Hello",
-      "name": "Alice"
-    }
++   "defaultSettings": {
++     "greeting": "Hello",
++     "name": "Alice"
++   }
   }
 }
 ```

@@ -42,19 +42,19 @@ export default function () {
 In `package.json`, specify `hello-world` as the ***handler*** for our plugin command:
 
 ```diff
- {
-   ...
-   "sketch-plugin-helper": {
-     ...
--    "menu": []
-+    "menu": [
-+      {
-+        "handler": "hello-world",
-+        "name": "Hello, World!"
-+      }
-+    ]
-   }
- }
+{
+  ...
+  "sketch-plugin-helper": {
+    ...
+-   "menu": []
++   "menu": [
++     {
++       "handler": "hello-world",
++       "name": "Hello, World!"
++     }
++   ]
+  }
+}
 ```
 
 Then, build our plugin, and install the plugin in Sketch as a symbolic link:
