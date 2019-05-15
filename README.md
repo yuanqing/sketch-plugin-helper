@@ -35,7 +35,7 @@ Next, create `src/hello-world.js` containing the following:
 import { showMessage } from 'sketch-plugin-helper'
 
 export default function () {
-  showMessage('Hello, World')
+  showMessage('Hello, World!')
 }
 ```
 
@@ -50,7 +50,7 @@ In `package.json`, specify `hello-world` as the ***handler*** for our plugin com
 +    "menu": [
 +      {
 +        "handler": "hello-world",
-+        "name": "Hello, World"
++        "name": "Hello, World!"
 +      }
 +    ]
    }
