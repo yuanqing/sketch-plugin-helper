@@ -4,7 +4,7 @@
 
 ## Features
 
-- [Get multi-field user input](docs/2-getting-user-input.md) using a concise, declarative API
+- [Get multi-field user input](docs/2-getting-user-input.md#example-1) using a concise, declarative API
 - Automatically generates your plugin’s [`appcast.xml`](https://developer.sketch.com/guides/publishing-plugins/#the-appcastxml-file) and [`manifest.json`](https://developer.sketch.com/guides/plugin-bundles/#manifest) files
 - [Utility functions](docs/3-plugin-utilities.md) and abstractions over the [Sketch API](https://github.com/BohemianCoding/SketchAPI) to ease the most common plugin tasks
 - [A prescribed, convention-over-configuration directory structure](docs/1-plugin-basics.md#directory-structure)
