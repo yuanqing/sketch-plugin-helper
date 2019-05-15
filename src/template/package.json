@@ -10,12 +10,16 @@
   "license": "MIT",
   "author": "{{authorName}}",
   "repository": "{{githubUsername}}/{{pluginName}}",
+  "files": [
+    "src"
+  ],
   "devDependencies": {
     "sketch-plugin-helper": "*"
   },
   "scripts": {
     "build": "sketch build",
     "fix": "sketch lint --fix",
+    "handler": "sketch handler",
     "lint": "sketch lint",
     "symlink": "sketch symlink",
     "test": "sketch test",
@@ -25,11 +29,6 @@
   },
   "sketch-plugin-helper": {
     "displayName": "{{pluginDisplayName}}",
-    "menu": [
-      {
-        "handler": "hello-world",
-        "label": "Hello World"
-      }
-    ]
+    "menu": []
   }
 }
