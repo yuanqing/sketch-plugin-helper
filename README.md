@@ -79,7 +79,7 @@ $ npm run watch
 
 ## Guides
 
-- [**Configuring Your Plugin**](docs/1-configuring-your-plugin.md)
+- [**Plugin Basics**](docs/1-plugin-basics.md)
 - [**Getting User Input**](docs/2-getting-user-input.md)
 - [**Plugin Utilities**](docs/3-plugin-utilities.md)
 - [**Testing Your Plugin**](docs/4-testing-your-plugin.md)

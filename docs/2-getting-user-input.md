@@ -1,7 +1,5 @@
 # Getting User Input
 
-> Learn how to obtain user input via a dialog box, and to get, save, and reset plugin settings
-
 - [**Example**](#example)
 - [**Get user input**](#get-user-input)
   - [openSettingsDialog(options)](#const-result--opensettingsdialogoptions)
