@@ -8,18 +8,65 @@
 - Automatically generate your plugin’s [`appcast.xml`](https://developer.sketch.com/guides/publishing-plugins/#the-appcastxml-file) and [`manifest.json`](https://developer.sketch.com/guides/plugin-bundles/#manifest) files
 - Utility functions for the most common plugin tasks
 - A prescribed, convention-over-configuration directory structure for your plugin
-- Write plugin tests that make assertions on the result of running your plugin code, including asserting that the actual resulting Sketch file matches an expected Sketch file
-- All the tools you need – builder, linter, test runner – available via an intuitive CLI (`sketch`), bundled in a single dependency
+- Write tests to assert that the resulting Sketch file after running your plugin code matches an expected Sketch file
+- All the tools you need – bundler, linter, test runner – bundled as a single dependency
 
 *The above is also a list of the key differences between `sketch-plugin-helper` and [`skpm`](https://github.com/skpm/skpm).*
 
 ## Quick start
 
-Requires [Node.js](https://nodejs.org/).
+To begin:
 
 ```
-$ npm i -g sketch-plugin-helper
-$ sketch create
+$ npm install --global sketch-plugin-helper
+$ sketch create sketch-hello-world
+```
+
+Enter the information prompted for. Then:
+
+```
+$ cd sketch-hello-world
+$ npm install
+```
+
+Next, create `src/hello-world.js` containing the following:
+
+```js
+import { showMessage } from 'sketch-plugin-helper'
+
+export default function () {
+  showMessage('Hello, World')
+}
+```
+
+In `package.json`, specify `hello-world` as the ***handler*** for our plugin command:
+
+```jsonc
+ {
+   // ...
+   "sketch-plugin-helper": {
+     // ...
+-    "menu": []
++    "menu": [
++      {
++        "handler": "hello-world",
++        "name": "Hello, World"
++      }
++    ]
+   }
+ }
+```
+
+Then, build our plugin, and install it in Sketch as a symbolic link:
+
+```
+$ npm run build && npm run symlink
+```
+
+Finally, open a new document in Sketch. Then, run our `hello-world` command:
+
+```
+$ npm run handler -- hello-world
 ```
 
 ## API
@@ -35,14 +82,14 @@ $ sketch --help
 sketch <command>
 
 Commands:
-  sketch build           Builds the plugin
-  sketch create <name>   Scaffolds a new Sketch plugin
-  sketch lint            Lints the plugin implementation code
-  sketch run <handler>   Runs the given plugin handler in Sketch
-  sketch script <file>   Runs the given script in Sketch
-  sketch symlink         Installs the plugin as a symlink
-  sketch test            Runs tests for the plugin
-  sketch version <type>  Updates the plugin version
+  sketch build              Builds the plugin
+  sketch create <name>      Scaffolds a new Sketch plugin
+  sketch handler <handler>  Runs the given plugin handler in Sketch
+  sketch lint               Lints the plugin implementation code
+  sketch script <file>      Runs the given script in Sketch
+  sketch symlink            Installs the plugin as a symlink
+  sketch test               Runs tests for the plugin
+  sketch version <type>     Updates the plugin version
 
 Options:
   --help     Show help                                                 [boolean]
@@ -52,7 +99,7 @@ Options:
 ## Installation
 
 ```
-$ npm i -g sketch-plugin-helper
+$ npm install --global sketch-plugin-helper
 ```
 
 ## License
