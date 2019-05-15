@@ -1,7 +1,7 @@
 import { runHandler } from '../common/run-handler'
 
-export const run = {
-  command: 'run <handler>',
+export const handler = {
+  command: 'handler <name>',
   describe: 'Runs the given plugin handler in Sketch',
   builder: function (yargs) {
     yargs.positional('handler', {
@@ -14,7 +14,7 @@ export const run = {
       type: 'boolean'
     })
   },
-  handler: async function ({ handler: handlerName, background }) {
-    return runHandler({ handlerName, shouldRunInBackground: background })
+  handler: async function ({ name, background }) {
+    return runHandler({ handlerName: name, shouldRunInBackground: background })
   }
 }
