@@ -1,15 +1,13 @@
 # Testing Your Plugin
 
-> A fuss-free way to write and run tests in Sketch
-
-- [Quick start](#quick-start)
+- [**Example**](#example)
 - [**Test**](#test)
   - [test(name, inputFilePath, expectedOutputFilePath, handler)](#testname-inputfilepath-expectedoutputfilepath-handler)
   - [test(name, expectedAssertionCount, handler)](#testname-expectedassertioncount-handler)
 
 ---
 
-## Quick start
+## Example
 
 Test files must match the glob pattern `src/**/__tests__/*.js`.
 

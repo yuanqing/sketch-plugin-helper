@@ -1,7 +1,5 @@
 # Sketch Plugin Utilities
 
-> Helper functions and abstractions over the [Sketch API](https://github.com/BohemianCoding/SketchAPI) to ease the most common plugin tasks
-
 - [**Document**](#document)
   - [getCurrentDocument()](#const-document--getcurrentdocument)
   - [openDocument(filePath)](#const-document--await-opendocumentfilepath)

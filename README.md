@@ -6,8 +6,8 @@
 
 - A concise, declarative API for obtaining multi-field user input
 - Automatically generate your plugin’s [`appcast.xml`](https://developer.sketch.com/guides/publishing-plugins/#the-appcastxml-file) and [`manifest.json`](https://developer.sketch.com/guides/plugin-bundles/#manifest) files
-- Utility functions for the most common plugin tasks
-- A prescribed, convention-over-configuration directory structure for your plugin
+- Utility functions and abstractions over the [Sketch API](https://github.com/BohemianCoding/SketchAPI) to ease the most common plugin tasks
+- A prescribed, convention-over-configuration directory structure
 - Write tests to assert that the resulting Sketch file after running your plugin code matches an expected Sketch file
 - All the tools you need – bundler, linter, test runner – bundled as a single dependency
 
@@ -29,7 +29,7 @@ $ cd sketch-hello-world
 $ npm install
 ```
 
-Next, create `src/hello-world.js` containing the following:
+Next, create a `src/hello-world.js` file containing the following:
 
 ```js
 import { showMessage } from 'sketch-plugin-helper'
@@ -39,7 +39,7 @@ export default function () {
 }
 ```
 
-In `package.json`, specify `hello-world` as the ***handler*** for our plugin command:
+In our `package.json`, specify `hello-world` as the `handler` for our plugin command:
 
 ```diff
 {
@@ -57,44 +57,32 @@ In `package.json`, specify `hello-world` as the ***handler*** for our plugin com
 }
 ```
 
-Then, build our plugin, and install the plugin in Sketch as a symbolic link:
+Then, build and install our plugin (as a symbolic link):
 
 ```
 $ npm run build && npm run symlink
 ```
 
-Finally, open a new document in Sketch. Then, run our `hello-world` command:
+Finally, open a new document in Sketch. Then run our `hello-world` command:
 
 ```
 $ npm run handler -- hello-world
 ```
 
-## API
+We should see a `Hello, World!` message appear near the bottom of the Sketch interface.
 
-- [Getting User Input](docs/getting-user-input.md)
-- [Plugin Utilities](docs/plugin-utilities.md)
-- [Testing Your Plugin](docs/testing-your-plugin.md)
-
-## CLI
+To rebuild our plugin whenever we make a change, do:
 
 ```
-$ sketch --help
-sketch <command>
-
-Commands:
-  sketch build              Builds the plugin
-  sketch create <name>      Scaffolds a new Sketch plugin
-  sketch handler <handler>  Runs the given plugin handler in Sketch
-  sketch lint               Lints the plugin implementation code
-  sketch script <file>      Runs the given script in Sketch
-  sketch symlink            Installs the plugin as a symlink
-  sketch test               Runs tests for the plugin
-  sketch version <type>     Updates the plugin version
-
-Options:
-  --help     Show help                                                 [boolean]
-  --version  Show version number                                       [boolean]
+$ npm run watch
 ```
+
+## Guides
+
+- [**Configuring Your Plugin**](docs/1-configuring-your-plugin.md)
+- [**Getting User Input**](docs/2-getting-user-input.md)
+- [**Plugin Utilities**](docs/3-plugin-utilities.md)
+- [**Testing Your Plugin**](docs/4-testing-your-plugin.md)
 
 ## Installation
 
