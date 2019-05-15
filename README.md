@@ -5,9 +5,8 @@
 ## Features
 
 - [Get multi-field user input](docs/2-getting-user-input.md#example-1) using a concise, declarative API
-- Automatically generates your plugin’s [`appcast.xml`](https://developer.sketch.com/guides/publishing-plugins/#the-appcastxml-file) and [`manifest.json`](https://developer.sketch.com/guides/plugin-bundles/#manifest) files
+- Automatically generate your plugin’s [`appcast.xml`](https://developer.sketch.com/guides/publishing-plugins/#the-appcastxml-file) and [`manifest.json`](https://developer.sketch.com/guides/plugin-bundles/#manifest) files
 - [Utility functions](docs/3-plugin-utilities.md) and abstractions over the [Sketch API](https://github.com/BohemianCoding/SketchAPI) to ease the most common plugin tasks
-- [A prescribed, convention-over-configuration directory structure](docs/1-plugin-basics.md#directory-structure)
 - [Write tests](docs/4-testing-your-plugin.md) to assert that the resulting Sketch file after running your plugin code matches an expected Sketch file
 - All the tools you need – [bundler, linter, test runner](docs/1-plugin-basics.md#cli) – bundled as a single dependency
 
@@ -39,7 +38,7 @@ export default function () {
 }
 ```
 
-In our `package.json`, specify `hello-world` as the `handler` for our plugin command:
+In our `package.json`, specify `hello-world` (the `.js` can be omitted) as the `handler` for our plugin command:
 
 ```diff
 {
