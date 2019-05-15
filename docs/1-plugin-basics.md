@@ -14,7 +14,7 @@
 
 - Plugin implementation code and tests are placed in the `src` directory.
   - Test files must match the glob pattern `src/**/__tests__/*.js`.
-- The `appcast.xml` and `*.sketchplugin` files are always regenerated whenever the plugin is built.
+- The `appcast.xml` file and the entire contents of `*.sketchplugin`, including `manifest.json`, are regenerated whenever the plugin is built. Do not manually edit these files.
 
 Looking back at [our toy example](../README.md#quick-start), we would have a directory structure that looks like so:
 
@@ -37,7 +37,7 @@ Looking back at [our toy example](../README.md#quick-start), we would have a dir
 
 ## Configuration options
 
-All configuration options for your plugin are specified on the **`"sketch-plugin-helper"`** key of the `package.json` file.
+All configuration options for your plugin are specified on the **`"sketch-plugin-helper"`** key of your `package.json` file.
 
 ---
 
@@ -143,7 +143,7 @@ An object that specifies the default settings for your plugin.
 
 ## CLI
 
-A plugin scaffolded with `sketch create` will have the following `scripts` defined in its `package.json` file:
+A plugin scaffolded via `sketch create` will have the following `scripts` defined in its `package.json` file:
 
 ```diff
 {
