@@ -38,7 +38,9 @@ export default function () {
 }
 ```
 
-In our `package.json`, specify `hello-world` (the `.js` can be omitted) as the `handler` for our plugin command:
+Note that our plugin handler must be the `default` export of the file.
+
+Then, in our `package.json`, use `src/hello-world.js` (stated as `hello-world` after omitting the `src/` and `.js`) as the `handler` for our plugin command:
 
 ```diff
 {
@@ -56,19 +58,19 @@ In our `package.json`, specify `hello-world` (the `.js` can be omitted) as the `
 }
 ```
 
-Then, build and install our plugin (as a symbolic link):
+Then, build our plugin, and install the plugin as a symbolic link:
 
 ```
 $ npm run build && npm run symlink
 ```
 
-Finally, open a new document in Sketch. Then run our `hello-world` command:
+Finally, open a new document in Sketch. Then, run our `hello-world` command:
 
 ```
 $ npm run handler -- hello-world
 ```
 
-We should see a `Hello, World!` message appear near the bottom of the Sketch interface.
+You should see a `Hello, World!` message appear near the bottom of the Sketch interface.
 
 To rebuild our plugin whenever we make a change, do:
 
