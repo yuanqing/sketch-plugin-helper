@@ -1,4 +1,8 @@
-import { getLayersOnAllPages, getLayersOnCurrentPage } from './layer'
+import {
+  getLayersOnAllPages,
+  getLayersOnCurrentPage,
+  getSelectedLayers
+} from './layer'
 
 export function getArtboardsOnAllPages () {
   return getLayersOnAllPages().filter(filterArtboardsCallback)
