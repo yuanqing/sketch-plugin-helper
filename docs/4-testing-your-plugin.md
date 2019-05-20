@@ -32,15 +32,14 @@ Running the `sketch test` command will run our test in Sketch, and give the foll
 
 ```
 $ sketch test
+[INFO] Running tests…
 TAP version 13
 # foo
 ok 1
 1..1
-
 # tests 1
 # pass  1
-
-# ok
+[SUCCESS] Tests passed
 ```
 
 ---
