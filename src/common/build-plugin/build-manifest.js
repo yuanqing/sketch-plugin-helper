@@ -106,7 +106,7 @@ function parseActionsConfig ({ actionsConfig, pluginIdentifier, commands }) {
     const identifier = createActionIdentifier({
       pluginIdentifier,
       handlerName: name,
-      actionName: actionConfig.action
+      actionName: actionConfig.name
     })
     const command = {
       name,
@@ -114,7 +114,7 @@ function parseActionsConfig ({ actionsConfig, pluginIdentifier, commands }) {
       script: bundleFileName,
       handlers: {
         actions: {
-          [actionConfig.action]: actionConfig.handler
+          [actionConfig.name]: actionConfig.handler
         }
       }
     }
