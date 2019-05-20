@@ -14,6 +14,8 @@
 
 ## Quick start
 
+*Requires [Node.js](https://nodejs.org/).*
+
 To begin:
 
 ```
@@ -40,7 +42,7 @@ export default function () {
 
 Note that our plugin handler must be the `default` export of the file.
 
-Then, in our `package.json`, use `src/hello-world.js` (stated as `hello-world` after omitting the `src/` and `.js`) as the `handler` for our plugin command:
+Then, in our `package.json`, specify `src/hello-world.js` (stated as `hello-world` after omitting the `src/` and `.js`) as the `handler` for our plugin command:
 
 ```diff
 {

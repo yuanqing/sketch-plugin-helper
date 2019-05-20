@@ -1,4 +1,4 @@
-# Sketch Plugin Utilities
+# Plugin Utilities
 
 - [**Document**](#document)
   - [getCurrentDocument()](#const-document--getcurrentdocument)

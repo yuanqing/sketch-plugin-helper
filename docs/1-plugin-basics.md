@@ -66,7 +66,7 @@ An array that specifies the menu commands shown for your plugin when you go to *
 Each object in the array has these keys:
 - **`"handler"`** is the path to a JavaScript file in the `src` directory. (The `src/` and `.js` must be omitted.) The handler for the menu command must be the `default` export of the given file.
 - **`"name"`** is the name of the menu command.
-- **`"shortcut"`** *(optional)* is the keyboard shortcut for running the menu command.
+- **`"shortcut"`** *(optional)* is the [keyboard shortcut](https://developer.sketch.com/guides/plugin-bundles/#shortcut) for running the menu command.
 
 Use a **`"-"`** in the array to specify a separator between commands in the menu.
 
@@ -92,11 +92,11 @@ Use a **`"-"`** in the array to specify a separator between commands in the menu
 
 ### `"actions"`
 
-An array that specifies the handlers to run in response to Sketch [Actions](https://developer.sketch.com/reference/action/).
+An array that specifies the handlers to run in response to a Sketch [Action](https://developer.sketch.com/reference/action/).
 
 Each object in the array has these keys:
-- **`"handler"`** is the path to a JavaScript file in the `src` directory. (The `src/` and `.js` must be omitted.) The function run in response to the Sketch Action must be the `default` export of the given file.
-- **`"name"`** is the name of the Sketch Action.
+- **`"handler"`** is the path to a JavaScript file in the `src` directory. (The `src/` and `.js` must be omitted.) The function run in response to the Action must be the `default` export of the given file.
+- **`"name"`** is the name of the [Action](https://developer.sketch.com/reference/action/).
 
 #### *Example*
 
