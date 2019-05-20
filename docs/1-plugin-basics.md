@@ -43,7 +43,7 @@ All configuration options for your plugin are specified on the **`"sketch-plugin
 
 ### `"name"`
 
-The name of your plugin, shown when you go to **Plugins** in the Sketch menu bar.
+The display name of your plugin, shown when you go to **Plugins** in the Sketch menu bar.
 
 #### *Example*
 
@@ -51,7 +51,7 @@ The name of your plugin, shown when you go to **Plugins** in the Sketch menu bar
 {
   ...
   "sketch-plugin-helper": {
-+   "name": "Hello, World",
++   "name": "Hello, World!",
     ...
   }
 }
@@ -80,7 +80,7 @@ Use a **`"-"`** in the array to specify a separator between commands in the menu
 +   "menu": [
 +     {
 +       "handler": "hello-world",
-+       "name": "Hello, World"
++       "name": "Hello, World!"
 +     }
 +   ],
     ...
@@ -153,6 +153,7 @@ A plugin scaffolded via `sketch create` will have the following `scripts` define
 +   "fix": "sketch lint --fix",
 +   "handler": "sketch handler",
 +   "lint": "sketch lint",
++   "script": "sketch script",
 +   "symlink": "sketch symlink",
 +   "test": "sketch test",
 +   "unlink": "sketch symlink --delete",
