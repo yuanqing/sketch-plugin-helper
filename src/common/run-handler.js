@@ -2,7 +2,7 @@ import { runPluginCommand } from './run-plugin-command'
 import { readConfig } from './read-config'
 import { createCommandIdentifier } from './create-identifier'
 
-export async function runHandler ({ handlerName, shouldRunInBackground }) {
+export async function runHandler (handlerName) {
   const { pluginDirectoryPath, pluginIdentifier } = await readConfig()
   const commandIdentifier = createCommandIdentifier({
     pluginIdentifier,
@@ -10,7 +10,6 @@ export async function runHandler ({ handlerName, shouldRunInBackground }) {
   })
   return runPluginCommand({
     pluginDirectoryPath,
-    commandIdentifier,
-    shouldRunInBackground
+    commandIdentifier
   })
 }

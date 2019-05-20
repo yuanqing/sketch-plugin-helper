@@ -1,4 +1,6 @@
 import { runHandler } from '../common/run-handler'
+import * as log from '../common/log'
+import { errorHandler } from '../common/error-handler'
 
 export const handler = {
   command: 'handler <name>',
@@ -7,14 +9,10 @@ export const handler = {
     yargs.positional('handler', {
       type: 'string'
     })
-    yargs.option('background', {
-      alias: ['b'],
-      default: false,
-      describe: 'Whether to run the plugin in the background',
-      type: 'boolean'
-    })
   },
-  handler: async function ({ name, background }) {
-    return runHandler({ handlerName: name, shouldRunInBackground: background })
+  handler: async function ({ name }) {
+    await runHandler(name).catch(errorHandler)
+    log.success('Ran plugin handler')
+    return Promise.resolve()
   }
 }

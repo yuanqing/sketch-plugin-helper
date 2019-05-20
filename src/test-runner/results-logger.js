@@ -18,14 +18,11 @@ export class ResultsLogger {
   }
   logResultsSummary () {
     console.log(`1..${this.count}`)
-    console.log(`\n# tests ${this.count}`)
+    console.log(`# tests ${this.count}`)
     console.log(`# pass  ${this.passCount}`)
     const failCount = this.count - this.passCount
-    if (this.count === 0 || failCount > 0) {
+    if (failCount !== 0) {
       console.log(`# fail  ${failCount}`)
-      console.log('\n# not ok\n')
-    } else {
-      console.log('\n# ok\n')
     }
   }
 }

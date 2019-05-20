@@ -1,6 +1,6 @@
-import { createLogger } from '../common/create-logger'
-import { createErrorHandler } from '../common/create-error-handler'
 import { updateVersion } from '../common/update-version'
+import * as log from '../common/log'
+import { errorHandler } from '../common/error-handler'
 
 export const version = {
   command: 'version <type>',
@@ -12,10 +12,8 @@ export const version = {
     })
   },
   handler: async function ({ type }) {
-    const logger = createLogger()
-    logger.loading('Updating version...')
-    await updateVersion(type).catch(createErrorHandler(logger))
-    logger.succeed('Updated version')
+    await updateVersion(type).catch(errorHandler)
+    log.success('Updated version')
     return Promise.resolve()
   }
 }

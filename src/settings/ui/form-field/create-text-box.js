@@ -1,3 +1,3 @@
 import { textBoxFactory } from './text-box-factory'
 
-export const createStringTextBox = textBoxFactory()
+export const createTextBox = textBoxFactory()

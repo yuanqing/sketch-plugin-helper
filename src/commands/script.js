@@ -1,4 +1,6 @@
 import { runScript } from '../common/run-script'
+import * as log from '../common/log'
+import { errorHandler } from '../common/error-handler'
 
 export const script = {
   command: 'script <file>',
@@ -9,6 +11,8 @@ export const script = {
     })
   },
   handler: async function ({ file }) {
-    return runScript(file)
+    await runScript([file]).catch(errorHandler)
+    log.success('Ran script')
+    return Promise.resolve()
   }
 }

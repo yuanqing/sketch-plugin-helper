@@ -2,7 +2,7 @@
 
 - [**Directory structure**](#directory-structure)
 - [**Configuration options**](#configuration-options)
-  - [`"displayName"`](#displayname)
+  - [`"name"`](#name)
   - [`"menu"`](#menu)
   - [`"actions"`](#actions)
   - [`"defaultSettings"`](#defaultsettings)
@@ -41,7 +41,7 @@ All configuration options for your plugin are specified on the **`"sketch-plugin
 
 ---
 
-### `"displayName"`
+### `"name"`
 
 The name of your plugin, shown when you go to **Plugins** in the Sketch menu bar.
 
@@ -51,7 +51,7 @@ The name of your plugin, shown when you go to **Plugins** in the Sketch menu bar
 {
   ...
   "sketch-plugin-helper": {
-+   "displayName": "Hello, World",
++   "name": "Hello, World",
     ...
   }
 }
@@ -61,7 +61,7 @@ The name of your plugin, shown when you go to **Plugins** in the Sketch menu bar
 
 ### `"menu"`
 
-An array that specifies the menu commands shown for your plugin when you go to **Plugins › `<displayName>`** in the Sketch menu bar.
+An array that specifies the menu commands shown for your plugin when you go to **Plugins › `<name>`** in the Sketch menu bar.
 
 Each object in the array has these keys:
 - **`"handler"`** is the path to a JavaScript file in the `src` directory. (The `src/` and `.js` must be omitted.) The handler for the menu command must be the `default` export of the given file.

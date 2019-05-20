@@ -1,20 +1,20 @@
 import { createAlert } from './ui/create-alert'
 import { createDivider } from './ui/create-divider'
 import { createLabel } from './ui/create-label'
-import * as createInput from './ui/input/create-input'
+import * as createFormField from './ui/form-field/create-form-field'
 import { getSettings } from './get-settings'
 import { flattenObject } from './nested-object/flatten-object'
 import { unflattenObject } from './nested-object/unflatten-object'
 
 const width = 300
 
-export function openSettingsDialog ({ title, inputs: inputsConfig }) {
+export function openSettingsDialog ({ title, formFields }) {
   const settings = flattenObject(getSettings())
   const { formView, retrieveValues } = createFormView({
-    inputsConfig: inputsConfig.filter(Boolean),
+    formFieldsConfig: formFields.filter(Boolean),
     settings
   })
-  const alert = createAlert(title)
+  const alert = createAlert(title || 'Settings')
   alert.setAccessoryView(formView)
   const subviews = formView.subviews()
   if (subviews[0]) {
@@ -33,13 +33,13 @@ export function openSettingsDialog ({ title, inputs: inputsConfig }) {
   return null
 }
 
-function createFormView ({ inputsConfig, settings }) {
+function createFormView ({ formFieldsConfig, settings }) {
   const formView = NSView.alloc().init()
   formView.setFlipped(true)
   const retrieveValues = {}
   let y = 0
-  inputsConfig.forEach(function (inputConfig) {
-    if (inputConfig === '-') {
+  formFieldsConfig.forEach(function (formFieldConfig) {
+    if (formFieldConfig === '-') {
       const { view, height } = createDivider({
         width,
         y
@@ -48,7 +48,13 @@ function createFormView ({ inputsConfig, settings }) {
       formView.addSubview(view)
       return
     }
-    const { type, key, label, value: inputsConfigValue, ...rest } = inputConfig
+    const {
+      type,
+      key,
+      label,
+      value: formFieldConfigValue,
+      ...rest
+    } = formFieldConfig
     if (label && type !== 'CHECK_BOX') {
       // Create a label for forms that aren't check boxes
       const { view, height } = createLabel({
@@ -61,8 +67,8 @@ function createFormView ({ inputsConfig, settings }) {
     }
     const settingsSavedValue = settings[key]
     const value =
-      inputsConfigValue != null ? inputsConfigValue : settingsSavedValue
-    const { view, height, retrieveValue } = createInput[type]({
+      formFieldConfigValue != null ? formFieldConfigValue : settingsSavedValue
+    const { view, height, retrieveValue } = createFormField[type]({
       width,
       y,
       label,

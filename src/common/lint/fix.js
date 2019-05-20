@@ -1,11 +1,6 @@
-import execa from 'execa'
-import { join } from 'path'
-
-import { sourceDirectory } from '../constants'
+import { executeShellCommand } from '../execute-shell-command'
+import { sourceGlobPattern } from '../constants'
 
 export async function fix () {
-  const sourceFilesGlob = join(sourceDirectory, '/**/*.js')
-  return execa('prettier-standard', [sourceFilesGlob]).stdout.pipe(
-    process.stdout
-  )
+  return executeShellCommand('prettier-standard', [sourceGlobPattern])
 }

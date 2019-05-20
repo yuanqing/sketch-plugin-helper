@@ -1,8 +1,8 @@
 import { buildPlugin } from '../common/build-plugin/build-plugin'
-import { createErrorHandler } from '../common/create-error-handler'
-import { createLogger } from '../common/create-logger'
-import { exec } from '../common/exec'
+import { executeShellCommand } from '../common/execute-shell-command'
 import { watchSourceDirectory } from '../common/watch-source-directory'
+import * as log from '../common/log'
+import { errorHandler } from '../common/error-handler'
 
 export const build = {
   command: 'build',
@@ -24,31 +24,35 @@ export const build = {
       default: null
     })
   },
-  handler: async function ({ development, watch, command }) {
-    const logger = createLogger()
-    const errorHandler = createErrorHandler(logger)
-    async function build () {
-      logger.loading('Building...')
+  handler: function ({ development, watch, command }) {
+    async function build (shouldClearLine) {
+      log.info('Building…')
       await buildPlugin({ development: development || watch }).catch(
         errorHandler
       )
-      command && (await exec(command))
-      logger.succeed('Built')
+      if (command) {
+        await executeShellCommand(command).catch(errorHandler)
+      }
+      if (shouldClearLine) {
+        log.clearLine()
+      }
+      log.success('Built')
+      return Promise.resolve()
     }
     if (watch) {
       return watchSourceDirectory({
         onReady: async function () {
-          await build()
-          logger.loading('Watching...')
+          await build(true)
+          log.info('Watching…')
         },
         onChange: async function () {
-          logger.info('Change detected')
-          await build()
-          logger.loading('Watching...')
+          log.clearLine() // 'Built'
+          log.clearLine() // 'Watching…'
+          await build(true)
+          log.info('Watching…')
         }
       })
     }
-    await build()
-    return Promise.resolve()
+    return build(false)
   }
 }

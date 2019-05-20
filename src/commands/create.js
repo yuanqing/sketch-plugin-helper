@@ -1,9 +1,7 @@
-import gitUserName from 'git-user-name'
-import inquirer from 'inquirer'
-
-import { createErrorHandler } from '../common/create-error-handler'
-import { createLogger } from '../common/create-logger'
-import { scaffoldPlugin } from '../common/scaffold-plugin'
+import { showPrompt } from '../common/scaffold-plugin/show-prompt'
+import { scaffoldPlugin } from '../common/scaffold-plugin/scaffold-plugin'
+import * as log from '../common/log'
+import { errorHandler } from '../common/error-handler'
 
 export const create = {
   command: 'create <name>',
@@ -14,55 +12,18 @@ export const create = {
     })
   },
   handler: async function ({ name }) {
-    const config = await prompt(name)
+    const config = await showPrompt(name)
     const outputDirectoryPath = process.cwd()
-    const logger = createLogger()
+    log.info('Scaffolding new plugin…')
     await scaffoldPlugin({
       outputDirectoryPath,
       config: {
         ...config,
         pluginName: name
       }
-    }).catch(createErrorHandler(logger))
-    logger.succeed('Scaffolded new plugin')
+    }).catch(errorHandler)
+    log.clearLine()
+    log.success('Scaffolded new plugin')
+    return Promise.resolve()
   }
-}
-
-function prompt (name) {
-  const questions = [
-    {
-      type: 'input',
-      name: 'pluginDisplayName',
-      message: 'Plugin display name',
-      default: name
-    },
-    {
-      type: 'input',
-      name: 'pluginDescription',
-      message: 'Plugin description',
-      default: name
-    },
-    {
-      type: 'input',
-      name: 'authorName',
-      message: 'Author name',
-      default: function () {
-        return gitUserName()
-      }
-    },
-    {
-      type: 'input',
-      name: 'githubUsername',
-      message: 'Github username',
-      default: function ({ authorName }) {
-        return createGithubUsername(authorName)
-      }
-    }
-  ]
-  return inquirer.prompt(questions)
-}
-
-const spaceRegularExpression = /\s+/g
-function createGithubUsername (authorName) {
-  return authorName.toLowerCase().replace(spaceRegularExpression, '')
 }

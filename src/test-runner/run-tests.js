@@ -6,5 +6,5 @@ import { testsGlobPattern } from '../common/constants'
 
 export async function runTests () {
   const entryFilePaths = await globby(join(process.cwd(), testsGlobPattern))
-  await runScript(entryFilePaths)
+  return runScript(entryFilePaths)
 }

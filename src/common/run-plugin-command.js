@@ -1,4 +1,4 @@
-import { spawn } from 'child_process'
+import execa from 'execa'
 import { join } from 'path'
 
 const sketchtoolBinaryPath = join(
@@ -12,38 +12,49 @@ const sketchtoolBinaryPath = join(
   'sketchtool'
 )
 
-export function runPluginCommand ({
+// `runPluginCommand` is an internal module called by `run-handler` and `run-script`
+export async function runPluginCommand ({
   pluginDirectoryPath,
-  commandIdentifier,
-  shouldRunInBackground
+  commandIdentifier
 }) {
-  return new Promise(function (resolve, reject) {
-    const child = spawn(sketchtoolBinaryPath, [
-      'run',
-      pluginDirectoryPath,
-      commandIdentifier,
-      ...[shouldRunInBackground && '--without-activating']
-    ])
-    child.stdout.on('data', function (chunk) {
-      console.log(stripQuotes(chunk.toString()))
-    })
-    child.stderr.pipe(process.stderr)
-    child.on('exit', resolve)
-    child.on('error', reject)
-  })
+  const { stdout } = await execa(sketchtoolBinaryPath, [
+    'run',
+    pluginDirectoryPath,
+    commandIdentifier
+  ])
+  const output = stripQuotes(stdout)
+  if (output.length !== 0) {
+    console.log(output)
+  }
+  if (hasError(output)) {
+    return Promise.reject(new Error('Error'))
+  }
+  if (hasTestFailure(output)) {
+    return Promise.reject(new Error('Test failed'))
+  }
+  return Promise.resolve()
 }
 
-const QUOTE_PREFIX = /^'/g
-const QUOTE_POSTFIX = /'$/g
-const QUOTE_BEFORE_NEWLINE = /'\n/g
-const QUOTE_AFTER_NEWLINE = /\n'/g
-const ESCAPED_NEWLINE = /\\n/g
-
+const quotePrefixRegularExpression = /^'/g
+const quotePostfixRegularExpression = /'$/g
+const quoteBeforeNewlineRegularExpression = /'\n/g
+const quoteAfterNewlineRegularExpression = /\n'/g
+const escapedNewlineRegularExpression = /\\n/g
 function stripQuotes (string) {
   return string
-    .replace(QUOTE_PREFIX, '')
-    .replace(QUOTE_POSTFIX, '')
-    .replace(QUOTE_BEFORE_NEWLINE, '\n')
-    .replace(QUOTE_AFTER_NEWLINE, '\n')
-    .replace(ESCAPED_NEWLINE, '\n')
+    .replace(quotePrefixRegularExpression, '')
+    .replace(quotePostfixRegularExpression, '')
+    .replace(quoteBeforeNewlineRegularExpression, '\n')
+    .replace(quoteAfterNewlineRegularExpression, '\n')
+    .replace(escapedNewlineRegularExpression, '\n')
+}
+
+const errorRegularExpression = /^Error: /g
+function hasError (output) {
+  return errorRegularExpression.test(output)
+}
+
+const failCountRegularExpression = /# fail\s+\d+/
+function hasTestFailure (output) {
+  return failCountRegularExpression.test(output)
 }

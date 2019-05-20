@@ -68,14 +68,14 @@ function parseMenuConfig ({ menuConfig, pluginIdentifier, commands, menu }) {
     }
     // menu item
     if (menuItem.handler) {
-      const { label, handler, shortcut } = menuItem
+      const { name, handler, shortcut } = menuItem
       const identifier = createCommandIdentifier({
         pluginIdentifier,
         handlerName: handler
       })
       menu.items.push(identifier)
       const command = {
-        name: label,
+        name,
         identifier,
         script: bundleFileName,
         shortcut,

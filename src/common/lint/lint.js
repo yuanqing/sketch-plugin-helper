@@ -1,14 +1,13 @@
-import execa from 'execa'
-import { join, resolve } from 'path'
+import { resolve } from 'path'
 
-import { sourceDirectory } from '../constants'
+import { executeShellCommand } from '../execute-shell-command'
+import { sourceGlobPattern } from '../constants'
 
-export async function lint () {
+export function lint () {
   const eslintConfigPath = resolve(__dirname, '..', '..', '.eslintrc.json')
-  const sourceFilesGlob = join(sourceDirectory, '/**/*.js')
-  return execa('eslint', [
+  return executeShellCommand('eslint', [
     '--config',
     eslintConfigPath,
-    sourceFilesGlob
-  ]).stdout.pipe(process.stdout)
+    sourceGlobPattern
+  ])
 }

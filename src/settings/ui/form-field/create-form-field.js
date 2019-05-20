@@ -4,7 +4,4 @@ export { createRadioButtons as RADIO_BUTTONS } from './create-radio-buttons'
 export {
   createNumericTextBox as NUMERIC_TEXT_BOX
 } from './create-numeric-text-box'
-export {
-  createStringTextBox as STRING_TEXT_BOX
-} from './create-string-text-box'
-export { createTextBox as TEXT_BOX } from './create-string-text-box'
+export { createTextBox as TEXT_BOX } from './create-text-box'

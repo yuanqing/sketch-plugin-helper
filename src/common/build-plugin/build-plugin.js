@@ -27,20 +27,21 @@ export async function buildPlugin ({ development }) {
     pluginDirectoryPath
   )
   const entryFilePath = await writeEntryFile(config)
-  await Promise.all([
-    await buildAppcast(config),
-    await buildBundle({
+  return Promise.all([
+    buildAppcast(config),
+    buildBundle({
       development,
       entryFilePaths: [entryFilePath],
       outputDirectoryPath: innerDirectoryPath
     }),
-    await buildManifest({
+    buildManifest({
       config,
       outputDirectoryPath: innerDirectoryPath
     }),
-    await copyResources(resourcesDirectoryPath)
-  ])
-  return remove(entryFilePath)
+    copyResources(resourcesDirectoryPath)
+  ]).finally(function () {
+    return remove(entryFilePath)
+  })
 }
 
 function writeEntryFile (config) {

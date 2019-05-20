@@ -36,7 +36,11 @@ export function test (...args) {
   }
   if (!isQueued) {
     isQueued = true
-    setTimeout(runAllTests, 0)
+    setTimeout(async function () {
+      await runAllTests().catch(function (error) {
+        throw error
+      })
+    }, 0)
   }
 }
 
@@ -57,27 +61,26 @@ function createFileComparisonTestHandler ({
 
 async function runAllTests () {
   const resultsLogger = new ResultsLogger()
-  try {
-    await pEachSeries(tests, async function ({
+  await pEachSeries(tests, async function ({
+    name,
+    expectedAssertionCount,
+    handler
+  }) {
+    const testSuite = new TestSuite({
       name,
       expectedAssertionCount,
-      handler
-    }) {
-      const testSuite = new TestSuite({
-        name,
-        expectedAssertionCount,
-        resultsLogger
-      })
-      const result = handler(testSuite)
-      if (isPromise(result)) {
-        await result
-      }
-      testSuite.checkAssertionCounts()
-      return Promise.resolve()
+      resultsLogger
     })
-  } catch (error) {
-    throw error
-  } finally {
+    const result = handler(testSuite)
+    if (isPromise(result)) {
+      await result
+    }
+    testSuite.checkAssertionCounts()
+    return Promise.resolve()
+  }).finally(function () {
     resultsLogger.logResultsSummary()
-  }
+    if (resultsLogger.isFail()) {
+      throw new Error('Tests failed')
+    }
+  })
 }

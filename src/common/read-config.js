@@ -17,7 +17,7 @@ export async function readConfig () {
     : null
   return {
     pluginName: packageJson.name,
-    pluginDisplayName: sketchPluginHelperConfig.displayName,
+    pluginDisplayName: sketchPluginHelperConfig.name,
     pluginDescription: packageJson.description,
     authorName: packageJson.author,
     repository: packageJson.repository,
@@ -26,7 +26,7 @@ export async function readConfig () {
       '.'
     ),
     pluginDirectoryPath: createPluginDirectoryPath(
-      sketchPluginHelperConfig.displayName
+      sketchPluginHelperConfig.name
     ),
     versions: appcastVersions || [packageJson.version],
     menuConfig: sketchPluginHelperConfig.menu,

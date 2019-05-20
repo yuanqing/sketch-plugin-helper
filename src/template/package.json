@@ -21,6 +21,7 @@
     "fix": "sketch lint --fix",
     "handler": "sketch handler",
     "lint": "sketch lint",
+    "script": "sketch script",
     "symlink": "sketch symlink",
     "test": "sketch test",
     "unlink": "sketch symlink --delete",
@@ -28,7 +29,7 @@
     "watch": "sketch build --watch"
   },
   "sketch-plugin-helper": {
-    "displayName": "{{pluginDisplayName}}",
+    "name": "{{pluginDisplayName}}",
     "menu": []
   }
 }

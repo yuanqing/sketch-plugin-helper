@@ -16,29 +16,27 @@ const outputDirectoryPath = createPluginInnerDirectoryPath(pluginDirectoryPath)
 
 export async function runScript (entryFilePaths) {
   const uuid = createUuid()
-  try {
-    await Promise.all([
-      buildBundle({
-        isDevelopment: true,
-        entryFilePaths,
-        outputDirectoryPath,
-        library: uuid
-      }),
-      buildManifest({
-        outputDirectoryPath,
-        identifier: uuid
-      })
-    ])
-    await runPluginCommand({
-      pluginDirectoryPath,
-      commandIdentifier: uuid,
-      shouldRunInBackground: false
+  return Promise.all([
+    buildBundle({
+      isDevelopment: true,
+      entryFilePaths,
+      outputDirectoryPath,
+      library: uuid
+    }),
+    buildManifest({
+      outputDirectoryPath,
+      identifier: uuid
     })
-  } catch (error) {
-    throw error
-  } finally {
-    await remove(pluginDirectoryPath)
-  }
+  ])
+    .then(function () {
+      return runPluginCommand({
+        pluginDirectoryPath,
+        commandIdentifier: uuid
+      })
+    })
+    .finally(function () {
+      return remove(pluginDirectoryPath)
+    })
 }
 
 function createUuid () {

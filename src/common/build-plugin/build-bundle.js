@@ -1,4 +1,4 @@
-import { join } from 'path'
+import { join, resolve } from 'path'
 import webpack from 'webpack'
 import TerserPlugin from 'terser-webpack-plugin'
 
@@ -20,7 +20,9 @@ export async function buildBundle ({
   const mode = development ? 'development' : 'production'
   const webpackConfig = {
     mode,
-    entry: entryFilePaths,
+    entry: entryFilePaths.map(function (entryFilePath) {
+      return resolve(entryFilePath)
+    }),
     output: {
       path: outputDirectoryPath,
       filename: bundleFileName,
@@ -70,13 +72,15 @@ export async function buildBundle ({
   }
   return new Promise(function (resolve, reject) {
     webpack(webpackConfig, async function (error, stats) {
-      if (error) {
-        console.error(error.details)
-      }
       if (stats.hasErrors()) {
-        console.error(stats.toJson())
+        reject(stats.toJson().errors.join('\n'))
+        return
       }
-      stats.hasErrors() ? reject(stats.toString()) : resolve()
+      if (error) {
+        reject(error)
+        return
+      }
+      resolve()
     })
   })
 }
