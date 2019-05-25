@@ -1,3 +1,5 @@
+[![sketch-plugin-helper](/media/sketch-plugin-helper.png)](#quick-start)
+
 # sketch-plugin-helper [![npm Version](https://badgen.net/npm/v/sketch-plugin-helper)](https://www.npmjs.org/package/sketch-plugin-helper)
 
 > A batteries-included toolkit for making [Sketch](https://www.sketch.com/) plugins
