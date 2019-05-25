@@ -19,7 +19,7 @@ export async function scaffoldPlugin ({ outputDirectoryPath, config }) {
 }
 
 async function buildPluginDirectory ({ pluginDirectoryPath, config }) {
-  const templateDirectoryPath = resolve(__dirname, '..', 'template')
+  const templateDirectoryPath = resolve(__dirname, 'template')
   const filePaths = await recursiveReaddir(templateDirectoryPath)
   return Promise.all(
     filePaths.map(async function (filePath) {
