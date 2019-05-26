@@ -1,17 +1,20 @@
 # Motivation
 
-- [**Challenges and solutions**](#challenges-and-solutions)
-  - [1. Manually managing `manifest.json` and `appcast.xml`](#1-manually-managing-manifestjson-and-appcastxml)
-  - [2. Creating UI to get user input](#2-creating-ui-to-get-user-input)
-  - [3. Performing common plugin tasks](#3-performing-common-plugin-tasks)
-  - [4. Writing plugin tests](#4-writing-plugin-tests)
-- [**Philosophy**](#philosophy)
+- [**Problems and solutions**](#problems-and-solutions)
+  - [1. Manually managing `manifest.json` and `appcast.xml` is error-prone](#1-manually-managing-manifestjson-and-appcastxml-is-error-prone)
+  - [2. Creating UI for user input is a non-trivial endeavour](#2-creating-ui-for-user-input-is-a-non-trivial-endeavour)
+  - [3. Common plugin tasks require boilerplate code](#3-common-plugin-tasks-require-boilerplate-code)
+  - [4. Plugin tests can be tedious to write](#4-plugin-tests-can-be-tedious-to-write)
 
 ---
 
-## Challenges and solutions
+## Problems and solutions
 
-### 1. Manually managing `manifest.json` and `appcast.xml`
+Sketch Plugin Helper is an intended to be an end-to-end, integrated toolkit to address the following problems.
+
+---
+
+### 1. Manually managing `manifest.json` and `appcast.xml` is error-prone
 
 Plugin configuration and metadata is distributed across `package.json`, [`manifest.json`](https://developer.sketch.com/plugins/plugin-manifest) and [`appcast.xml`](https://developer.sketch.com/plugins/update-a-plugin). All three files need to be manually managed, even though some information (eg. the plugin name, description, and version) is duplicated between the files. Changing the plugin configuration or releasing a new version of a Sketch plugin is tedious and error-prone.
 
@@ -24,9 +27,9 @@ See [**Plugin Basics**](2-plugin-basics.md).
 
 ---
 
-### 2. Creating UI to get user input
+### 2. Creating UI for user input is a non-trivial endeavour
 
-Sketch only provides [a quite rudimentary API for getting user input](https://developer.sketch.com/reference/api/#get-an-input-from-the-user). Anything more elaborate than a text box or drop down menu will need to be [written from scratch, using imperative APIs](https://journal.yummygum.com/the-simple-guide-to-getting-user-input-for-your-sketch-plugin-part-ii-3375153e063d). Without a higher-level API, UI code is repeatedly reimplemented across the Sketch plugin ecosystem.
+Sketch only provides [a rudimentary API for getting user input](https://developer.sketch.com/reference/api/#get-an-input-from-the-user). Anything more elaborate than a text box or drop down menu will need to be [written from scratch, using imperative APIs](https://journal.yummygum.com/the-simple-guide-to-getting-user-input-for-your-sketch-plugin-part-ii-3375153e063d). Without a higher-level API, UI code is repeatedly reimplemented across the Sketch plugin ecosystem.
 
 #### Solution
 
@@ -36,9 +39,9 @@ See [**Getting User Input**](3-getting-user-input.md).
 
 ---
 
-### 3. Performing common plugin tasks
+### 3. Common plugin tasks require boilerplate code
 
-Many common plugin tasks are not supported out-of-the-box by the Sketch JavaScript API. As a result, boilerplate code to perform these common tasks is duplicated across plugins.
+Many common plugin tasks are not supported out-of-the-box by the Sketch API. As a result, boilerplate code to perform these common tasks is duplicated across plugins.
 
 #### Solution
 
@@ -49,19 +52,12 @@ See [**Plugin Utilities**](4-plugin-utilities.md).
 
 ---
 
-### 4. Writing plugin tests
+### 4. Plugin tests can be tedious to write
 
-There is friction towards [writing tests](https://github.com/skpm/skpm/tree/master/packages/test-runner) because it is tedious to make assertions on the particular structure or content of a Sketch document.
+When [writing tests](https://github.com/skpm/skpm/tree/master/packages/test-runner), it is tedious to make assertions on the particular structure or content of the Sketch file.
 
 #### Solution
 
-- The test runner should support performing a one-to-one comparison between the resulting Sketch file (after running your plugin code) and an expected Sketch file.
+- The test runner should also support performing a one-to-one comparison between the resulting Sketch file (after running your plugin code) and an expected Sketch file.
 
 See [**Testing Your Plugin**](5-testing-your-plugin.md).
-
----
-
-## Philosophy
-
-- An end-to-end, single-dependency, integrated toolkit
-- Optimised for the common use cases
