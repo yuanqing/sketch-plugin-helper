@@ -1,18 +1,22 @@
-[![sketch-plugin-helper](/media/sketch-plugin-helper.png)](#quick-start)
-
-# sketch-plugin-helper [![npm Version](https://badgen.net/npm/v/sketch-plugin-helper)](https://www.npmjs.org/package/sketch-plugin-helper)
+# Sketch Plugin Helper [![npm Version](https://badgen.net/npm/v/sketch-plugin-helper)](https://www.npmjs.org/package/sketch-plugin-helper)
 
 > A batteries-included toolkit for making [Sketch](https://www.sketch.com/) plugins
 
+[![Sketch Plugin Helper](/media/sketch-plugin-helper.png)](#quick-start)
+
+<p align="center">[**Motivation**](docs/1-motivation.md) · [**Plugin Basics**](docs/2-plugin-basics.md) · [**Getting User Input**](docs/3-getting-user-input.md) · [**Plugin Utilities**](docs/4-plugin-utilities.md) · [**Testing Your Plugin**](docs/5-testing-your-plugin.md)</p>
+
 ## Features
 
+- Automatically generate your plugin’s [`manifest.json`](https://developer.sketch.com/plugins/plugin-manifest) and [`appcast.xml`](https://developer.sketch.com/plugins/update-a-plugin) files
 - [Get multi-field user input](docs/2-getting-user-input.md#example-1) using a concise, declarative API
-- Automatically generate your plugin’s [`appcast.xml`](https://developer.sketch.com/guides/publishing-plugins/#the-appcastxml-file) and [`manifest.json`](https://developer.sketch.com/guides/plugin-bundles/#manifest) files
 - [Utility functions](docs/3-plugin-utilities.md) and abstractions over the [Sketch API](https://github.com/BohemianCoding/SketchAPI) to ease the most common plugin tasks
 - [Write tests](docs/4-testing-your-plugin.md) to assert that the resulting Sketch file after running your plugin code matches an expected Sketch file
 - All the tools you need – [builder, linter, test runner](docs/1-plugin-basics.md#cli) – bundled in one dependency
 
-*The above is also a list of the key differences between `sketch-plugin-helper` and [`skpm`](https://github.com/skpm/skpm).*
+[Read the **Motivation** doc](docs/1-motivation.md) for more about why I created Sketch Plugin Helper.
+
+(The above is also a list of the key differences with [`skpm`](https://github.com/skpm/skpm).)
 
 ## Quick start
 
@@ -82,18 +86,30 @@ To rebuild our plugin whenever we make a change, do:
 $ npm run watch
 ```
 
-## Guides
+## Docs
 
-- [**Plugin Basics**](docs/1-plugin-basics.md)
-- [**Getting User Input**](docs/2-getting-user-input.md)
-- [**Plugin Utilities**](docs/3-plugin-utilities.md)
-- [**Testing Your Plugin**](docs/4-testing-your-plugin.md)
+- [**Motivation**](docs/1-motivation.md)
+- [**Plugin Basics**](docs/2-plugin-basics.md)
+- [**Getting User Input**](docs/3-getting-user-input.md)
+- [**Plugin Utilities**](docs/4-plugin-utilities.md)
+- [**Testing Your Plugin**](docs/5-testing-your-plugin.md)
 
-## Installation
+## Made with Sketch Plugin Helper
 
-```
-$ npm install --global sketch-plugin-helper
-```
+The following are reference plugin implementations made using Sketch Plugin Helper:
+
+Plugin Name | Description
+:-|:-
+[Add Artboard Borders and Titles](https://github.com/yuanqing/sketch-add-artboard-borders-and-titles) | Automatically add borders and titles to artboards
+[Align to Grid](https://github.com/yuanqing/sketch-align-to-grid) | Align artboards and layers to a grid
+[Clean Document](https://github.com/yuanqing/sketch-clean-document) | Automagically organise and clean up your Sketch document
+[Draw Slice Over Selection](https://github.com/yuanqing/sketch-draw-slice-over-selection) | Draw a slice over the selection
+[Export Prototype](https://github.com/yuanqing/sketch-export-prototype) | Export a clickable prototype from your Sketch file
+[Extract Text](https://github.com/yuanqing/sketch-extract-text) | Extract text from layers that match a regular expression
+[Find and Replace Text](https://github.com/yuanqing/sketch-find-and-replace-text) | Find and replace text in text layers and symbol instances
+[Move Layers](https://github.com/yuanqing/sketch-move-layers) | Precisely move and arrange layers
+[Select Layers](https://github.com/yuanqing/sketch-select-layers) | Create or filter a selection of layers based on name, type or similarity
+[Sort Layer List](https://github.com/yuanqing/sketch-sort-layer-list) | Sort the layer list by name or layer position
 
 ## License
 
