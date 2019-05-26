@@ -122,7 +122,7 @@ Each object in the array has these keys:
 
 An object that specifies the default settings for your plugin.
 
-(See the guide about [Getting User Input](2-getting-user-input.md).)
+See [**Getting User Input**](3-getting-user-input.md).
 
 #### *Example*
 

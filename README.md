@@ -18,9 +18,9 @@
 - [Write tests](docs/4-testing-your-plugin.md) to assert that the resulting Sketch file after running your plugin code matches an expected Sketch file
 - All the tools you need – [builder, linter, test runner](docs/1-plugin-basics.md#cli) – bundled in one dependency
 
-[Read the **Motivation** doc](docs/1-motivation.md) for more about why I created Sketch Plugin Helper.
-
 (The above is also a list of the key differences with [`skpm`](https://github.com/skpm/skpm).)
+
+See [**Motivation**](docs/1-motivation.md) for more about why I created Sketch Plugin Helper.
 
 ## Quick start
 
