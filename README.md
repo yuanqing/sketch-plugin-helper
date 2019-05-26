@@ -4,7 +4,11 @@
 
 [![Sketch Plugin Helper](/media/sketch-plugin-helper.png)](#quick-start)
 
-<p align="center">[**Motivation**](docs/1-motivation.md) · [**Plugin Basics**](docs/2-plugin-basics.md) · [**Getting User Input**](docs/3-getting-user-input.md) · [**Plugin Utilities**](docs/4-plugin-utilities.md) · [**Testing Your Plugin**](docs/5-testing-your-plugin.md)</p>
+<div align="center">
+
+[**Motivation**](docs/1-motivation.md) · [**Plugin Basics**](docs/2-plugin-basics.md) · [**Getting User Input**](docs/3-getting-user-input.md) · [**Plugin Utilities**](docs/4-plugin-utilities.md) · [**Testing Your Plugin**](docs/5-testing-your-plugin.md)
+
+</div>
 
 ## Features
 
