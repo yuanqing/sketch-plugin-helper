@@ -98,9 +98,7 @@ $ npm run watch
 - [**Plugin Utilities**](docs/4-plugin-utilities.md)
 - [**Testing Your Plugin**](docs/5-testing-your-plugin.md)
 
-## Made with Sketch Plugin Helper
-
-The following are reference plugin implementations made using Sketch Plugin Helper:
+## Reference plugin implementations
 
 Plugin Name | Description
 :-|:-
