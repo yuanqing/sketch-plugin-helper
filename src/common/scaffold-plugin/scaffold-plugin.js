@@ -4,18 +4,27 @@ import { join, resolve } from 'path'
 import mustache from 'mustache'
 import recursiveReaddir from 'recursive-readdir'
 
+import { showPrompt } from './show-prompt'
+
 mustache.escape = function (text) {
   return text
 }
 
-export async function scaffoldPlugin ({ outputDirectoryPath, config }) {
-  const pluginDirectoryPath = join(outputDirectoryPath, config.pluginName)
+export async function scaffoldPlugin ({ outputDirectoryPath, pluginName }) {
+  const pluginDirectoryPath = join(outputDirectoryPath, pluginName)
   if (await exists(pluginDirectoryPath)) {
     return Promise.reject(
       new Error(`Directory already exists: ${pluginDirectoryPath}`)
     )
   }
-  return buildPluginDirectory({ pluginDirectoryPath, config })
+  const config = await showPrompt(pluginName)
+  return buildPluginDirectory({
+    pluginDirectoryPath,
+    config: {
+      ...config,
+      pluginName
+    }
+  })
 }
 
 async function buildPluginDirectory ({ pluginDirectoryPath, config }) {

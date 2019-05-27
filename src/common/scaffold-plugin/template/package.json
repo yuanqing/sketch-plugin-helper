@@ -1,7 +1,9 @@
 {
   "name": "{{pluginName}}",
   "version": "0.0.0",
+{{#pluginDescription}}
   "description": "{{pluginDescription}}",
+{{/pluginDescription}}
   "keywords": [
     "plugin",
     "sketch",

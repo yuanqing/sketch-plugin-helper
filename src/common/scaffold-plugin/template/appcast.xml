@@ -3,7 +3,9 @@
   <channel>
     <title>{{pluginDisplayName}}</title>
     <link>https://raw.githubusercontent.com/{{githubUsername}}/{{pluginName}}/master/appcast.xml</link>
+{{#pluginDescription}}
     <description>{{pluginDescription}}</description>
+{{/pluginDescription}}
     <language>en</language>
   </channel>
 </rss>

@@ -1,4 +1,3 @@
-import { showPrompt } from '../common/scaffold-plugin/show-prompt'
 import { scaffoldPlugin } from '../common/scaffold-plugin/scaffold-plugin'
 import * as log from '../common/log'
 import { errorHandler } from '../common/error-handler'
@@ -12,15 +11,11 @@ export const create = {
     })
   },
   handler: async function ({ name }) {
-    const config = await showPrompt(name)
-    const outputDirectoryPath = process.cwd()
     log.info('Scaffolding new plugin…')
+    const outputDirectoryPath = process.cwd()
     await scaffoldPlugin({
       outputDirectoryPath,
-      config: {
-        ...config,
-        pluginName: name
-      }
+      pluginName: name
     }).catch(errorHandler)
     log.clearLine()
     log.success('Scaffolded new plugin')

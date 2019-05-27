@@ -1,6 +1,8 @@
 # {{pluginDisplayName}}
+{{#pluginDescription}}
 
 > {{pluginDescription}}
+{{/pluginDescription}}
 
 ## Installation
 
