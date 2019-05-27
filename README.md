@@ -20,7 +20,7 @@
 
 *(The above is also a list of the key differences with [`skpm`](https://github.com/skpm/skpm).)*
 
-See [**Motivation**](docs/1-motivation.md) for more about why I created Sketch Plugin Helper.
+See [**Motivation**](docs/1-motivation.md).
 
 ## Quick start
 
