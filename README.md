@@ -12,13 +12,13 @@
 
 ## Features
 
-- Automatically generate your plugin’s [`manifest.json`](https://developer.sketch.com/plugins/plugin-manifest) and [`appcast.xml`](https://developer.sketch.com/plugins/update-a-plugin) files
-- [Get multi-field user input](docs/2-getting-user-input.md#example-1) using a concise, declarative API
-- [Utility functions](docs/3-plugin-utilities.md) and abstractions over the [Sketch API](https://github.com/BohemianCoding/SketchAPI) to ease the most common plugin tasks
-- [Write tests](docs/4-testing-your-plugin.md) to assert that the resulting Sketch file after running your plugin code matches an expected Sketch file
-- All the tools you need – [builder, linter, test runner](docs/1-plugin-basics.md#cli) – bundled in one dependency
+- [Automatically generate](docs/2-plugin-basics.md) your plugin’s `manifest.json` and `appcast.xml` files
+- [Get multi-field user input](docs/3-getting-user-input.md#example-1) using a concise, declarative API
+- [Utility functions](docs/4-plugin-utilities.md) and abstractions over the [Sketch API](https://github.com/BohemianCoding/SketchAPI) to ease the most common plugin tasks
+- [Write tests](docs/5-testing-your-plugin.md) to assert that the resulting Sketch file after running your plugin code matches an expected Sketch file
+- All the tools you need – [bundler, linter, test runner](docs/2-plugin-basics.md#cli) – in a single dependency
 
-(The above is also a list of the key differences with [`skpm`](https://github.com/skpm/skpm).)
+*(The above is also a list of the key differences with [`skpm`](https://github.com/skpm/skpm).)*
 
 See [**Motivation**](docs/1-motivation.md) for more about why I created Sketch Plugin Helper.
 
@@ -49,6 +49,8 @@ export default function () {
   showMessage('Hello, World!')
 }
 ```
+
+(See [**Plugin Utilities**](docs/4-plugin-utilities.md) for the full list of utility functions that you can use in your plugin.)
 
 Note that our plugin handler must be the `default` export of the file.
 
