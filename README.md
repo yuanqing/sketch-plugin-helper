@@ -50,11 +50,11 @@ export default function () {
 }
 ```
 
-(See [**Plugin Utilities**](docs/4-plugin-utilities.md) for the full list of utility functions that you can use in your plugin.)
-
 Note that our plugin handler must be the `default` export of the file.
 
-Then, in our `package.json`, specify `src/hello-world.js` (stated as `hello-world` after omitting the `src/` and `.js`) as the `handler` for our plugin command:
+(See [**Plugin Utilities**](docs/4-plugin-utilities.md) for a list of helpful functions that you can use in your plugin.)
+
+Then, in our `package.json`, set `src/hello-world.js` as the `handler` for our plugin menu command:
 
 ```diff
 {
@@ -71,6 +71,8 @@ Then, in our `package.json`, specify `src/hello-world.js` (stated as `hello-worl
   }
 }
 ```
+
+Note that the initial `src/` and trailing `.js` extension is omitted.
 
 Then, build our plugin, and install the plugin as a symbolic link:
 
