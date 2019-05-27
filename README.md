@@ -2,7 +2,7 @@
 
 > A batteries-included toolkit for making [Sketch](https://www.sketch.com/) plugins
 
-[![Sketch Plugin Helper](/media/sketch-plugin-helper.png)](#quick-start)
+[![Sketch Plugin Helper](/media/header.png)](#quick-start)
 
 <div align="center">
 
