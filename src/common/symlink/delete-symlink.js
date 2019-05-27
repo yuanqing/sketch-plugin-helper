@@ -1,11 +1,12 @@
-import { exists, unlink } from 'fs-extra'
+import { unlink } from 'fs-extra'
 
 import { readConfig } from '../read-config'
+import { symlinkExists } from './symlink-exists'
 
 export async function deleteSymlink () {
-  const { pluginDirectoryPath } = await readConfig()
-  if (!(await exists(pluginDirectoryPath))) {
-    return Promise.resolve()
+  if (!(await symlinkExists())) {
+    return Promise.reject(new Error('Symlink does not exist'))
   }
+  const { pluginDirectoryPath } = await readConfig()
   return unlink(pluginDirectoryPath)
 }
