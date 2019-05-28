@@ -29,11 +29,11 @@ See [**Plugin Basics**](2-plugin-basics.md).
 
 ### 2. Creating UI for user input is a non-trivial endeavour
 
-Sketch only provides [a rudimentary API for getting user input](https://developer.sketch.com/reference/api/#get-an-input-from-the-user). Anything more elaborate than a text box or drop down menu will need to be [written from scratch, using imperative APIs](https://journal.yummygum.com/the-simple-guide-to-getting-user-input-for-your-sketch-plugin-part-ii-3375153e063d). Without a higher-level API, UI code is repeatedly reimplemented across the Sketch plugin ecosystem.
+Sketch only provides [a rudimentary API for getting user input](https://developer.sketch.com/reference/api/#get-an-input-from-the-user). Anything more elaborate than a text box or drop down menu will need to be [written from scratch, using imperative APIs](https://journal.yummygum.com/the-simple-guide-to-getting-user-input-for-your-sketch-plugin-part-ii-3375153e063d). This UI code is repeatedly reimplemented across the Sketch plugin ecosystem.
 
 #### Solution
 
-- Create a simple, declarative abstraction for building UI to get user input.
+- Create a higher-level API for building UI to get user input. (The trade-off of having this abstraction is that you will not have granular control of the UI.)
 
 See [**Getting User Input**](3-getting-user-input.md).
 
@@ -58,6 +58,6 @@ When [writing tests](https://github.com/skpm/skpm/tree/master/packages/test-runn
 
 #### Solution
 
-- The test runner should also support performing a one-to-one comparison between the resulting Sketch file (after running your plugin code) and an expected Sketch file.
+- The test runner should also support performing a one-to-one comparison between the resulting Sketch file after running your plugin code and an expected Sketch file.
 
 See [**Testing Your Plugin**](5-testing-your-plugin.md).
