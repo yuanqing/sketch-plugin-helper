@@ -82,6 +82,10 @@ export default function () {
 }
 ```
 
+This gives the following:
+
+![Settings dialog](../media/settings-dialog.png)
+
 ---
 
 ## Get user input
