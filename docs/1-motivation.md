@@ -10,7 +10,7 @@
 
 ## Problems and solutions
 
-Sketch Plugin Helper is an intended to be an end-to-end, integrated toolkit to address the following problems.
+I wrote Sketch Plugin Helper to address some points of friction that I’ve personally experienced writing plugins for Sketch. The intent was to create an end-to-end, batteries-included toolkit to solve the following problems:
 
 ---
 
