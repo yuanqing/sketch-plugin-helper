@@ -6,21 +6,20 @@
 
 <div align="center">
 
-[**Motivation**](docs/1-motivation.md) · [**Plugin Basics**](docs/2-plugin-basics.md) · [**Getting User Input**](docs/3-getting-user-input.md) · [**Plugin Utilities**](docs/4-plugin-utilities.md) · [**Testing Your Plugin**](docs/5-testing-your-plugin.md)
+[**Motivation**](docs/1-motivation.md#readme) · [**Plugin Basics**](docs/2-plugin-basics.md#readme) · [**Getting User Input**](docs/3-getting-user-input.md#readme) · [**Plugin Utilities**](docs/4-plugin-utilities.md#readme) · [**Testing Your Plugin**](docs/5-testing-your-plugin.md#readme)
 
 </div>
 
 ## Features
 
-- [Automatically generate](docs/2-plugin-basics.md) your plugin’s `manifest.json` and `appcast.xml` files
-- [Get multi-field user input](docs/3-getting-user-input.md#example-1) using a concise, declarative API
-- [Utility functions](docs/4-plugin-utilities.md) and abstractions over the [Sketch API](https://github.com/BohemianCoding/SketchAPI) to ease the most common plugin tasks
-- [Write tests](docs/5-testing-your-plugin.md) to assert that the resulting Sketch file after running your plugin code matches an expected Sketch file
-- All the tools you need – [bundler, linter, test runner](docs/2-plugin-basics.md#cli) – in a single dependency
+- Write your plugin in modern JavaScript *(of course)*
+- [Automatically generate](docs/2-plugin-basics.md#readme) your plugin’s [`manifest.json`](https://developer.sketch.com/plugins/plugin-manifest) and [`appcast.xml`](https://developer.sketch.com/plugins/update-a-plugin) files
+- [Get multi-field user input](docs/3-getting-user-input.md#readme) using a concise, declarative API
+- [Utility functions](docs/4-plugin-utilities.md#readme) and abstractions over the [Sketch API](https://github.com/BohemianCoding/SketchAPI) to ease the most common plugin tasks
+- [Write tests](docs/5-testing-your-plugin.md#readme) to assert that the resulting Sketch file after running your plugin code matches an expected Sketch file
+- [A powerful CLI](docs/2-plugin-basics.md#cli) to build, lint and test your plugin
 
-*(The above is also a list of the key differences with [`skpm`](https://github.com/skpm/skpm).)*
-
-See [**Motivation**](docs/1-motivation.md).
+See [**Motivation**](docs/1-motivation.md#readme).
 
 ## Quick start
 
@@ -50,9 +49,7 @@ export default function () {
 }
 ```
 
-Note that our plugin handler must be the `default` export of the file.
-
-(See [**Plugin Utilities**](docs/4-plugin-utilities.md) for a list of helpful functions that you can use in your plugin.)
+Our plugin handler must be the `default` export of the file. (See [**Plugin Utilities**](docs/4-plugin-utilities.md#readme) for a list of helpful functions that you can use in your plugin.)
 
 Then, in our `package.json`, set `src/hello-world.js` as the `handler` for our plugin menu command:
 
@@ -96,11 +93,11 @@ $ npm run watch
 
 ## Docs
 
-- [**Motivation**](docs/1-motivation.md)
-- [**Plugin Basics**](docs/2-plugin-basics.md)
-- [**Getting User Input**](docs/3-getting-user-input.md)
-- [**Plugin Utilities**](docs/4-plugin-utilities.md)
-- [**Testing Your Plugin**](docs/5-testing-your-plugin.md)
+- [**Motivation**](docs/1-motivation.md#readme)
+- [**Plugin Basics**](docs/2-plugin-basics.md#readme)
+- [**Getting User Input**](docs/3-getting-user-input.md#readme)
+- [**Plugin Utilities**](docs/4-plugin-utilities.md#readme)
+- [**Testing Your Plugin**](docs/5-testing-your-plugin.md#readme)
 
 ## Reference plugin implementations
 
@@ -116,6 +113,12 @@ Plugin Name | Description
 [Move Layers](https://github.com/yuanqing/sketch-move-layers) | Precisely move and arrange layers
 [Select Layers](https://github.com/yuanqing/sketch-select-layers) | Create or filter a selection of layers based on name, type or similarity
 [Sort Layer List](https://github.com/yuanqing/sketch-sort-layer-list) | Sort the layer list by name or layer position
+
+## Installation
+
+```
+$ npm install --global sketch-plugin-helper
+```
 
 ## License
 
