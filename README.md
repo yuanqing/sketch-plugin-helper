@@ -15,7 +15,7 @@
 - Write your plugin in modern JavaScript *(of course)*
 - [Automatically generate](docs/2-plugin-basics.md#readme) your plugin’s [`manifest.json`](https://developer.sketch.com/plugins/plugin-manifest) and [`appcast.xml`](https://developer.sketch.com/plugins/update-a-plugin) files
 - [Get multi-field user input](docs/3-getting-user-input.md#readme) using a concise, declarative API
-- [Utility functions](docs/4-plugin-utilities.md#readme) and abstractions over the [Sketch API](https://github.com/BohemianCoding/SketchAPI) to ease the most common plugin tasks
+- [Utility functions](docs/4-plugin-utilities.md#readme) and abstractions over the [Sketch API](https://github.com/BohemianCoding/SketchAPI) to ease common plugin tasks
 - [Write tests](docs/5-testing-your-plugin.md#readme) to assert that the resulting Sketch file after running your plugin code matches an expected Sketch file
 - [A powerful CLI](docs/2-plugin-basics.md#cli) to build, lint and test your plugin
 
@@ -101,7 +101,7 @@ $ npm run watch
 
 ## Reference plugin implementations
 
-Plugin Name | Description
+Plugin name | Description
 :-|:-
 [Add Artboard Borders and Titles](https://github.com/yuanqing/sketch-add-artboard-borders-and-titles) | Automatically add borders and titles to artboards
 [Align to Grid](https://github.com/yuanqing/sketch-align-to-grid) | Align artboards and layers to a grid
