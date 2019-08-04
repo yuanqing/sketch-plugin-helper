@@ -1,0 +1,23 @@
+{
+  "name": "@sketch-plugin-helper/settings",
+  "version": "0.1.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "Get user input in your Sketch plugin via a concise API",
+  "keywords": [
+    "sketch",
+    "sketch-plugin",
+    "sketch-plugin-helper"
+  ],
+  "license": "MIT",
+  "author": "Lim Yuan Qing",
+  "repository": "yuanqing/sketch-plugin-helper",
+  "files": [
+    "lib"
+  ],
+  "main": "lib/index.js",
+  "dependencies": {
+    "@sketch-plugin-helper/utilities": "^0.1.0"
+  }
+}

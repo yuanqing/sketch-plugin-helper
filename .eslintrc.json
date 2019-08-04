@@ -1,0 +1,20 @@
+{
+  "extends": [
+    "sketch",
+    "standard"
+  ],
+  "globals": {
+    "CGPointMake": "readonly",
+    "CGColorCreateGenericRGB": "readonly",
+    "NSLineBreakByTruncatingTail": "readonly",
+    "NSLayoutAttributeLeft": "readonly",
+    "NSOnState": "readonly",
+    "NSOffState": "readonly",
+    "NSRadioButton": "readonly",
+    "NSRadioModeMatrix": "readonly",
+    "NSStackViewGravityTop": "readonly",
+    "NSStringPboardType": "readonly",
+    "NSSwitchButton": "readonly",
+    "NSUserInterfaceLayoutOrientationVertical": "readonly"
+  }
+}

@@ -1,8 +1,0 @@
-export const appcastFileName = 'appcast.xml'
-export const bundleFileName = 'plugin.js'
-export const manifestFileName = 'manifest.json'
-export const packageJsonConfigKey = 'sketch-plugin-helper'
-export const resourcesDirectory = './resources'
-export const sourceDirectory = './src'
-export const sourceGlobPattern = './src/**/*.js'
-export const testsGlobPattern = './src/**/__tests__/*.js'

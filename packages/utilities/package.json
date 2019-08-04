@@ -1,0 +1,20 @@
+{
+  "name": "@sketch-plugin-helper/utilities",
+  "version": "0.1.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "Utility functions for Sketch plugins",
+  "keywords": [
+    "sketch",
+    "sketch-plugin",
+    "sketch-plugin-helper"
+  ],
+  "license": "MIT",
+  "author": "Lim Yuan Qing",
+  "repository": "yuanqing/sketch-plugin-helper",
+  "files": [
+    "lib"
+  ],
+  "main": "lib/index.js"
+}
