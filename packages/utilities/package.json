@@ -12,7 +12,11 @@
   ],
   "license": "MIT",
   "author": "Lim Yuan Qing",
-  "repository": "yuanqing/sketch-plugin-helper",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/yuanqing/sketch-plugin-helper.git",
+    "directory": "packages/utilities"
+  },
   "files": [
     "lib"
   ],
